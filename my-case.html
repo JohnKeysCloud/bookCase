@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bookCase</title>
+  <link rel="icon" href="assets/images/logos/cyclone-favicon.gif" type="image/gif">
+	<link rel="stylesheet" href="css/cyclone-reset.css">
+	<link rel="stylesheet" href="css/styles.css">
+	<script defer src="js/script.js"></script>
+  <script src="https://kit.fontawesome.com/24176ab973.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header>
+    <div id="header-left">
+      <h1 id="header-logo">bookCase</h1>
+    </div>
+    <div id="header-right">
+      <ul id="nav-ul">
+        <li><a href="#">home</a></li>
+        <li><a href="my-case.html">myCase</a></li>
+        <li><a href="#">browse</a></li>
+        <li><a href="#">community</a></li>
+      </ul>
+    </div>
+  </header>
+  <main>
+    <fieldset id="controls">
+      <legend><span class="accessibility">bookCase Controls</span></legend>
+      <div id="controls-left">
+        <!-- <label for="add-book">add new</label> -->
+        <button id="add-book-button"><span id="add-book-text">+</span></button>
+        <dialog>
+          <form>
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title">
+            <label for="author">Author</label>
+            <input type="text" name="author" id="author">
+            <label for="pages">Pages</label>
+            <input type="number" name="pages" id="pages">
+            <label for="read">Read</label>
+            <input type="checkbox" name="read" id="read">
+            <button type="submit">Add Book</button>
+          </form>
+        </dialog>
+      </div>
+      <div id="controls-mid">
+        <form id="search-form" action="">
+          <!-- <label for="search-input"></label> -->
+          <input id="search-input" type="search" required>
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <a href="javascript:void(0)" id="clear-btn">clear</a>
+        </form>
+      </div>
+      <div id="controls-right">
+
+        <label class="accessibility" for="sort">sort by:</label>
+        <select name="sort" id="sort-select">
+          <option value="" disabled selected>Sort By</option>
+          <option value="read">Unread/Read</option>
+          <option value="title-a-z">A-Z (Title)</option>
+          <option value="author-a-z">A-Z (Author)</option>
+          <option value="pages">Page Amount</option>
+        </select>
+      </div>
+    </fieldset>
+    <div id="book-case">
+      <!-- injected via JS -->
+    </div>
+  </main>
+  <aside>
+    
+  </aside>
+  <footer></footer>
+</body>
+</html>

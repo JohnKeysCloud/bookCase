@@ -1,0 +1,178 @@
+body {
+	display: flex;
+	flex-direction: column;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	position: relative;
+}
+
+header {
+	align-items: center;
+	display: flex;
+	justify-content: space-around;
+	margin-bottom: 25px;
+}
+
+header #header-left #header-logo {
+	font-family: 'Cyclone';
+	font-size: 2.5rem;
+	padding-bottom: 8px;
+}
+
+header #header-right #nav-ul {
+	display: flex;
+	font-size: 1rem;
+	list-style: none;
+}
+
+header #header-right #nav-ul li {
+	display: inline;
+	padding: 0 1rem;
+}
+
+header #header-right #nav-ul li a {
+	color: black;
+	text-decoration: none;
+}
+
+/* ! adjust somehow ? */
+/* header #header-right #nav-ul li a:visited {
+	color: red;
+}  */
+
+main {
+	display: grid;
+}
+
+main #controls {
+	align-items: center;
+	display: flex;
+	justify-content: space-evenly;
+}
+
+main #controls-left,
+main #controls-mid,
+main #controls-right  {
+	align-items: center;
+	display: flex;
+	/* position: relative; */
+}
+
+main #controls-left #add-book-button {
+  background-color: black;
+  border-radius: 50%;
+  border: none;
+  color: white;
+	font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.5rem;
+  height: 55px;
+  width: 55px;
+}
+
+main #controls-left #add-book-text {
+	vertical-align: 5px;
+} 
+
+main #controls-mid #search-form {
+  position: relative;
+  transition: all 1s;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: 2.5px solid black;
+  padding: 5px;
+}
+
+main #controls-mid #search-form:hover,
+main #controls-mid #search-form:valid {
+	border-radius: 25px;
+  cursor: pointer;
+  width: 200px;
+}
+
+main #controls-mid #search-form:hover #search-input,
+main #controls-mid #search-form:valid #search-input {
+  display: block;
+}
+
+main #controls-mid #search-form:hover .fa-magnifying-glass,
+main #controls-mid #search-form:valid .fa-magnifying-glass {
+  background: black;
+  color: white;
+}
+
+main #controls-mid #search-form a {
+  color: black;
+  font-size: 1rem;
+	inset: 50px 0 0 0;
+	opacity: 0;
+  position: absolute;
+  text-align: center;
+	transition: all 333ms ease-in-out;
+	visibility: hidden;
+  width: 100%;
+}
+
+main #controls-mid #search-form:valid a {
+	opacity: 1;
+	visibility: visible;
+}
+
+main #controls-mid #search-form #search-input {
+  background: transparent;
+  border-radius: 25px;
+  border: 0;
+  display: none;
+  font-size: 1em;
+  height: 42.5px;
+  left: 0;
+  line-height: 30px;
+  outline: 0;
+  padding: 0 50px 0 20px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+/* clears the ‘X’ from Internet Explorer */
+#search-input::-ms-clear { display: none; width : 0; height: 0; }
+#search-input::-ms-reveal { display: none; width : 0; height: 0; }
+/* clears the ‘X’ from Chrome */
+#search-input::-webkit-search-decoration,
+#search-input::-webkit-search-cancel-button,
+#search-input::-webkit-search-results-button,
+#search-input::-webkit-search-results-decoration { display: none; }
+
+main #controls-mid #search-form .fa-magnifying-glass {
+  border-radius: 50%;
+  box-sizing: border-box;
+  color: black;
+  font-size: 1rem;
+  height: 38px;
+  padding: 12px;
+  position: absolute;
+  right: 5px;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 1s;
+  width: 38px;
+}
+
+/* !⬇️! */
+/* !⬇️! */
+/* !⬇️! */
+
+main #controls select {
+	border: none;
+}
+
+/* article {
+	border: 2px solid red;
+	border-radius: 12px;
+}
+
+footer {
+} */
