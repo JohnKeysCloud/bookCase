@@ -29,9 +29,9 @@
     <fieldset id="controls">
       <legend><span class="accessibility">bookCase Controls</span></legend>
       <div id="controls-left">
-        <!-- <label for="add-book">add new</label> -->
+        <label class="accessibility" for="add-book">add new</label>
         <button id="add-book-button"><span id="add-book-text">+</span></button>
-        <dialog>
+        <dialog id="add-book-modal">
           <form>
             <label for="title">Title</label>
             <input type="text" name="title" id="title">
@@ -47,22 +47,23 @@
       </div>
       <div id="controls-mid">
         <form id="search-form" action="">
-          <!-- <label for="search-input"></label> -->
+          <label class="accessibility" for="search-input">Search:</label>
           <input id="search-input" type="search" required>
           <i class="fa-solid fa-magnifying-glass"></i>
-          <a href="javascript:void(0)" id="clear-btn">clear</a>
         </form>
+        <button id="search-close-btn">✖</button>
       </div>
       <div id="controls-right">
-
-        <label class="accessibility" for="sort">sort by:</label>
-        <select name="sort" id="sort-select">
-          <option value="" disabled selected>Sort By</option>
-          <option value="read">Unread/Read</option>
-          <option value="title-a-z">A-Z (Title)</option>
-          <option value="author-a-z">A-Z (Author)</option>
-          <option value="pages">Page Amount</option>
-        </select>
+        <div class="custom-select">
+          <label class="accessibility" for="sort">sort by:</label>
+          <select name="sort" id="sort-select">
+            <option value="">Sort By:</option>
+            <option value="read">Unread/Read</option>
+            <option value="title-a-z">A-Z (Title)</option>
+            <option value="author-a-z">A-Z (Author)</option>
+            <option value="pages"># of Pages</option>
+          </select>
+        </div>
       </div>
     </fieldset>
     <div id="book-case">
