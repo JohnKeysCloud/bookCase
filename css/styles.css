@@ -200,15 +200,6 @@ main {
 	display: grid;
 }
 
-#page-content-wrapper aside section {
-  border: 2px solid #724b3f;
-  margin-bottom: 33px;
-}
-
-#page-content-wrapper aside ul {
-  list-style: none;
-}
-
 main #controls-wrapper {
   background-color: #724b3f;
   box-shadow: 0 10px 20px -8px;
@@ -449,6 +440,20 @@ main #controls .same-as-selected {
 
 main #controls .select-items li:last-child {
 	border-radius: 0 0 25px 25px;
+}
+
+aside section {
+  border: 2px solid #724b3f;
+  margin-bottom: 25px;
+  padding: 8px;
+}
+
+aside section h3 {
+  text-align: center;
+}
+
+aside ul {
+  list-style: none;
 }
 
 aside #advertisement-box video {
