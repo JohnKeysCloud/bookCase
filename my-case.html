@@ -15,6 +15,11 @@
   <header>
     <div id="header-left">
       <h1 id="header-logo">bookCase</h1>
+      <button id="menu-btn" aria-label="Nav Toggle">
+        <div id="menu-btn-san">
+          <!-- injected via css -->
+        </div>
+      </button>
     </div>
     <div id="header-right">
       <ul id="nav-ul">
@@ -23,56 +28,121 @@
         <li><a href="#">browse</a></li>
         <li><a href="#">community</a></li>
       </ul>
+      <div id="header-btns">
+        <button class="header-btn">log in</button>
+        <button class="header-btn">join</button>
+      </div>
     </div>
   </header>
-  <main>
-    <fieldset id="controls">
-      <legend><span class="accessibility">bookCase Controls</span></legend>
-      <div id="controls-left">
-        <label class="accessibility" for="add-book">add new</label>
-        <button id="add-book-button"><span id="add-book-text">+</span></button>
-        <dialog id="add-book-modal">
-          <form>
-            <label for="title">Title</label>
-            <input type="text" name="title" id="title">
-            <label for="author">Author</label>
-            <input type="text" name="author" id="author">
-            <label for="pages">Pages</label>
-            <input type="number" name="pages" id="pages">
-            <label for="read">Read</label>
-            <input type="checkbox" name="read" id="read">
-            <button type="submit">Add Book</button>
-          </form>
-        </dialog>
+  <div id="page-content-wrapper">
+    <main>
+      <div id="controls-wrapper">
+        <fieldset id="controls">
+          <legend><span class="accessibility">bookCase Controls</span></legend>
+          <div id="controls-top">
+            <div id="add-book-container">
+                <label class="accessibility" for="add-book">add new</label>
+                <button id="add-book-button"><span id="add-book-text">+</span></button>
+                <dialog id="add-book-modal">
+                  <form>
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title">
+                    <label for="author">Author</label>
+                    <input type="text" name="author" id="author">
+                    <label for="pages">Pages</label>
+                    <input type="number" name="pages" id="pages">
+                    <label for="read">Read</label>
+                    <input type="checkbox" name="read" id="read">
+                    <button type="submit">Add Book</button>
+                  </form>
+                </dialog>
+              </div>
+            <div id="search-form-container">
+              <form id="search-form" action="">
+                <label class="accessibility" for="search-input">Search:</label>
+                <input id="search-input" type="search" required>
+                <button id="search-submit-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button id="search-close-btn" type="button">✖</button>
+              </form>
+            </div>
+          </div>
+          <div id="sort-select-container">
+            <div class="custom-select">
+              <label class="accessibility" for="sort">sort by:</label>
+              <select name="sort" id="sort-select">
+                <option value="">Sort By:</option>
+                <option value="read">read</option>
+                <option value="author-a-z">a-z (author)</option>
+                <option value="title-a-z">a-z (title)</option>
+                <option value="pages"># of pages</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
       </div>
-      <div id="controls-mid">
-        <form id="search-form" action="">
-          <label class="accessibility" for="search-input">Search:</label>
-          <input id="search-input" type="search" required>
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </form>
-        <button id="search-close-btn">✖</button>
+      <div id="book-case">
+        <!-- injected via JS -->
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
       </div>
-      <div id="controls-right">
-        <div class="custom-select">
-          <label class="accessibility" for="sort">sort by:</label>
-          <select name="sort" id="sort-select">
-            <option value="">Sort By:</option>
-            <option value="read">Unread/Read</option>
-            <option value="title-a-z">A-Z (Title)</option>
-            <option value="author-a-z">A-Z (Author)</option>
-            <option value="pages"># of Pages</option>
-          </select>
+    </main>
+    <aside>
+      <section id="advertisement">
+        <h3>Advertisement</h3>
+        <div id="advertisement-box">
+
         </div>
-      </div>
-    </fieldset>
-    <div id="book-case">
-      <!-- injected via JS -->
-    </div>
-  </main>
-  <aside>
-    
-  </aside>
+      </section>
+      <section id="friends">
+        <h3>Friends</h3>
+        <ul>
+          <li>Rick S. is reading <span class="book-title">Physics of Quantum Fluids</span> </li>
+          <li>Morty is reading <div class="book-title">My Horrible Father</div></li>
+          <li>Patrick B. is reading <span class="book-title">Jar of Hearts</span></li>
+          <li>Ice S. is reading <span class="book-title">The Story of Edward Munch</span></li>
+          <li></li>
+        </ul>
+      </section>
+      <section id="Notifications">
+        <p><span class="like">👍</span> this person liked your new book addition</p>
+        <p><span class="message">✉️</span> this person sent you a message</p>
+        <p><span class="mention">🏷️</span> this person mentioned you in a post</p>
+      </section>
+      <section id="trending">
+        <h3>Trending</h3>
+        <ul>
+          <li>book 1</li>
+          <li>book 2</li>
+          <li>book 3</li>
+          <li>book 4 </li>
+          <li>book 5</li>
+        </ul>
+      </section>
+      <section id="subscribe">
+        <label for="email"></label>
+        <input type="email" name="email" id="email" placeholder="E-mail">
+        <p>Subscribe to our newsletter to receive weekly book recommendations, promotions from associated brands & event dates. Your information is secure and you can unsubscribe at any time.</p>
+      </section>
+      <section id="socials">
+        <h3>Follow Us</h3>
+        <ul>
+          <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+          <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+          <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+        </ul>
+      </section>
+
+    </aside>
+  </div>
   <footer></footer>
 </body>
 </html>

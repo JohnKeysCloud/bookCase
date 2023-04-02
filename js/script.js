@@ -8,6 +8,19 @@ const searchInput = document.getElementById('search-input');
 const searchCloseBtn = document.getElementById('search-close-btn');
 let bookCase = [];
 
+const menuBtn = document.querySelector('#menu-btn');
+let menuOpen = false;
+
+menuBtn.addEventListener('click', () => {
+  if (!menuOpen) {
+    menuBtn.classList.add('open');
+    menuOpen = true;
+  } else {
+    menuBtn.classList.remove('open');
+    menuOpen = false;
+  }
+}); 
+
 // ! ---------------------------------------------------
 // * REVIEW 
 
@@ -134,7 +147,7 @@ function openAddBookModal() {
     addBookModal.showModal();
 }
 
-function closeSearchInput() {
+function closeSearchInput(e) {
     searchInput.value = '';
 }
 
