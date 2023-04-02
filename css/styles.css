@@ -3,6 +3,14 @@
 	--input-focus-bg: hsla(14, 29%, 35%, 0.3);
 }
 
+/* DEFAULT pressStart */
+h3 {
+  font-family: 'Cyclone', sans-serif;
+  font-size: clamp(2.125rem, 4vw, 2.5rem);
+}
+
+/* DEFAULT gameOver */
+
 body {
 	/* background-color: #f5f5f5; */
 	background-color: cornsilk;
@@ -443,6 +451,10 @@ main #controls .select-items li:last-child {
 	border-radius: 0 0 25px 25px;
 }
 
+aside #advertisement-box video {
+  object-fit: contain;
+}
+
 #book-case {
   display: grid;
   grid-template-columns: repeat( auto-fit, minmax(150px, 1fr));
@@ -494,13 +506,18 @@ footer {
     list-style: none;
   }
 
+  main #controls-wrapper{
+    background-color: unset;
+    box-shadow: unset;
+  }
+
   main #controls {
     align-items: center;
     display: flex;
     flex-direction: row;
     gap: 75px;
 	  /* justify-content: space-evenly; */
-    margin-bottom: 55px;
+    /* margin-bottom: 55px; */
     padding-inline: 5vw;
   }
 
