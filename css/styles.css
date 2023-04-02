@@ -197,15 +197,24 @@ header #header-right .header-btn {
 }  */
 
 main {
+  align-items: start;
 	display: grid;
+  min-height: 100vh;
+  grid-template-rows: auto 1fr;
+  /* 
+  ? Set the grid-template-rows property to auto 1fr to create two rows in the grid, 
+  ? with the first row set to the height of its content and the second row set to take 
+  ? up the remaining space. 
+  */
 }
 
 main #controls-wrapper {
   background-color: #724b3f;
   box-shadow: 0 10px 20px -8px;
   display: grid;
-  margin-bottom: 25px;
-  padding-block: 15px;
+  height: max-content;
+  max-width: 100%;
+  padding-block: 16px;
   place-items: center;
 }
 
@@ -217,6 +226,7 @@ main #controls {
 	display: flex;
   flex-direction: column;
   gap: 15px;
+  max-width: 100%;
   margin-inline: auto;
   padding: 20px 45px;
 }
@@ -225,7 +235,7 @@ main #controls #controls-top {
   align-items: center;
   justify-content: space-evenly;
   display: flex;
-  gap: 15px;
+  gap: 25px;
 }
 
 main #controls #add-book-button {
@@ -461,14 +471,16 @@ aside #advertisement-box video {
 }
 
 #book-case {
+  align-self: start;
+  border: 2px solid blueviolet;
   display: grid;
-  grid-template-columns: repeat( auto-fit, minmax(150px, 1fr));
-  margin-bottom: 50px;
+  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+  grid-auto-rows: minmax(250px, auto);
 }
 
 .book {
-  height: 200px;
   border: 2px solid red;
+  /* border-radius: 50px; */
 }
 
 /* article {
@@ -482,12 +494,10 @@ footer {
 @media only screen and (min-width: 768px) {
   header {
     align-items: center;
-    display: flex;
     flex-direction: row;
     gap: 40px;
     justify-content: space-between;
     margin-bottom: 25px;
-    padding-inline: 5vw;
   }
 
   header #header-left #menu-btn {
@@ -511,7 +521,7 @@ footer {
     list-style: none;
   }
 
-  main #controls-wrapper{
+  main #controls-wrapper {
     background-color: unset;
     box-shadow: unset;
   }
@@ -520,24 +530,58 @@ footer {
     align-items: center;
     display: flex;
     flex-direction: row;
-    gap: 75px;
-	  /* justify-content: space-evenly; */
-    /* margin-bottom: 55px; */
-    padding-inline: 5vw;
+    gap: 40px;   
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  main #controls #search-form {
+    border-radius: 25px;
+    /* width: 200px; */
+  }
+
+  main #controls #search-form:hover, 
+  main #controls #search-form:valid {
+    width: 300px;
   }
 
   #page-content-wrapper {
     display: grid;
-    gap: 40px;
-    grid-template-columns: 3fr 1fr;
+    align-items: start;
+    /* gap: 40px; */
     padding-inline: 5vw;
-  }
-  
-  main #controls #controls-bottom {
-    gap: 75px;
   }
 }
 
-/* @media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1024px) {
+  #page-content-wrapper {
+    display: grid;
+    gap: 40px;
+    grid-template-columns: 5fr 2fr;
+    padding-inline: 5vw;
+  }
 
-} */
+  main #controls {
+    /* justify-self: start; */
+    margin-inline: unset;
+    width: 100%;
+  }
+
+  main #controls #search-form {
+    width: 55px;
+  }
+
+  main #controls #search-form:hover, 
+  main #controls #search-form:valid {
+    width: 250px;
+  }
+
+}
+
+@media only screen and (min-width: 1200px) {
+  main #controls #search-form:hover, 
+  main #controls #search-form:valid {
+    width: 350px;
+  }
+
+}
