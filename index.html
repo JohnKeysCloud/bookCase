@@ -99,11 +99,28 @@
       </div>
     </main>
     <aside>
-      <section id="Notifications">
+      <section id="notifications">
         <h3>Notifications</h3>
-        <p><span class="like">👍</span> this person liked your new book addition</p>
-        <p><span class="message">✉️</span> this person sent you a message</p>
-        <p><span class="mention">🏷️</span> this person mentioned you in a post</p>
+        <ul id="notifications-list">
+          <li>
+            <span class="love iconic">
+              <img src="assets/icons/love.png" width="25" height="25" alt="New Love">
+            </span> 
+            <span class="notification-text-content">this person loved your new book addition</span>
+          </li>
+          <li>
+            <span class="message iconic">
+              <img src="assets/icons/message.png" height="25" width="25" alt="New Message">
+            </span> 
+            <span class="notification-text-content">this person sent you a message</span>
+            </li>
+          <li>
+            <span class="mention iconic">
+              <img src="assets/icons/mention.png" height="25" width="25" alt="New Mention">
+            </span> 
+            <span class="notification-text-content">this person mentioned you in a post</span>
+          </li>
+        </ul>
       </section>
       <section id="advertisement">
         <h3>Advertisement</h3>
@@ -118,11 +135,10 @@
       <section id="friends">
         <h3>Friends</h3>
         <ul>
-          <li>Rick S. is reading <span class="book-title">Physics of Quantum Fluids</span> </li>
-          <li>Morty is reading <div class="book-title">My Horrible Father</div></li>
+          <li>Rick S. is reading <span class="book-title">Physics of Quantum Fluids</span></li>
+          <li>Morty is reading <span class="book-title">My Horrible Father</span></li>
           <li>Patrick B. is reading <span class="book-title">Jar of Hearts</span></li>
           <li>Ice S. is reading <span class="book-title">The Story of Edward Munch</span></li>
-          <li></li>
         </ul>
       </section>
       <section id="trending">
@@ -136,9 +152,11 @@
         </ul>
       </section>
       <section id="subscribe">
-        <label for="email"></label>
+        <h3>Sign Up</h3>
+        <label for="email" class="accessibility">Sign Up</label>
         <input type="email" name="email" id="email" placeholder="E-mail">
-        <p>Subscribe to our newsletter to receive weekly book recommendations, promotions from associated brands & event dates. Your information is secure and you can unsubscribe at any time.</p>
+        <p>Subscribe to our newsletter to receive weekly book recommendations, promotions from associated brands & event dates.</p>
+        <p>Your information is secure and you can unsubscribe at any time.</p>
       </section>
       <section id="socials">
         <h3>Follow Us</h3>
@@ -148,7 +166,6 @@
           <li><a href="#"><i class="fab fa-instagram"></i></a></li>
         </ul>
       </section>
-
     </aside>
   </div>
   <footer></footer>
