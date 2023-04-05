@@ -1,12 +1,39 @@
 :root {
   --header-height: 70px;
-	--input-focus-bg: hsla(14, 29%, 35%, 0.3);
+	--text-input-bg: #ebe2d5;
 }
 
 /* DEFAULT pressStart */
 h3 {
   font-family: 'Cyclone', sans-serif;
   font-size: clamp(1.875rem, 4vw, 2.125rem);
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+.user-name {
+  font-weight: bold;
+}
+
+.user-status {
+  border: 2px solid #724b3f;
+  background: radial-gradient(red, white);
+  border-radius: 50%;
+  display: inline-block;
+  height: 15px;
+  width: 15px;
+}
+
+.user-online {
+  background: radial-gradient(chartreuse, white);
+}
+
+.book-title {
+  color: #724b3f;
+  font-weight: bold;
+  font-style: italic;
 }
 
 /* DEFAULT gameOver */
@@ -196,9 +223,9 @@ header #header-right .header-btn {
 	color: red;
 }  */
 
-#page-content-wrapper #book-case,
-#page-content-wrapper aside {
-  padding-inline: 5vw
+main > :not(#controls-wrapper), 
+aside {
+  padding-inline: 3vw;
 }
 
 main {
@@ -276,7 +303,7 @@ main #controls #search-form {
 
 main #controls #search-form:hover,
 main #controls #search-form:valid {
-	background-color: var(--input-focus-bg);
+	background-color: var(--text-input-bg);
 	border-radius: 25px;
   cursor: pointer;
   width: 200px;
@@ -481,9 +508,9 @@ aside {
 
 aside section {
   background: linear-gradient(145deg, #e6dfc6, #ffffeb);
+  border-radius: 25px 75px 25px 25px;
   box-shadow:  7px 7px 46px #ada996,
               -7px -7px 46px #ffffff;
-  border-radius: 25px;
   margin-bottom: 25px;
   padding: 25px 25px;
 }
@@ -519,15 +546,20 @@ aside section h3::before {
 aside ul {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   list-style: none;
 }
 
-aside #notifications #notifications-list li {
+aside li {
+  width: max-content;
+}
+
+aside #notifications #notifications-list .notification-link {
+  color: #724b3f;
   align-items: center;
   display: flex;
   gap: 8px;
-
+  text-decoration: none;
 }
 
 aside #advertisement-box video {
@@ -535,14 +567,46 @@ aside #advertisement-box video {
   object-fit: contain;
 }
 
-aside li {
-  width: max-content;
+aside #friends #friends-list .friends-list-li {
+  align-items: center;
+  display: flex;
+  gap: 8px;
 }
 
-.iconic {
-  display: inline-block;
+aside #trending #trending-list .trending-list-li a {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  text-decoration: none;
 }
 
+aside #subscribe #sign-up-form {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+aside #subscribe #email {
+  appearance: none;
+  color: black;
+  background: #fff8dc;
+  box-shadow: inset 17px 17px 34px #c9c4ae,
+              inset -17px -17px 34px #ffffff;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 15px;
+}
+
+aside #subscribe #sign-up-btn {
+  color: #724b3f;
+}
+
+aside #subscribe #email::placeholder,
+aside #subscribe #email::-webkit-input-placeholder,
+aside #subscribe #email::-ms-input-placeholder {
+  color: #724b3f;
+  font-size: 3rem;
+}
 
 @media only screen and (min-width: 768px) {
   header {
@@ -572,6 +636,11 @@ aside li {
     font-size: 1rem;
     gap: 1rem;
     list-style: none;
+  }
+
+  main > :not(#controls-wrapper),
+  aside {
+    padding-inline: unset;
   }
 
   main #controls-wrapper {
@@ -618,11 +687,6 @@ aside li {
     display: grid;
     gap: 40px;
     grid-template-columns: 5fr 2fr;
-  }
-
-  #page-content-wrapper #book-case,
-  #page-content-wrapper aside {
-    padding-inline: unset;
   }
 
   main {

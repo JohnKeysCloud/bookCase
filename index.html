@@ -103,22 +103,43 @@
         <h3>Notifications</h3>
         <ul id="notifications-list">
           <li>
-            <span class="love iconic">
-              <img src="assets/icons/love.png" width="25" height="25" alt="New Love">
-            </span> 
-            <span class="notification-text-content">this person loved your new book addition</span>
+            <a href="#" class="notification-link">
+              <span class="love noti-icon">
+                <img src="assets/icons/love.png" width="25" height="25" alt="New Love">
+              </span>
+              <span class="notification-text-content">
+                <span class="user-name">
+                  User 1 
+                </span> 
+                loved your new book addition
+              </span>
+            </a>
           </li>
           <li>
-            <span class="message iconic">
-              <img src="assets/icons/message.png" height="25" width="25" alt="New Message">
-            </span> 
-            <span class="notification-text-content">this person sent you a message</span>
+            <a href="#" class="notification-link">
+              <span class="message noti-icon">
+                <img src="assets/icons/message.png" height="25" width="25" alt="New Message">
+              </span>
+              <span class="notification-text-content">
+                <span class="user-name">
+                  User 2
+                </span> 
+                sent you a message
+              </span>
+            </a>
             </li>
           <li>
-            <span class="mention iconic">
-              <img src="assets/icons/mention.png" height="25" width="25" alt="New Mention">
-            </span> 
-            <span class="notification-text-content">this person mentioned you in a post</span>
+            <a href="#" class="notification-link">
+              <span class="mention noti-icon">
+                <img src="assets/icons/mention.png" height="25" width="25" alt="New Mention">
+              </span>
+              <span class="notification-text-content">
+                <span class="user-name">
+                  User 3
+                </span> 
+                mentioned you in a post
+              </span>
+            </a>
           </li>
         </ul>
       </section>
@@ -134,29 +155,61 @@
       </section>
       <section id="friends">
         <h3>Friends</h3>
-        <ul>
-          <li>Rick S. is reading <span class="book-title">Physics of Quantum Fluids</span></li>
-          <li>Morty is reading <span class="book-title">My Horrible Father</span></li>
-          <li>Patrick B. is reading <span class="book-title">Jar of Hearts</span></li>
-          <li>Ice S. is reading <span class="book-title">The Story of Edward Munch</span></li>
+        <ul id="friends-list">
+          <li class="friends-list-li">
+            <span class="user-status user-online"></span>
+            <div class="friends-list-li-text-content"><span class="user-name">Rick S.</span> is reading <a href="https://link.springer.com/book/10.1007/978-3-642-37569-9?source=shoppingads&locale=en-us&gclid=Cj0KCQjwuLShBhC_ARIsAFod4fKXb6eKBAN0Tjj4UzdsSDV8pkkNV9berO6SeDJZKzGiIj0fWTR1Ay8aAmsrEALw_wcB" target="_blank" rel="noopener" class="book-title">Physics of Quantum Fluids</a></div>
+          </li>
+          <li class="friends-list-li">
+            <span class="user-status user-online"></span>
+            <div class="friends-list-li-text-content"><span class="user-name">Morty S.</span> is reading <a href="https://rickandmorty.fandom.com/wiki/Morty_Jr." target="_blank" rel="noopener" class="book-title">My Horrible Father</a></div>
+          </li>
+          <li class="friends-list-li">
+            <span class="user-status user-online"></span>
+            <div class="friends-list-li-text-content"><span class="user-name">Patrick B.</span> is reading <a href="https://www.amazon.com/Jar-Hearts-Jennifer-Hillier/dp/1250154197" target="_blank" rel="noopener" class="book-title">Jar of Hearts</a></div>
+          </li>
+          <li class="friends-list-li">
+            <span class="user-status"></span>
+            <div class="friends-list-li-text-content"><span class="user-name">Ice S.</span> is reading <a href="https://www.amazon.com/Story-Edvard-Munch-Ketil-Bjornstad/dp/190085094X" target="_blank" rel="noopener" class="book-title">The Story of Edvard Munch</a></div>
+          </li>
         </ul>
       </section>
       <section id="trending">
         <h3>Trending</h3>
-        <ul>
-          <li>book 1</li>
-          <li>book 2</li>
-          <li>book 3</li>
-          <li>book 4 </li>
-          <li>book 5</li>
+        <ul id="trending-list">
+          <li class="trending-list-li">
+            <a href="https://www.amazon.com/Ready-Player-One-Ernest-Cline/dp/0307887448" target="_blank" rel="noopener" class="trending-list-li-a">
+              <span><img src="assets/icons/book.png" alt="Book" height="25" width="25"></span>
+              <span class="book-title">Ready Player One</span>
+            </a>
+          </li>
+          <li class="trending-list-li">
+            <a href="https://www.amazon.com/Ultimate-Hitchhikers-Guide-Galaxy-Outrageous-ebook/dp/B0043M4ZH0/ref=sr_1_2?keywords=hitchhikers+guide+to+the+galaxy+book&qid=1680727965&s=books&sprefix=hitch%2Cstripbooks%2C100&sr=1-2" target="_blank" rel="noopener" class="trending-list-li-a">
+              <span><img src="assets/icons/book.png" alt="Book" height="25" width="25"></span>
+              <span class="book-title">The Hitchhiker's Guide to the Galaxy</span>
+            </a>
+          </li>
+          <li class="trending-list-li">
+            <a href="https://www.amazon.com/Life-Changing-Magic-Tidying-Decluttering-Organizing/dp/1607747308/ref=sr_1_1?crid=3E96IWDYCPHE1&keywords=life+changing+magic+of+tidying+up&qid=1680728011&s=books&sprefix=life+changing+magic+of+tidying+up%2Cstripbooks%2C93&sr=1-1" target="_blank" rel="noopener" class="trending-list-li-a">
+              <span><img src="assets/icons/book.png" alt="Book" height="25" width="25"></span>
+              <span class="book-title">Life Changing Magic of Tidying Up</span>
+            </a>
+          </li>
         </ul>
       </section>
       <section id="subscribe">
         <h3>Sign Up</h3>
-        <label for="email" class="accessibility">Sign Up</label>
-        <input type="email" name="email" id="email" placeholder="E-mail">
-        <p>Subscribe to our newsletter to receive weekly book recommendations, promotions from associated brands & event dates.</p>
-        <p>Your information is secure and you can unsubscribe at any time.</p>
+        <div id="subscribe-content-wrapper">
+          <form id="sign-up-form" action="#">
+            <label for="email" class="accessibility">Sign Up</label>
+            <input type="email" name="email" id="email" placeholder="E-mail" pattern="([\w-]+)@([a-zA-Z\d-]+)\.([a-zA-Z]{2,5})([\.][a-zA-Z]{2,5})?">
+            <button form="sign-up-form" id="sign-up-btn">submit</button>
+          </form>
+          <div id="subscribe-text-content">
+            <p>Subscribe to our newsletter to receive weekly book recommendations, promotions from associated brands & event dates.</p>
+            <p>Your information is secure and you can unsubscribe at any time.</p>
+          </div>
+        </div>
       </section>
       <section id="socials">
         <h3>Follow Us</h3>
