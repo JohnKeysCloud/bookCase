@@ -729,7 +729,9 @@ aside #subscribe #email::-ms-input-placeholder {
   #page-content-wrapper {
     display: grid;
     gap: 40px;
-    grid-template-columns: 5fr 2fr;
+    grid-template-columns: 5fr 1fr;
+    margin-inline: auto;
+    max-width: 1400px;
   }
 
   main {
@@ -757,6 +759,7 @@ aside #subscribe #email::-ms-input-placeholder {
     border-radius: unset;
     box-shadow:  unset;
     grid-template-areas: 'notifications' 'friends' 'trending' 'advertisement' 'subscribe' 'socials';
+    grid-template-columns: 1fr;
     padding-top: 25px;
   }
 
@@ -772,5 +775,11 @@ aside #subscribe #email::-ms-input-placeholder {
   main #controls #search-form:hover, 
   main #controls #search-form:valid {
     width: 315px;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  #page-content-wrapper {
+    gap: 75px;
   }
 }
