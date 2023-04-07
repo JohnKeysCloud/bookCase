@@ -669,7 +669,7 @@ aside #subscribe #subscribe-text-content {
   text-align: center;
 }
 
-aside #subscribe #subscribe-text-content p {
+aside #subscribe #subscribe-text-content p:not(:last-child) {
   margin-bottom: 15px;
 }
 
