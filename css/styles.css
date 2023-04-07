@@ -18,10 +18,11 @@ a:hover {
 }
 
 .user-status {
-  border: 2px solid #724b3f;
   background: radial-gradient(red, white);
   border-radius: 50%;
+  border: 2px solid #724b3f;
   display: inline-block;
+  flex-shrink: 0;
   height: 15px;
   width: 15px;
 }
@@ -488,7 +489,7 @@ main #book-case {
   align-self: start;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
-  grid-auto-rows: minmax(250px, auto);
+  grid-auto-rows: minmax(175px, auto);
 }
 
 main #book-case .book {
@@ -508,11 +509,12 @@ aside {
 
 aside section {
   background: linear-gradient(145deg, #e6dfc6, #ffffeb);
-  border-radius: 25px 75px 25px 25px;
+  border-radius: 55px;
   box-shadow:  7px 7px 46px #ada996,
               -7px -7px 46px #ffffff;
   margin-bottom: 25px;
-  padding: 25px 25px;
+  padding: 20px 30px;
+  position: relative;
 }
 
 aside section:hover h3::before {
@@ -550,13 +552,9 @@ aside ul {
   list-style: none;
 }
 
-aside li {
-  width: max-content;
-}
-
 aside #notifications #notifications-list .notification-link {
   color: #724b3f;
-  align-items: center;
+  align-items: top;
   display: flex;
   gap: 8px;
   text-decoration: none;
@@ -568,7 +566,7 @@ aside #advertisement-box video {
 }
 
 aside #friends #friends-list .friends-list-li {
-  align-items: center;
+  align-items: top;
   display: flex;
   gap: 8px;
 }
@@ -582,7 +580,6 @@ aside #trending #trending-list .trending-list-li a {
 
 aside #subscribe #sign-up-form {
   display: flex;
-  justify-content: center;
   gap: 8px;
 }
 
@@ -680,6 +677,52 @@ aside #subscribe #email::-ms-input-placeholder {
     box-shadow: inset 5px 5px 9px #d4ceb7,
               inset -5px -5px 9px #ffffff;
   }
+
+  aside {
+    background: linear-gradient(145deg, #e6dfc6, #ffffeb);
+    border-radius: 55px;
+    box-shadow:  7px 7px 46px #ada996,
+              -7px -7px 46px #ffffff;
+    display: grid;
+    grid-template-areas:
+    'notifications friends'
+    'trending advertisement'
+    'subscribe socials';
+    justify-content: center;
+
+    grid-template-columns: 1fr 1fr;
+    /* align-items: center; */
+  }
+
+  aside #notifications {
+    grid-area: notifications;
+  }
+
+  aside #friends {
+    grid-area: friends;
+  }
+
+  aside #advertisement {
+    grid-area: advertisement;
+  }
+
+  aside #trending {
+    grid-area: trending;
+  }
+
+  aside #subscribe {
+    grid-area: subscribe;
+  }
+
+  aside #socials {
+    grid-area: socials;
+  }
+
+  aside section {
+    background: unset;
+    border-radius: unset;
+    box-shadow:  unset;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
@@ -703,13 +746,25 @@ aside #subscribe #email::-ms-input-placeholder {
     width: 55px;
   }
 
+  /* ! adjust so maybe sort button shrinks while valid? */
   main #controls #search-form:hover, 
   main #controls #search-form:valid {
-    width: 210px;
+    width: 180px;
   }
 
   aside {
+    background: unset;
+    border-radius: unset;
+    box-shadow:  unset;
+    grid-template-areas: 'notifications' 'friends' 'trending' 'advertisement' 'subscribe' 'socials';
     padding-top: 25px;
+  }
+
+  aside section {
+    background: linear-gradient(145deg, #e6dfc6, #ffffeb);
+    border-radius: 55px;
+    box-shadow:  7px 7px 46px #ada996,
+              -7px -7px 46px #ffffff;
   }
 }
 
