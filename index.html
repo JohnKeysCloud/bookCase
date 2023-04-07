@@ -14,7 +14,7 @@
 <body>
   <header>
     <div id="header-left">
-      <h1 id="header-logo">bookCase</h1>
+      <h1 id="header-logo"><a href="#">bookCase</a></h1>
       <button id="menu-btn" aria-label="Nav Toggle">
         <div id="menu-btn-san">
           <!-- injected via css -->
@@ -24,7 +24,7 @@
     <div id="header-right">
       <ul id="nav-ul">
         <li><a href="#">home</a></li>
-        <li><a href="my-case.html">myCase</a></li>
+        <li><a href="index.html">myCase</a></li>
         <li><a href="#">browse</a></li>
         <li><a href="#">community</a></li>
       </ul>
@@ -70,7 +70,7 @@
             <div class="custom-select">
               <label class="accessibility" for="sort">sort by:</label>
               <select name="sort" id="sort-select">
-                <option value="">Sort By:</option>
+                <option value="">Sort By</option>
                 <option value="read">read</option>
                 <option value="author-a-z">a-z (author)</option>
                 <option value="title-a-z">a-z (title)</option>
@@ -202,21 +202,21 @@
         <div id="subscribe-content-wrapper">
           <form id="sign-up-form" action="#">
             <label for="email" class="accessibility">Sign Up</label>
-            <input type="email" name="email" id="email" placeholder="E-mail" pattern="([\w-]+)@([a-zA-Z\d-]+)\.([a-zA-Z]{2,5})([\.][a-zA-Z]{2,5})?">
+            <input type="email" name="email" id="email" placeholder="johncloud@cyclonestud.io" pattern="([\w-]+)@([a-zA-Z\d-]+)\.([a-zA-Z]{2,5})([\.][a-zA-Z]{2,5})?">
             <button form="sign-up-form" id="sign-up-btn">submit</button>
           </form>
           <div id="subscribe-text-content">
-            <p>Subscribe to our newsletter to receive weekly book recommendations, promotions from associated brands & event dates.</p>
-            <p>Your information is secure and you can unsubscribe at any time.</p>
+            <p>Subscribe to our newsletter to receive weekly book recommendations, promotions from associated brands & event information.</p>
+            <p>Your data is secure and you can unsubscribe at any time.</p>
           </div>
         </div>
       </section>
       <section id="socials">
         <h3>Follow Us</h3>
-        <ul>
-          <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-          <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-          <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+        <ul id="socials-icons">
+          <li class="socials-icon"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+          <li class="socials-icon"><a href="#"><i class="fab fa-twitter"></i></a></li>
+          <li class="socials-icon"><a href="#"><i class="fab fa-instagram"></i></a></li>
         </ul>
       </section>
     </aside>

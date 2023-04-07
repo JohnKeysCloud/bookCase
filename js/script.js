@@ -12,43 +12,46 @@ const menuBtn = document.querySelector('#menu-btn');
 let menuOpen = false;
 
 menuBtn.addEventListener('click', () => {
-  if (!menuOpen) {
-    menuBtn.classList.add('open');
-    menuOpen = true;
-  } else {
-    menuBtn.classList.remove('open');
-    menuOpen = false;
-  }
+    if (!menuOpen) {
+        menuBtn.classList.add('open');
+        menuOpen = true;
+    } else {
+        menuBtn.classList.remove('open');
+        menuOpen = false;
+    }
 }); 
 
 // ! ---------------------------------------------------
 // * REVIEW 
 
 let selectContainers = document.getElementsByClassName('custom-select');
+let selectedOptionDiv = document.createElement('div');
 
-// ? look for any elements with the class "custom-select":
+// ? look for any elements with the class 'custom-select':
 for (let i = 0; i < selectContainers.length; i++) {
     let selectElement = selectContainers[i].getElementsByTagName('select')[0];
     // ? for each element, create a new DIV that will contain the option list:
     let optionsList = document.createElement('ul');
     
     // ? for each element, create a new DIV that will act as the selected item:
-    selectedOptionDiv = document.createElement('div');
-    selectedOptionDiv.setAttribute("class", "select-selected");
+    selectedOptionDiv.setAttribute('class', 'select-selected');
+    selectedOptionDiv.setAttribute('tabindex', '0');
+
     selectedOptionDiv.innerHTML = selectElement.options[selectElement.selectedIndex].innerHTML;
     selectContainers[i].appendChild(selectedOptionDiv);
     
-    optionsList.setAttribute("class", "select-items select-hide");
+    optionsList.setAttribute('class', 'select-items select-hide');
 
     for (let j = 1; j < selectElement.length; j++) {
         // ? for each option in the original select element, create a new DIV that will act as an option item:
-        let optionsListItem = document.createElement("li");
+        let optionsListItem = document.createElement('li');
+        optionsListItem.setAttribute('tabindex', '0');
         optionsListItem.innerHTML = selectElement.options[j].innerHTML;
 
-        optionsListItem.addEventListener("click", function(e) {
+        optionsListItem.addEventListener('click', function(e) {
             // ? when an item is clicked, update the original select box, and the selected item:
-            let currentSelectedLiElem = this.parentNode.getElementsByClassName("same-as-selected");
-            let listItemParent = this.parentNode.parentNode.getElementsByTagName("select")[0];
+            let currentSelectedLiElem = this.parentNode.getElementsByClassName('same-as-selected');
+            let listItemParent = this.parentNode.parentNode.getElementsByTagName('select')[0];
             let currentSelectedDiv = this.parentNode.previousSibling;
 
             for (let i = 0; i < listItemParent.length; i++) {
@@ -59,7 +62,7 @@ for (let i = 0; i < selectContainers.length; i++) {
                     for (let k = 0; k < currentSelectedLiElem.length; k++) {
                         currentSelectedLiElem[k].removeAttribute('class');
                     }
-                    this.setAttribute("class", "same-as-selected");
+                    this.setAttribute('class', 'same-as-selected');
                     break;
                 }
             }
@@ -69,37 +72,51 @@ for (let i = 0; i < selectContainers.length; i++) {
     }
     selectContainers[i].appendChild(optionsList);
 
-    selectedOptionDiv.addEventListener("click", function(e) {
+    selectedOptionDiv.addEventListener('click', function(e) {
         // ? when the select box is clicked, close any other select boxes, and open/close the current select box:*
         e.stopPropagation();
         closeAllSelect(this);
-        this.nextSibling.classList.toggle("select-hide");
-        this.classList.toggle("select-arrow-active");
+        this.nextSibling.classList.toggle('select-hide');
+        this.classList.toggle('select-arrow-active');
     });
 }
+
+selectedOptionDiv.addEventListener('keydown', function (e) {
+    console.log(e.key);
+    if (e.key === 'Enter' && document.activeElement === selectedOptionDiv) {
+        this.click();
+    }
+
+    // ! add keydown event listener to each li => goes to next sibling => enter simulates click
+    
+    if (e.key === 'ArrowDown') {
+        console.log(this.nextSibling.firstChild);
+        this.nextSibling.firstChild.focus();
+    }
+});
 
 function closeAllSelect(currentSelectedDivOption) {
     // ? a function that will close all select boxes in the document, except the current select box:
     var arrNo = [];
-    let customSelectULs = document.getElementsByClassName("select-items");
-    let allSelectedDivOptions = document.getElementsByClassName("select-selected");
+    let customSelectULs = document.getElementsByClassName('select-items');
+    let allSelectedDivOptions = document.getElementsByClassName('select-selected');
 
     for (let i = 0; i < allSelectedDivOptions.length; i++) {
         if (currentSelectedDivOption === allSelectedDivOptions[i]) {
             arrNo.push(i)
         } else {
-            allSelectedDivOptions[i].classList.remove("select-arrow-active");
+            allSelectedDivOptions[i].classList.remove('select-arrow-active');
         }
     }
 
     for (let i = 0; i < customSelectULs.length; i++) {
         if (arrNo.indexOf(i)) {
-        customSelectULs[i].classList.add("select-hide");
+        customSelectULs[i].classList.add('select-hide');
         }
     }
 }
 // ? if the user clicks anywhere outside the select box, then close all select boxes:
-document.addEventListener("click", closeAllSelect);
+document.addEventListener('click', closeAllSelect);
 
 // ! ---------------------------------------------------
 

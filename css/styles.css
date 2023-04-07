@@ -4,13 +4,23 @@
 }
 
 /* DEFAULT pressStart */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  border-radius: inherit;
+  outline: 2px dashed #724b3f;
+}
+
 h3 {
   font-family: 'Cyclone', sans-serif;
   font-size: clamp(1.875rem, 4vw, 2.125rem);
 }
 
-a:hover {
-  opacity: 0.8;
+a:hover,
+button:hover {
+  opacity: 0.85;
 }
 
 .user-name {
@@ -52,17 +62,25 @@ body {
 header {
   background-color: #724b3f;
   box-shadow: 0 10px 20px -8px;
-	display: flex;
+  display: flex;
   flex-direction: column;
-	justify-content: space-between;
-	margin-bottom: 25px;
+  justify-content: space-between;
+  left: 0;
+  margin-bottom: 25px;
   min-height: var(--header-height);
   padding-inline: 5vw;
   position: fixed;
-  top: 0;
-  left: 0;
   right: 0;
+  top: 0;
   z-index: 1;
+}
+
+header :focus {
+  outline: none;  
+}
+
+header :focus-visible {
+  outline: 2px dashed cornsilk;
 }
 
 header ~ #page-content-wrapper {
@@ -76,10 +94,14 @@ header #header-left {
 }
 
 header #header-left #header-logo {
-  color: white;
-	font-family: 'Cyclone';
+  font-family: 'Cyclone';
 	font-size: 2.5rem;
 	padding-bottom: 7px;
+}
+
+header #header-left #header-logo a {
+  color: white;
+  text-decoration: none;
 }
 
 header #header-left #menu-btn {
@@ -488,8 +510,9 @@ main #controls .select-items li:last-child {
 main #book-case {
   align-self: start;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
   grid-auto-rows: minmax(175px, auto);
+  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+  padding: 25px;
 }
 
 main #book-case .book {
@@ -581,16 +604,20 @@ aside #trending #trending-list .trending-list-li a {
 aside #subscribe #sign-up-form {
   display: flex;
   gap: 8px;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  margin-inline: auto;
 }
 
 aside #subscribe #email {
   appearance: none;
-  color: black;
   background: #fff8dc;
-  box-shadow: inset 17px 17px 34px #c9c4ae,
-              inset -17px -17px 34px #ffffff;
-  border: none;
   border-radius: 25px;
+  border: 1px solid #724b3f;
+  box-shadow: inset 6px 6px 12px #dbd5bd,
+            inset -6px -6px 12px #fffffb;
+  color: #724b3f;
+  flex: 1;
   padding: 10px 15px;
 }
 
@@ -598,11 +625,104 @@ aside #subscribe #sign-up-btn {
   color: #724b3f;
 }
 
-aside #subscribe #email::placeholder,
-aside #subscribe #email::-webkit-input-placeholder,
+aside #subscribe #email::placeholder {
+  color: hsla(14, 29%, 35%, 0.7);
+}
+
 aside #subscribe #email::-ms-input-placeholder {
+  color: hsla(14, 29%, 35%, 0.7);
+}
+
+aside #subscribe #email:-ms-input-placeholder {
+  color: hsla(14, 29%, 35%, 0.7);
+}
+
+aside #subscribe #sign-up-btn {
+  border-radius: 25px;
+  border: 1px solid #724b3f;
+  padding-inline: 15px;
+  position: relative;
+  transition: all 88ms ease-in-out;
+  z-index: 1;
+}
+
+aside #subscribe #sign-up-btn:active {
+  transform: translateY(2px);
+} 
+
+aside #subscribe #sign-up-btn::before {
+  border-radius: inherit;
+  box-shadow: 0 4px 0px -1px hsla(14, 29%, 35%, 0.8);
+  content: '';
+  inset: 0;
+  position: absolute;
+  transition: all 111ms ease-in-out;
+  z-index: -1;
+}
+
+aside #subscribe #sign-up-btn:active::before {
+  opacity: 0.3;
+  transform: translateY(-3px);
+}
+
+aside #subscribe #subscribe-text-content {
+  text-align: center;
+}
+
+aside #subscribe #subscribe-text-content p {
+  margin-bottom: 15px;
+}
+
+aside #socials {
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+aside #socials #socials-icons {
+  align-self: center;
+  background: #fff8dc;
+  border-radius: 50px;
+  box-shadow: inset 15px 15px 23px #c9c4ae,
+            inset -15px -15px 23px #ffffff;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  padding-block: 25px;
+}
+
+aside #socials #socials-icons .socials-icon {
+  align-items: center;
+  background: linear-gradient(145deg, #ffffeb, #e6dfc6);
+  border-radius: 50%;
+  box-shadow:  6px 6px 10px #a8a491,
+              -6px -6px 10px #ffffff;
+  display: grid;
+  height: 55px;
+  justify-content: center;
+  transition: all 380ms ease-in-out;
+  width: 55px;
+}
+
+aside #socials #socials-icons .socials-icon:hover {
+  transform: rotate(8deg);
+}
+
+aside #socials #socials-icons .socials-icon a {
+  border-radius: inherit;
+  /* color: #724b3f; */
+  padding: 25px;
+  position: relative;
+}
+
+aside #socials #socials-icons .socials-icon svg {
   color: #724b3f;
-  font-size: 3rem;
+  /* font-size: 3rem; */
+  left: 50%;
+  height: min(30px, 5vw);
+  width: min(30px, 5vw);
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 @media only screen and (min-width: 768px) {
@@ -635,7 +755,6 @@ aside #subscribe #email::-ms-input-placeholder {
     list-style: none;
   }
 
-  main > :not(#controls-wrapper),
   aside {
     padding-inline: unset;
   }
@@ -688,10 +807,8 @@ aside #subscribe #email::-ms-input-placeholder {
     'notifications friends'
     'trending advertisement'
     'subscribe socials';
-    justify-content: center;
-
     grid-template-columns: 1fr 1fr;
-    /* align-items: center; */
+    justify-content: center;
   }
 
   aside #notifications {
@@ -764,10 +881,10 @@ aside #subscribe #email::-ms-input-placeholder {
   }
 
   aside section {
-    background: linear-gradient(145deg, #e6dfc6, #ffffeb);
+    background: cornsilk;
     border-radius: 55px;
-    box-shadow:  7px 7px 46px #ada996,
-              -7px -7px 46px #ffffff;
+    box-shadow:  7px 7px 11px #dbd5bd,
+                -7px -7px 11px #fffffb;
   }
 }
 
