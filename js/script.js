@@ -3,10 +3,12 @@ const header = document.createElement('header');
 const main = document.createElement('main');
 const footer = document.createElement('footer');
 const addBookModal = document.querySelector('dialog');
-const addBookBtn = document.getElementById('add-book-button');
+const openDialogBtn = document.getElementById('open-dialog-btn');
+const addBookBtn = document.getElementById('add-book-btn');
 const searchInput = document.getElementById('search-input');
 const searchCloseBtn = document.getElementById('search-close-btn');
-let bookCase = [];
+const bookCase = document.getElementById('book-case');
+let bookCaseArray = [];
 
 const menuBtn = document.querySelector('#menu-btn');
 let menuOpen = false;
@@ -128,36 +130,39 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToCase(book) {
-    bookCase.push(book);
+    bookCaseArray.push(book);
 }
 
 function removeBookFromCase(book) {
-    bookCase.splice(bookCase.indexOf(book), 1);
+    bookCaseArray.splice(bookCaseArray.indexOf(book), 1);
 }
 
-function populateBookCase() {
-    for (let i = 0; i < bookCase.length; i++) {
-        let bookCard = document.createElement('article');
-        
-        let descriptionList = document.createElement('dl');
-        let bookTitle = document.createElement('dt');
-        let bookAuthor = document.createElement('dt');
-        let bookPages = document.createElement('dt');
-        let bookRead = document.createElement('dt');
+function populateBookCase(e) {
+    e.preventDefault();
 
-        bookTitle.textContent = bookCase[i].title;
-        bookAuthor.textContent = bookCase[i].author;
-        bookPages.textContent = bookCase[i].pages;
-        bookRead.textContent = bookCase[i].read;
-        
-        descriptionList.appendChild(bookTitle);
-        descriptionList.appendChild(bookAuthor);
-        descriptionList.appendChild(bookPages);
-        descriptionList.appendChild(bookRead);
-        
-        bookCard.appendChild(descriptionList);
-        main.appendChild(bookCard);
-    }
+    let bookCard = document.createElement('article');
+    let descriptionList = document.createElement('dl');
+    let bookTitle = document.createElement('dt');
+    let bookAuthor = document.createElement('dt');
+    let bookPages = document.createElement('dt');
+    let bookRead = document.createElement('dt');
+    
+    descriptionList.appendChild(bookTitle);
+    descriptionList.appendChild(bookAuthor);
+    descriptionList.appendChild(bookPages);
+    descriptionList.appendChild(bookRead);
+    
+    bookCard.appendChild(descriptionList);
+    bookCase.appendChild(bookCard);
+    
+    bookCard.classList.add('book-card');
+
+    // get all the text input values 
+    // create a new book object
+    // add the book object to the bookcase array
+    // populate the bookcase with the book object
+    // clear the form
+    // close the modal
 }
 
 function openAddBookModal() {
@@ -168,12 +173,6 @@ function closeSearchInput(e) {
     searchInput.value = '';
 }
 
-addBookBtn.addEventListener('click', openAddBookModal);
+openDialogBtn.addEventListener('click', openAddBookModal);
 searchCloseBtn.addEventListener('click', closeSearchInput);
-
-// addBookBtn.addEventListener('click', () => {
-
-//     let newBook = new Book('The Hobbit', 'J.R.R. Tolkien', 295, 'Read');
-//     addBookToCase(newBook);
-//     populateBookCase();
-// });
+addBookBtn.addEventListener('click', populateBookCase);

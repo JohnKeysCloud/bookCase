@@ -293,7 +293,7 @@ main #controls #controls-top {
   gap: 25px;
 }
 
-main #controls #add-book-button {
+main #controls #open-dialog-btn {
   background-color: #724b3f;
   border-radius: 50%;
   border: 2px solid black;
@@ -304,6 +304,41 @@ main #controls #add-book-button {
   font-size: 1.5rem;
   height: 55px;
   width: 55px;
+}
+
+main #controls #add-book-container :modal {
+  background-color: cornsilk;
+  border: 2px solid red;
+  border-radius: 55px;
+  display: none;  
+  padding: 0;
+  place-items: center;
+  position: fixed;
+  width: min(88vw, 555px);
+
+  z-index: 1;
+}
+
+main #controls #add-book-container :modal .input-wrapper {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+  align-items: center;
+}
+
+main #controls #add-book-container :modal[open] {
+  display: grid;
+}
+
+main #controls #add-book-container :modal form {
+    border: 2px solid chartreuse;
+
+  display: grid;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 75px;
+  width: 100%;
 }
 
 main #controls #add-book-text {
@@ -515,7 +550,7 @@ main #book-case {
   padding: 25px;
 }
 
-main #book-case .book {
+main #book-case .book-card {
   border: 1px solid red;
   border-radius: 50px;
 }
