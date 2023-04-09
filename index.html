@@ -44,22 +44,25 @@
                 <label class="accessibility" for="add-book">add new</label>
                 <button id="open-dialog-btn"><span id="add-book-text">+</span></button>
                 <dialog id="add-book-modal">
+                  <h3>Add a Book</h3>
                   <form>
-                    <div class="input-wrapper">
-                      <label for="title">Title</label>
+                    <div id="title-input" class="input-wrapper">
+                      <label class="input-label" for="title">Title</label>
                       <input type="text" name="title" id="title">
                     </div>
-                    <div class="input-wrapper">
-                      <label for="author">Author</label>
+                    <div id="author-input" class="input-wrapper">
+                      <label class="input-label" for="author">Author</label>
                       <input type="text" name="author" id="author">
                     </div>
-                    <div class="input-wrapper">
-                      <label for="pages">Pages</label>
-                      <input type="number" name="pages" id="pages">
-                    </div>
-                    <div class="input-wrapper">
-                      <label for="read">Read</label>
-                      <input type="checkbox" name="read" id="read">
+                    <div id="bottom-modal">
+                      <div id="pages-input" class="input-wrapper">
+                        <label class="input-label" for="pages">Pages</label>
+                        <input type="number" name="pages" id="pages">
+                      </div>
+                      <div id="read-input" class="input-wrapper">
+                        <label class="input-label" for="read">Read</label>
+                        <input type="checkbox" name="read" id="read">
+                      </div>
                     </div>
                     <button type="submit" id="add-book-btn">Add Book</button>
                   </form>
@@ -199,7 +202,7 @@
         <div id="subscribe-content-wrapper">
           <form id="sign-up-form" action="#">
             <label for="email" class="accessibility">Sign Up</label>
-            <input type="email" name="email" id="email" placeholder="johncloud@cyclonestud.io" pattern="([\w-]+)@([a-zA-Z\d-]+)\.([a-zA-Z]{2,5})([\.][a-zA-Z]{2,5})?">
+            <input type="email" name="email" id="email" placeholder="johncloud@cyclonestud.io" pattern="([\w-]+)@([a-zA-Z\d-]+)\.([a-zA-Z]{2,5})([\.][a-zA-Z]{2,5})?" required>
             <button form="sign-up-form" id="sign-up-btn">submit</button>
           </form>
           <div id="subscribe-text-content">

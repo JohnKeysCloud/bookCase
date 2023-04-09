@@ -307,38 +307,82 @@ main #controls #open-dialog-btn {
 }
 
 main #controls #add-book-container :modal {
-  background-color: cornsilk;
-  border: 2px solid red;
-  border-radius: 55px;
-  display: none;  
+  background: linear-gradient(145deg, #ffffeb, #e6dfc6);
+  box-shadow:  5px 5px 39px #b5b09c,
+              -5px -5px 39px #ffffff;
+  border: none;
+  border-radius: 75px;
+  color: #724b3f;
+  display: none;
+  height: max-content;
   padding: 0;
   place-items: center;
   position: fixed;
   width: min(88vw, 555px);
-
   z-index: 1;
-}
-
-main #controls #add-book-container :modal .input-wrapper {
-  display: flex;
-  /* flex-direction: column; */
-  justify-content: space-between;
-  align-items: center;
 }
 
 main #controls #add-book-container :modal[open] {
   display: grid;
 }
 
-main #controls #add-book-container :modal form {
-    border: 2px solid chartreuse;
-
-  display: grid;
-  flex-direction: column;
-  justify-content: center;
+main #controls #add-book-container :modal .input-wrapper {
+  display: flex;
+  justify-content: left;
   align-items: center;
+  gap: 16px;
+}
+
+main #controls #add-book-container :modal .input-label {
+  display: grid;
+  font-family: 'Cyclone', sans-serif;
+  font-size: 1.75rem;
+  padding-bottom: 5px;
+  place-items: center;
+  width: 55px;
+}
+
+main #controls #add-book-container :modal form {
+  border: 2px  red;
+  border-radius: inherit;
+  display: grid;
+  gap: 20px;
+  grid-template-areas: 'title title'
+                      'author author'
+                      'bottomModal bottomModal'
+                      'addbook addbook';
+  grid-template-columns: 1fr 1fr;
   padding: 50px 75px;
   width: 100%;
+}
+
+main #controls #add-book-container :modal form #title-input {
+  grid-area: title;
+}
+
+main #controls #add-book-container :modal form #author-input {
+  grid-area: author;
+}
+
+main #controls #add-book-container :modal form #bottom-modal {
+  display: flex;
+  justify-content: left;
+  gap: 16px;
+  grid-area: bottomModal;
+}
+
+main #controls #add-book-container :modal form #bottom-modal #pages-input input {
+  width: 100px;
+}
+
+main #controls #add-book-container :modal form #add-book-btn {
+  grid-area: addbook;
+}
+
+main #controls #add-book-container :modal form input {
+  border-radius: 25px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  padding: 8px 12px;
 }
 
 main #controls #add-book-text {
@@ -360,6 +404,7 @@ main #controls #search-form {
 }
 
 main #controls #search-form:hover,
+main #controls #search-form:focus-within,
 main #controls #search-form:valid {
 	background-color: var(--text-input-bg);
 	border-radius: 25px;
