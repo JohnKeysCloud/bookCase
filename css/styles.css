@@ -56,6 +56,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: clamp(0.8313rem, 1.3vw, 1rem);
 	position: relative;
 }
 
@@ -309,16 +310,18 @@ main #controls #open-dialog-btn {
 main #controls #add-book-container :modal {
   background: linear-gradient(145deg, #ffffeb, #e6dfc6);
   box-shadow:  5px 5px 39px #b5b09c,
-              -5px -5px 39px #ffffff;
+              -5px -5px 39px #724b3f,
+              inset -2px -2px 3px 2px #724b3f;
   border: none;
   border-radius: 75px;
   color: #724b3f;
   display: none;
+  display: grid; /* ! delete when finished styling  */
   height: max-content;
-  padding: 0;
+  padding-block: 15px;
   place-items: center;
   position: fixed;
-  width: min(88vw, 555px);
+  width: 333px;
   z-index: 1;
 }
 
@@ -326,34 +329,69 @@ main #controls #add-book-container :modal[open] {
   display: grid;
 }
 
+main #controls #add-book-container :modal::backdrop {
+  background: linear-gradient(transparent, hwb(0 0% 100% / 0.5), hwb(14 25% 55% / 0.7));
+}
+
+main #controls #add-book-container :modal #modal-header {
+  margin-bottom: 10px;
+}
+
+main #controls #add-book-container :modal ::placeholder {
+  color: #724b3f;
+  font-family: 'Cyclone';
+  font-size: 1.313rem;
+  letter-spacing: 1px;
+  opacity: 0.7;
+  text-align: center;
+  transform: translateY(3px);
+}
+
+main #controls #add-book-container :modal form input:not([type='checkbox']):focus::placeholder {
+  opacity: 0;
+}
+
 main #controls #add-book-container :modal .input-wrapper {
   display: flex;
   justify-content: left;
   align-items: center;
-  gap: 16px;
+  /* * ⬇️ if modal labels are visible ⬇️ * */
+  /* gap: 5px; */
 }
 
 main #controls #add-book-container :modal .input-label {
   display: grid;
   font-family: 'Cyclone', sans-serif;
-  font-size: 1.75rem;
+  font-size: 1.313rem;
+  letter-spacing: 1px;
   padding-bottom: 5px;
   place-items: center;
   width: 55px;
 }
 
+main #controls #add-book-container :modal #modal-close-btn {
+  color: red;
+  cursor: pointer;
+  font-size: 1.5rem;
+  position: absolute;
+  right: 50px;
+  top: 20px;
+  transition: all 333ms ease-in-out;
+}
+
+main #controls #add-book-container :modal #modal-close-btn:hover {
+  transform: scale(1.1) rotate(90deg);
+}
+
 main #controls #add-book-container :modal form {
-  border: 2px  red;
   border-radius: inherit;
   display: grid;
   gap: 20px;
+  justify-content: center;
   grid-template-areas: 'title title'
                       'author author'
                       'bottomModal bottomModal'
                       'addbook addbook';
-  grid-template-columns: 1fr 1fr;
-  padding: 50px 75px;
-  width: 100%;
 }
 
 main #controls #add-book-container :modal form #title-input {
@@ -376,13 +414,81 @@ main #controls #add-book-container :modal form #bottom-modal #pages-input input 
 }
 
 main #controls #add-book-container :modal form #add-book-btn {
+  border-radius: 25px;
+  border: 1px solid #724b3f;
+  color: #724b3f;
   grid-area: addbook;
+  justify-self: center;
+  margin-bottom: 15px;
+  padding: 10px 25px;
+  position: relative;
+  transition: all 88ms ease-in-out;
+  z-index: 1;
 }
 
-main #controls #add-book-container :modal form input {
+main #controls #add-book-container :modal form #add-book-btn:active {
+  transform: translateY(2px);
+} 
+
+main #controls #add-book-container :modal form #add-book-btn::before {
+  border-radius: inherit;
+  box-shadow: 0 4px 0px -1px hsla(14, 29%, 35%, 0.8);
+  content: '';
+  inset: 0;
+  position: absolute;
+  transition: all 111ms ease-in-out;
+  z-index: -1;
+}
+
+main #controls #add-book-container :modal form #add-book-btn:active::before {
+  opacity: 0.3;
+  transform: translateY(-3px);
+}
+
+main #controls #add-book-container :modal form input:not([type='checkbox']) {
+  appearance: none;
+  background: #fff8dc;
+  border: 1px solid #724b3f;
   border-radius: 25px;
+  box-shadow: inset 6px 6px 12px #dbd5bd,
+              inset -6px -6px 12px #fffffb;
+  color: #724b3f;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   padding: 8px 12px;
+  text-align: center;
+  transition: opacity 1s ease-in-out;
+  /* ! ⬆️ the fuck? */
+}
+
+main #controls #add-book-container :modal form input#read {
+  -webkit-appearance: none;
+  appearance: none;
+  box-shadow: inset 6px 6px 12px #dbd5bd,
+              inset -6px -6px 12px #fffffb;
+  background-color: white;
+  border: 1px solid #724b3f;
+  border-radius: 50%;
+  display: grid;
+  margin: 0;
+  height: 25px;
+  place-items: center;
+  width: 25px;
+}
+
+main #controls #add-book-container :modal form input#read::before {
+  box-shadow: inset 1rem 1rem #724b3f;
+  content: '';
+  border-radius: inherit;
+  height: 58%;
+  width: 58%;
+  transform: scale(0);
+  transition: transform 380ms cubic-bezier(.89,.2,.08,.99);
+}
+/* ? Use of box-shadow instead of background-color will enable the state of the radio to be visible when printed (h/t Alvaro Montoro). */
+
+
+main #controls #add-book-container :modal form input#read:checked::before {
+  transform: scale(1);
 }
 
 main #controls #add-book-text {
@@ -428,7 +534,7 @@ main #controls #search-form > #search-submit-btn {
 }
 
 main #controls #search-form > #search-close-btn {
-  color: #724b3f;
+  color: red;
 	cursor: pointer;
   font-size: 1.5rem;
 	opacity: 0;
@@ -592,7 +698,7 @@ main #book-case {
   display: grid;
   grid-auto-rows: minmax(175px, auto);
   grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
-  padding: 25px;
+  padding-block: 25px;
 }
 
 main #book-case .book-card {
@@ -605,10 +711,6 @@ main #book-case .book-card {
 	border-radius: 12px;
 }
 */
-
-aside {
-  font-size: clamp(0.8313rem, 1.3vw, 1rem);
-}
 
 aside section {
   background: linear-gradient(145deg, #e6dfc6, #ffffeb);

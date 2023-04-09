@@ -7,6 +7,7 @@ const openDialogBtn = document.getElementById('open-dialog-btn');
 const addBookBtn = document.getElementById('add-book-btn');
 const searchInput = document.getElementById('search-input');
 const searchCloseBtn = document.getElementById('search-close-btn');
+const modalCloseBtn = document.getElementById('modal-close-btn');
 const bookCase = document.getElementById('book-case');
 let bookCaseArray = [];
 
@@ -163,6 +164,7 @@ function populateBookCase(e) {
     // populate the bookcase with the book object
     // clear the form
     // close the modal
+    addBookModal.close();
 }
 
 function openAddBookModal() {
@@ -173,6 +175,11 @@ function closeSearchInput(e) {
     searchInput.value = '';
 }
 
+function closeModal() {
+    addBookModal.close();
+}
+
 openDialogBtn.addEventListener('click', openAddBookModal);
 searchCloseBtn.addEventListener('click', closeSearchInput);
+modalCloseBtn.addEventListener('click', closeModal);
 addBookBtn.addEventListener('click', populateBookCase);

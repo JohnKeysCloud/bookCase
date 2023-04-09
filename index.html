@@ -44,27 +44,28 @@
                 <label class="accessibility" for="add-book">add new</label>
                 <button id="open-dialog-btn"><span id="add-book-text">+</span></button>
                 <dialog id="add-book-modal">
-                  <h3>Add a Book</h3>
-                  <form>
+                  <h3 id="modal-header">new book</h3>
+                  <button id="modal-close-btn">✖</button>
+                  <form id="add-book-form">
                     <div id="title-input" class="input-wrapper">
-                      <label class="input-label" for="title">Title</label>
-                      <input type="text" name="title" id="title">
+                      <label class="input-label accessibility" for="title">Title</label>
+                      <input type="text" name="title" id="title" placeholder="title" required>
                     </div>
                     <div id="author-input" class="input-wrapper">
-                      <label class="input-label" for="author">Author</label>
-                      <input type="text" name="author" id="author">
+                      <label class="input-label accessibility" for="author">Author</label>
+                      <input type="text" name="author" id="author" placeholder="author" required>
                     </div>
                     <div id="bottom-modal">
                       <div id="pages-input" class="input-wrapper">
-                        <label class="input-label" for="pages">Pages</label>
-                        <input type="number" name="pages" id="pages">
+                        <label class="input-label accessibility" for="pages">Pages</label>
+                        <input type="number" name="pages" id="pages" placeholder="pages" required>
                       </div>
                       <div id="read-input" class="input-wrapper">
                         <label class="input-label" for="read">Read</label>
-                        <input type="checkbox" name="read" id="read">
+                        <input type="checkbox" name="read" id="read" required>
                       </div>
                     </div>
-                    <button type="submit" id="add-book-btn">Add Book</button>
+                    <button form="add-book-form" id="add-book-btn">Add Book</button>
                   </form>
                 </dialog>
               </div>
