@@ -476,13 +476,13 @@ main #controls #add-book-container :modal form input#read {
 }
 
 main #controls #add-book-container :modal form input#read::before {
+  border-radius: inherit;
   box-shadow: inset 1rem 1rem #724b3f;
   content: '';
-  border-radius: inherit;
   height: 58%;
-  width: 58%;
   transform: scale(0);
   transition: transform 380ms cubic-bezier(.89,.2,.08,.99);
+  width: 58%;
 }
 /* ? Use of box-shadow instead of background-color will enable the state of the radio to be visible when printed (h/t Alvaro Montoro). */
 
@@ -605,7 +605,7 @@ main #controls #sort-select-container {
 main #controls .custom-select {
 	border-radius: 25px;
 	position: relative;
-	width: 158px;
+	width: 125px;
 }
 
 main #controls .custom-select select {
@@ -618,7 +618,7 @@ main #controls .select-selected {
   border: 2px solid black;
   color: white;
   display: grid;
-  height: 55px;
+  height: 48px;
   place-items: center;
 }
 
@@ -629,7 +629,7 @@ main #controls .select-selected:after {
   content: "";
   height: 0;
   position: absolute;
-  right: 10px;
+  right: 8px;
   top: 25px;
   width: 0;
 }
