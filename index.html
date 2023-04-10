@@ -22,12 +22,14 @@
       </button>
     </div>
     <div id="header-right">
-      <ul id="nav-ul">
-        <li><a href="#">home</a></li>
-        <li><a href="index.html">myCase</a></li>
-        <li><a href="#">browse</a></li>
-        <li><a href="#">community</a></li>
-      </ul>
+      <nav>
+        <ul id="nav-ul">
+          <li><a href="#">home</a></li>
+          <li><a href="index.html">myCase</a></li>
+          <li><a href="#">browse</a></li>
+          <li><a href="#">community</a></li>
+        </ul>
+      </nav>
       <div id="header-btns">
         <button class="header-btn">log in</button>
         <button class="header-btn">join</button>
@@ -198,20 +200,6 @@
           </li>
         </ul>
       </section>
-      <section id="subscribe">
-        <h3>Sign Up</h3>
-        <div id="subscribe-content-wrapper">
-          <form id="sign-up-form" action="#">
-            <label for="email" class="accessibility">Sign Up</label>
-            <input type="email" name="email" id="email" placeholder="johncloud@cyclonestud.io" pattern="([\w-]+)@([a-zA-Z\d-]+)\.([a-zA-Z]{2,5})([\.][a-zA-Z]{2,5})?" required>
-            <button form="sign-up-form" id="sign-up-btn">submit</button>
-          </form>
-          <div id="subscribe-text-content">
-            <p>Subscribe to our newsletter to receive weekly book recommendations, promotions from associated brands & event information.</p>
-            <p>Your data is secure and you can unsubscribe at any time.</p>
-          </div>
-        </div>
-      </section>
       <section id="socials">
         <h3>Follow Us</h3>
         <ul id="socials-icons">
@@ -224,19 +212,35 @@
   </div>
   <footer>
     <div id="footer-content-wrapper">
-      <div id="footer-links">
-        <ul>
-          <li><a href="#">Terms of Service</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Contact Us</a></li>
-        </ul>
+      <div id="footer-top-wrapper">
+        <section id="subscribe">
+          <h3>Updates</h3>
+          <div id="subscribe-content-wrapper">
+            <form id="sign-up-form" action="#">
+              <label for="email" class="accessibility">Sign Up</label>
+              <input type="email" name="email" id="email" placeholder="johncloud@cyclonestud.io" pattern="([\w-]+)@([a-zA-Z\d-]+)\.([a-zA-Z]{2,5})([\.][a-zA-Z]{2,5})?" required>
+              <button form="sign-up-form" id="sign-up-btn">submit</button>
+            </form>
+            <div id="subscribe-text-content">
+              <p>Subscribe to our newsletter to receive weekly book recommendations, promotions from associated brands & event information.</p>
+              <p>Your data is secure and you can unsubscribe at any time.</p>
+            </div>
+          </div>
+        </section>
+        <section id="footer-links">
+          <h3 id="footer-links-header">Links</h3>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </section>
       </div>
-      <div id="footer-logo">
-        <p>Powered By:</p>
+      <section id="footer-logo">
+        <p>Powered By</p>
         <a href="https://www.johnkeys.cloud/" target="_blank"><img src="assets/images/logos/cycloneStudios.svg" alt="Cyclone Studios"></a>
-      </div>
-    </div>
-    
+      </section>
+    </div>   
   </footer>
 </body>
 </html>

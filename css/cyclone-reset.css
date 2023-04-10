@@ -3,6 +3,11 @@
     src: url(../assets/fonts/Cyclone.woff2) format('woff2');
 }
 
+@font-face {
+    font-family: 'pixeBoy';
+    src: url(../assets/fonts/pixeBoy.woff2) format('woff2');
+}
+
 *,
 *::before,
 *::after {
