@@ -696,7 +696,6 @@ main #book-case {
 
 main #book-case .book-card {
   border: 1px solid red;
-  border-radius: 50px;
   display: grid;
   place-items: center;
 }
