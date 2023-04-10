@@ -310,7 +310,6 @@ main #controls #add-book-container :modal {
   border-radius: 75px;
   color: #724b3f;
   display: none;
-  display: grid; /* ! delete when finished styling  */
   height: max-content;
   padding-block: 15px;
   place-items: center;
@@ -831,47 +830,50 @@ aside #socials #socials-icons .socials-icon svg {
 
 /* before footer settings */
 footer {
-  background: #724b3f;
-  box-shadow: 0 -10px 20px -8px #724b3f;
+    background: linear-gradient(to top, #724b3f, cornsilk);
+
+  /* box-shadow: 0 -10px 20px -8px #724b3f; */
   color: white;
-  padding-bottom: 10px;
-  padding-inline: 5vw;
 }
 
 footer h3 {
   margin-bottom: 10px;
+  text-align: center;
+}
+
+footer #subscribe-links-header {
+  color: #724b3f;
 }
 
 footer #footer-top-wrapper {
   align-items: top;
   display: grid;
-  grid-template-columns: 3fr 1fr;
-  justify-content: center;
+  grid-template-columns: 1fr;
+  margin-inline: auto;
+  max-width: 1400px;
   padding-block: 25px;  
+  padding-inline: 5vw;
+  justify-content: center;
 }
 
 footer #sign-up-form {
   display: flex;
   gap: 8px;
-  justify-content: start;
+  justify-content: center;
   margin-bottom: 20px;
-  margin-inline: auto;
 }
 
 footer #email {
   appearance: none;
   background: #fff8dc;
+  border: 2px solid #724b3f;
   border-radius: 25px;
-  border: 1px solid #724b3f;
   box-shadow: inset 6px 6px 12px #dbd5bd,
             inset -6px -6px 12px #fffffb;
   color: #724b3f;
   flex: 1;
+  max-width: 375px;
   padding: 10px 15px;
-}
-
-footer #sign-up-btn {
-  color: white;
 }
 
 footer #email::placeholder {
@@ -888,7 +890,8 @@ footer #email:-ms-input-placeholder {
 
 footer #sign-up-btn {
   border-radius: 25px;
-  border: 1px solid white;
+  border: 1px solid cornsilk;
+  color: #724b3f;
   padding-inline: 15px;
   position: relative;
   transition: all 88ms ease-in-out;
@@ -901,7 +904,7 @@ footer #sign-up-btn:active {
 
 footer #sign-up-btn::before {
   border-radius: inherit;
-  box-shadow: 0 4px 0px -1px rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 0px -1px #724b3f;
   content: '';
   inset: 0;
   position: absolute;
@@ -914,8 +917,12 @@ footer #sign-up-btn:active::before {
   transform: translateY(-3px);
 }
 
+footer #subscribe {
+  margin-bottom: 50px;
+}
+
 footer #subscribe-text-content {
-  /* text-align: center; */
+  text-align: center;
 }
 
 footer #subscribe-text-content p:not(:last-child) {
@@ -924,18 +931,27 @@ footer #subscribe-text-content p:not(:last-child) {
 
 footer #footer-logo {
   align-items: center;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-areas: 'text'
+                        'logo';
+  overflow-y: hidden;                        
+  padding-bottom: 15px;
+  place-items: center;
   justify-content: center;
 }
 
-footer #footer-logo:hover p {
+footer #footer-logo:hover p:first-of-type {
+  opacity: 0;
+  transform: scale(0);
+  visibility: hidden;
+}
+
+footer #footer-logo:hover p:not(:first-of-type) {
   visibility: visible;
   transform: scale(1);
   opacity: 1;
 }
 
-/* ! change to animation */
 footer #footer-logo:hover a {
   transform: rotate(3turn);
   transition-delay: 0.555s;
@@ -944,29 +960,34 @@ footer #footer-logo:hover a {
 footer #footer-logo p {
   font-family: 'pixeBoy', sans-serif;
   font-size: 1.125rem;
+  grid-area: text;
   text-shadow: 0 0 5px white;
+  transition: opacity 380ms ease-in-out, transform 0.555s ease-in-out, visibility 0.555s ease-in-out;
+}
+
+footer #footer-logo p:not(:first-of-type) {
   transform: scale(0);
   transition: opacity 380ms ease-in-out, transform 0.555s ease-in-out, visibility 0.555s ease-in-out;
   visibility: hidden;
 }
 
 footer #footer-logo a {
-  /* filter: drop-shadow(0 0 5px white); */
-  transition: all 1s ease-in-out;
-  width: 70px;
+  filter: drop-shadow(0 0 5px cornsilk);
+  grid-area: logo;
+  transition: all 0.555s ease-in-out;
+  width: min(13vw, 77px);
 }
 
 footer #footer-links {
-  text-align: end;
+  margin-bottom: 25px;
 }
 
 footer #footer-links ul {
-  align-items: end;
-  display: flex;
-  gap: 11px;
-  justify-content: space-between;
-  flex-direction: column;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   list-style: none;
+  place-items: center;
 }
 
 footer #footer-links ul li {
@@ -1004,8 +1025,12 @@ footer #footer-links a {
     flex-direction: row;
   }
 
-  aside {
-    padding-inline: unset;
+  #page-content-wrapper {
+    display: grid;
+    align-items: start;
+    gap: 25px;
+    margin-bottom: 50px;
+    padding-inline: 3vw;
   }
 
   main #controls-wrapper {
@@ -1032,13 +1057,6 @@ footer #footer-links a {
     width: 300px;
   }
 
-  #page-content-wrapper {
-    display: grid;
-    align-items: start;
-    /* gap: 40px; */
-    padding-inline: 3vw;
-  }
-
   main #book-case {
     background-color: cornsilk;
     border-radius: 50px;
@@ -1058,6 +1076,7 @@ footer #footer-links a {
     'socials socials';
     grid-template-columns: 1fr 1fr;
     justify-content: center;
+    padding: unset;
   }
 
   aside #notifications {
@@ -1076,10 +1095,6 @@ footer #footer-links a {
     grid-area: trending;
   }
 
-  aside #subscribe {
-    grid-area: subscribe;
-  }
-
   aside #socials {
     grid-area: socials;
   }
@@ -1088,6 +1103,24 @@ footer #footer-links a {
     background: unset;
     border-radius: unset;
     box-shadow:  unset;
+  }
+
+  footer #footer-top-wrapper {
+    grid-template-columns: 1fr 1fr;
+    padding-bottom: 50px;
+  }
+
+  footer #subscribe {
+    margin-bottom: unset;
+  }
+
+  footer #footer-links ul {
+    gap: 15px;
+    grid-template-columns: 1fr;
+  }
+
+  footer #footer-links-header {
+    color: #724b3f;
   }
 }
 
@@ -1135,12 +1168,24 @@ footer #footer-links a {
     box-shadow:  7px 7px 11px #dbd5bd,
                 -7px -7px 11px #fffffb;
   }
+
+  footer #footer-top-wrapper {
+    gap: 50px;
+  }
 }
 
 @media only screen and (min-width: 1200px) {
   main #controls #search-form:hover, 
   main #controls #search-form:valid {
     width: 315px;
+  }
+
+  footer #footer-top-wrapper {
+    gap: 150px;
+  }
+
+  footer #footer-links ul {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
