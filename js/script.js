@@ -9,6 +9,12 @@ const searchInput = document.getElementById('search-input');
 const searchCloseBtn = document.getElementById('search-close-btn');
 const modalCloseBtn = document.getElementById('modal-close-btn');
 const bookCase = document.getElementById('book-case');
+
+const titleInput = document.getElementById('title');
+const authorInput = document.getElementById('author');
+const pagesInput = document.getElementById('pages');
+const readInput = document.getElementById('read');
+
 let bookCaseArray = [];
 
 const menuBtn = document.querySelector('#menu-btn');
@@ -147,7 +153,16 @@ function populateBookCase(e) {
     let bookAuthor = document.createElement('dt');
     let bookPages = document.createElement('dt');
     let bookRead = document.createElement('dt');
-    
+
+    let newBook = new Book(title.value, author.value, pages.value, read.checked);
+
+    addBookToCase(newBook);
+
+    bookTitle.textContent = `Title: ${newBook.title}`;
+    bookAuthor.textContent = `Author: ${newBook.author}`;
+    bookPages.textContent = `Pages: ${newBook.pages}`;
+    bookRead.textContent = `Read: ${newBook.read}`;
+
     descriptionList.appendChild(bookTitle);
     descriptionList.appendChild(bookAuthor);
     descriptionList.appendChild(bookPages);

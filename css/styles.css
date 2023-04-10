@@ -363,7 +363,7 @@ main #controls #add-book-container :modal .input-label {
 }
 
 main #controls #add-book-container :modal #modal-close-btn {
-  color: red;
+  color: #724b3f;
   cursor: pointer;
   font-size: 1.5rem;
   position: absolute;
@@ -527,7 +527,7 @@ main #controls #search-form > #search-submit-btn {
 }
 
 main #controls #search-form > #search-close-btn {
-  color: red;
+  color: #724b3f;
 	cursor: pointer;
   font-size: 1.5rem;
 	opacity: 0;
@@ -697,6 +697,8 @@ main #book-case {
 main #book-case .book-card {
   border: 1px solid red;
   border-radius: 50px;
+  display: grid;
+  place-items: center;
 }
 
 /* article {
