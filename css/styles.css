@@ -905,7 +905,7 @@ footer #sign-up-btn {
   color: var(--color-secondary);
   padding-inline: 15px;
   position: relative;
-  text-shadow: 0 0 3px var(--color-secondary);
+  text-shadow: 0 0 8px var(--color-secondary);
   transition: all 88ms ease-in-out;
   z-index: 1;
 }
@@ -973,7 +973,7 @@ footer #footer-logo p {
   font-family: 'pixeBoy', sans-serif;
   font-size: 1rem;
   grid-area: text;
-  text-shadow: 0 0 8px var(--color-secondary);
+  /* text-shadow: 0 0 8px var(--color-secondary); */
   transition: opacity 380ms ease-in-out, transform 0.555s ease-in-out, visibility 0.555s ease-in-out;
 }
 
