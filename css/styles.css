@@ -1,6 +1,9 @@
 :root {
-  --header-height: 70px;
+  --color-primary: cornsilk;
+  --color-secondary: #724b3f;
 	--text-input-bg: #ebe2d5;
+
+  --header-height: 70px;
 }
 
 /* DEFAULT pressStart */
@@ -10,7 +13,7 @@
 
 :focus-visible {
   border-radius: inherit;
-  outline: 2px dashed #724b3f;
+  outline: 2px dashed var(--color-secondary);
 }
 
 h3 {
@@ -28,9 +31,9 @@ button:hover {
 }
 
 .user-status {
-  background: radial-gradient(red, cornsilk);
+  background: radial-gradient(red, var(--color-primary));
   border-radius: 50%;
-  border: 2px solid #724b3f;
+  border: 2px solid var(--color-secondary);
   display: inline-block;
   flex-shrink: 0;
   height: 15px;
@@ -38,11 +41,11 @@ button:hover {
 }
 
 .user-online {
-  background: radial-gradient(chartreuse, cornsilk);
+  background: radial-gradient(chartreuse, var(--color-primary));
 }
 
 .book-title {
-  color: #724b3f;
+  color: var(--color-secondary);
   font-weight: bold;
   font-style: italic;
 }
@@ -50,8 +53,8 @@ button:hover {
 /* DEFAULT gameOver */
 
 body {
-	background-color: cornsilk;
-  color: #724b3f;
+	background-color: var(--color-primary);
+  color: var(--color-secondary);
 	display: flex;
 	flex-direction: column;
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -60,7 +63,7 @@ body {
 }
 
 header {
-  background-color: #724b3f;
+  background-color: var(--color-secondary);
   box-shadow: 0 10px 20px -8px;
   display: flex;
   flex-direction: column;
@@ -80,7 +83,7 @@ header :focus {
 }
 
 header :focus-visible {
-  outline: 2px dashed cornsilk;
+  outline: 2px dashed var(--color-primary);
 }
 
 header ~ #page-content-wrapper {
@@ -100,7 +103,7 @@ header #header-left #header-logo {
 }
 
 header #header-left #header-logo a {
-  color: cornsilk;
+  color: var(--color-primary);
   text-decoration: none;
 }
 
@@ -119,7 +122,7 @@ header #header-left #menu-btn {
 }
 
 header #header-left #menu-btn-san {
-  background: cornsilk;
+  background: var(--color-primary);
   border-radius: 8px;
   display: flex;
   height: 3px;
@@ -129,7 +132,7 @@ header #header-left #menu-btn-san {
 }
 
 header #header-left #menu-btn-san::before {
-  background: cornsilk;
+  background: var(--color-primary);
   border-radius: 3px;
   content: '';
   height: 3px;
@@ -139,7 +142,7 @@ header #header-left #menu-btn-san::before {
 }
 
 header #header-left #menu-btn-san::after {
-  background: cornsilk;
+  background: var(--color-primary);
   border-radius: 3px;
   content: '';
   height: 3px;
@@ -157,7 +160,7 @@ header #header-left #menu-btn.open #menu-btn-san {
 }
 
 header #header-left #menu-btn.open #menu-btn-san::before {
-  background: cornsilk;
+  background: var(--color-primary);
   opacity: 0.8;
   transform: rotate(405deg);
   transition: all 1.8s ease-out;
@@ -165,7 +168,7 @@ header #header-left #menu-btn.open #menu-btn-san::before {
 }
 
 header #header-left #menu-btn.open #menu-btn-san::after {
-  background: cornsilk;
+  background: var(--color-primary);
   opacity: 0.8;
   transform: rotate(-405deg);
   transition: all 1.8s ease-out;
@@ -198,13 +201,13 @@ header #header-right #nav-ul li {
 }
 
 header #header-right #nav-ul li a {
-	color: cornsilk;
+	color: var(--color-primary);
   position: relative;
 	text-decoration: none;
 }
 
 header #header-right #nav-ul li a::before {
-  background: cornsilk;
+  background: var(--color-primary);
   bottom: -2px;
   content: '';
   height: 1px;
@@ -229,9 +232,9 @@ header #header-right #header-btns {
 }
 
 header #header-right .header-btn {
-  border: 2px solid cornsilk;
+  border: 2px solid var(--color-primary);
   border-radius: 11px;
-  color: cornsilk;
+  color: var(--color-primary);
   cursor: pointer;
   padding: 3px 18px;
 }
@@ -259,7 +262,7 @@ main {
 }
 
 main #controls-wrapper {
-  background-color: #724b3f;
+  background-color: var(--color-secondary);
   box-shadow: 0 10px 20px -8px;
   display: grid;
   height: max-content;
@@ -269,9 +272,9 @@ main #controls-wrapper {
 }
 
 main #controls {
-  background-color: cornsilk;
-  border: 3px solid cornsilk;
-  box-shadow: inset 0 -3px 15px #724b3f;
+  background-color: var(--color-primary);
+  border: 3px solid var(--color-primary);
+  box-shadow: inset 0 -3px 15px var(--color-secondary);
   border-radius: 75px;
 	display: flex;
   flex-direction: column;
@@ -289,10 +292,10 @@ main #controls #controls-top {
 }
 
 main #controls #open-dialog-btn {
-  background-color: #724b3f;
+  background-color: var(--color-secondary);
   border-radius: 50%;
   border: 2px solid black;
-  color: cornsilk;
+  color: var(--color-primary);
 	font-weight: bold;
   cursor: pointer;
   display: inline-block;
@@ -304,11 +307,11 @@ main #controls #open-dialog-btn {
 main #controls #add-book-container :modal {
   background: linear-gradient(145deg, #ffffeb, #e6dfc6);
   box-shadow:  5px 5px 39px #b5b09c,
-              -5px -5px 39px #724b3f,
-              inset -2px -2px 3px 2px #724b3f;
+              -5px -5px 39px var(--color-secondary),
+              inset -2px -2px 3px 2px var(--color-secondary);
   border: none;
   border-radius: 75px;
-  color: #724b3f;
+  color: var(--color-secondary);
   display: none;
   height: max-content;
   padding-block: 15px;
@@ -331,7 +334,7 @@ main #controls #add-book-container :modal #modal-header {
 }
 
 main #controls #add-book-container :modal ::placeholder {
-  color: #724b3f;
+  color: var(--color-secondary);
   font-family: 'Cyclone';
   font-size: 1.313rem;
   letter-spacing: 1px;
@@ -363,7 +366,7 @@ main #controls #add-book-container :modal .input-label {
 }
 
 main #controls #add-book-container :modal #modal-close-btn {
-  color: #724b3f;
+  color: var(--color-secondary);
   cursor: pointer;
   font-size: 1.5rem;
   position: absolute;
@@ -408,8 +411,8 @@ main #controls #add-book-container :modal form #bottom-modal #pages-input input 
 
 main #controls #add-book-container :modal form #add-book-btn {
   border-radius: 25px;
-  border: 1px solid #724b3f;
-  color: #724b3f;
+  border: 1px solid var(--color-secondary);
+  color: var(--color-secondary);
   grid-area: addbook;
   justify-self: center;
   margin-bottom: 15px;
@@ -441,11 +444,11 @@ main #controls #add-book-container :modal form #add-book-btn:active::before {
 main #controls #add-book-container :modal form input:not([type='checkbox']) {
   appearance: none;
   background: #fff8dc;
-  border: 1px solid #724b3f;
+  border: 1px solid var(--color-secondary);
   border-radius: 25px;
   box-shadow: inset 6px 6px 12px #dbd5bd,
               inset -6px -6px 12px #fffffb;
-  color: #724b3f;
+  color: var(--color-secondary);
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   padding: 8px 12px;
   text-align: center;
@@ -458,8 +461,8 @@ main #controls #add-book-container :modal form input#read {
   appearance: none;
   box-shadow: inset 6px 6px 12px #dbd5bd,
               inset -6px -6px 12px #fffffb;
-  background-color: cornsilk;
-  border: 1px solid #724b3f;
+  background-color: var(--color-primary);
+  border: 1px solid var(--color-secondary);
   border-radius: 50%;
   display: grid;
   margin: 0;
@@ -470,7 +473,7 @@ main #controls #add-book-container :modal form input#read {
 
 main #controls #add-book-container :modal form input#read::before {
   border-radius: inherit;
-  box-shadow: inset 1rem 1rem #724b3f;
+  box-shadow: inset 1rem 1rem var(--color-secondary);
   content: '';
   height: 58%;
   transform: scale(0);
@@ -517,8 +520,8 @@ main #controls #search-form:valid #search-input {
 
 main #controls #search-form:hover .fa-magnifying-glass,
 main #controls #search-form:valid .fa-magnifying-glass {
-  background: #724b3f;
-  color: cornsilk;
+  background: var(--color-secondary);
+  color: var(--color-primary);
 }
 
 main #controls #search-form > #search-submit-btn {
@@ -526,7 +529,7 @@ main #controls #search-form > #search-submit-btn {
 }
 
 main #controls #search-form > #search-close-btn {
-  color: #724b3f;
+  color: var(--color-secondary);
 	cursor: pointer;
   font-size: 1.5rem;
 	opacity: 0;
@@ -577,7 +580,7 @@ main #controls #search-form #search-input::-webkit-search-results-decoration { d
 main #controls #search-form .fa-magnifying-glass {
   border-radius: 50%;
   box-sizing: border-box;
-  color: #724b3f;
+  color: var(--color-secondary);
   font-size: 1rem;
   height: 38px;
   padding: 10px;
@@ -605,10 +608,10 @@ main #controls .custom-select select {
 }
 
 main #controls .select-selected {
-  background-color: #724b3f;
+  background-color: var(--color-secondary);
   border-radius: 25px;
   border: 2px solid black;
-  color: cornsilk;
+  color: var(--color-primary);
   display: grid;
   height: 48px;
   place-items: center;
@@ -662,7 +665,7 @@ main #controls .select-arrow-active {
 
 /* ? Style items (options): */
 main #controls .select-items {
-  background-color: #724b3f;
+  background-color: var(--color-secondary);
   border-radius: 0 0px 25px 25px;
   left: 0;
   position: absolute;
@@ -691,7 +694,7 @@ main {
 
 main #book-case {
   align-self: start;
-  background-color: cornsilk;
+  background-color: var(--color-primary);
   box-shadow: inset 5px 5px 9px #d4ceb7,
               inset -5px -5px 9px #ffffff;
   display: grid;
@@ -742,7 +745,7 @@ aside section h3::before {
   left: -3px;
   height: 2px;
   position: absolute;
-  background: linear-gradient(to left, transparent, #724b3f);
+  background: linear-gradient(to left, transparent, var(--color-secondary));
   width: 100%;
   transform: scaleX(1);
   transform-origin: left;
@@ -758,7 +761,7 @@ aside ul {
 }
 
 aside #notifications #notifications-list .notification-link {
-  color: #724b3f;
+  color: var(--color-secondary);
   align-items: top;
   display: flex;
   gap: 8px;
@@ -819,13 +822,13 @@ aside #socials #socials-icons .socials-icon:hover {
 
 aside #socials #socials-icons .socials-icon a {
   border-radius: inherit;
-  /* color: #724b3f; */
+  /* color: var(--color-secondary); */
   padding: 25px;
   position: relative;
 }
 
 aside #socials #socials-icons .socials-icon svg {
-  color: #724b3f;
+  color: var(--color-secondary);
   /* font-size: 3rem; */
   left: 50%;
   height: min(30px, 5vw);
@@ -837,10 +840,10 @@ aside #socials #socials-icons .socials-icon svg {
 
 /* before footer settings */
 footer {
-    background: linear-gradient(to top, #724b3f, cornsilk);
+    background: linear-gradient(to top, var(--color-secondary), var(--color-primary));
 
-  /* box-shadow: 0 -10px 20px -8px #724b3f; */
-  color: cornsilk;
+  /* box-shadow: 0 -10px 20px -8px var(--color-secondary); */
+  color: var(--color-primary);
 }
 
 footer h3 {
@@ -849,7 +852,7 @@ footer h3 {
 }
 
 footer #subscribe-links-header {
-  color: #724b3f;
+  color: var(--color-secondary);
 }
 
 footer #footer-top-wrapper {
@@ -873,11 +876,11 @@ footer #sign-up-form {
 footer #email {
   appearance: none;
   background: #fff8dc;
-  border: 2px solid #724b3f;
+  border: 2px solid var(--color-secondary);
   border-radius: 25px;
   box-shadow: inset 6px 6px 12px #dbd5bd,
             inset -6px -6px 12px #fffffb;
-  color: #724b3f;
+  color: var(--color-secondary);
   flex: 1;
   max-width: 375px;
   padding: 10px 15px;
@@ -897,9 +900,9 @@ footer #email:-ms-input-placeholder {
 
 footer #sign-up-btn {
   border-radius: 25px;
-  border: 1px solid cornsilk;
-  box-shadow: inset 0 10px 10px cornsilk;
-  color: #724b3f;
+  border: 1px solid var(--color-primary);
+  box-shadow: inset 0 10px 10px var(--color-primary);
+  color: var(--color-secondary);
   padding-inline: 15px;
   position: relative;
   transition: all 88ms ease-in-out;
@@ -912,7 +915,7 @@ footer #sign-up-btn:active {
 
 footer #sign-up-btn::before {
   border-radius: inherit;
-  box-shadow: 0 4px 0px -1px #724b3f;
+  box-shadow: 0 4px 0px -1px var(--color-secondary);
   content: '';
   inset: 0;
   position: absolute;
@@ -964,7 +967,7 @@ footer #footer-logo:hover a {
 }
 
 footer #footer-logo p {
-  color: cornsilk;
+  color: var(--color-primary);
   font-family: 'pixeBoy', sans-serif;
   font-size: 1rem;
   grid-area: text;
@@ -1000,7 +1003,7 @@ footer #footer-links ul li {
 }
 
 footer #footer-links a {
-  color: cornsilk;
+  color: var(--color-primary);
   text-decoration: none;
 }
 
@@ -1063,7 +1066,7 @@ footer #footer-links a {
   }
 
   main #book-case {
-    background-color: cornsilk;
+    background-color: var(--color-primary);
     border-radius: 50px;
     box-shadow: inset 5px 5px 9px #d4ceb7,
               inset -5px -5px 9px #ffffff;
@@ -1124,7 +1127,7 @@ footer #footer-links a {
   }
 
   footer #footer-links-header {
-    color: #724b3f;
+    color: var(--color-secondary);
   }
 }
 
@@ -1171,7 +1174,7 @@ footer #footer-links a {
   }
 
   aside section {
-    background: cornsilk;
+    background: var(--color-primary);
     border-radius: 55px;
     box-shadow:  7px 7px 11px #dbd5bd,
                 -7px -7px 11px #fffffb;
