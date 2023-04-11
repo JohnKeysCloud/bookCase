@@ -901,10 +901,11 @@ footer #email:-ms-input-placeholder {
 footer #sign-up-btn {
   border-radius: 25px;
   border: 1px solid var(--color-primary);
-  box-shadow: inset 0 10px 10px var(--color-primary);
-  color: var(--color-secondary);
+  box-shadow: inset 0 7px 7px var(--color-primary);
+  color: var(--color-primary);
   padding-inline: 15px;
   position: relative;
+  text-shadow: 0 0 3px var(--color-secondary);
   transition: all 88ms ease-in-out;
   z-index: 1;
 }
@@ -934,6 +935,7 @@ footer #subscribe {
 
 footer #subscribe-text-content {
   text-align: center;
+  text-shadow: 0 0 8px var(--color-secondary);
 }
 
 footer #subscribe-text-content p:not(:last-child) {
@@ -971,6 +973,7 @@ footer #footer-logo p {
   font-family: 'pixeBoy', sans-serif;
   font-size: 1rem;
   grid-area: text;
+  text-shadow: 0 0 8px var(--color-secondary);
   transition: opacity 380ms ease-in-out, transform 0.555s ease-in-out, visibility 0.555s ease-in-out;
 }
 
@@ -984,6 +987,10 @@ footer #footer-logo a {
   grid-area: logo;
   transition: all 0.555s ease-in-out;
   width: min(11vw, 58px);
+}
+
+footer #footer-links-header {
+  text-shadow: 0 0 8px var(--color-secondary);
 }
 
 footer #footer-links {
@@ -1005,6 +1012,7 @@ footer #footer-links ul li {
 footer #footer-links a {
   color: var(--color-primary);
   text-decoration: none;
+  text-shadow: 0 0 8px var(--color-secondary);
 }
 
 @media only screen and (min-width: 768px) {
@@ -1128,6 +1136,7 @@ footer #footer-links a {
 
   footer #footer-links-header {
     color: var(--color-secondary);
+    text-shadow: none;
   }
 }
 
