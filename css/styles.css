@@ -479,7 +479,6 @@ main #controls #add-book-container :modal form input#read::before {
 }
 /* ? Use of box-shadow instead of background-color will enable the state of the radio to be visible when printed (h/t Alvaro Montoro). */
 
-
 main #controls #add-book-container :modal form input#read:checked::before {
   transform: scale(1);
 }
@@ -686,11 +685,19 @@ main #controls .select-items li:last-child {
 	border-radius: 0 0 25px 25px;
 }
 
+main {
+  height: 100%;
+}
+
 main #book-case {
   align-self: start;
+  background-color: cornsilk;
+  box-shadow: inset 5px 5px 9px #d4ceb7,
+              inset -5px -5px 9px #ffffff;
   display: grid;
   grid-auto-rows: minmax(175px, auto);
   grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  min-height: 225px;
   padding-block: 25px;
 }
 
@@ -707,10 +714,9 @@ main #book-case .book-card {
 */
 
 aside section {
-  background: linear-gradient(145deg, #e6dfc6, #ffffeb);
   border-radius: 55px;
-  box-shadow:  7px 7px 46px #ada996,
-              -7px -7px 46px #ffffff;
+  box-shadow:  7px 7px 11px #dbd5bd,
+              -7px -7px 11px #fffffb;
   margin-bottom: 25px;
   padding: 20px 30px;
   position: relative;
@@ -1064,10 +1070,9 @@ footer #footer-links a {
   }
 
   aside {
-    background: linear-gradient(145deg, #e6dfc6, #ffffeb);
     border-radius: 55px;
-    box-shadow:  7px 7px 46px #ada996,
-              -7px -7px 46px #ffffff;
+    box-shadow:  7px 7px 11px #dbd5bd,
+                -7px -7px 11px #fffffb;
     display: grid;
     grid-template-areas:
     'notifications friends'
@@ -1152,6 +1157,10 @@ footer #footer-links a {
     width: 180px;
   }
 
+  main #book-case {
+    height: 100%;
+  }
+
   aside {
     background: unset;
     border-radius: unset;
@@ -1166,6 +1175,10 @@ footer #footer-links a {
     border-radius: 55px;
     box-shadow:  7px 7px 11px #dbd5bd,
                 -7px -7px 11px #fffffb;
+  }
+
+  aside section:last-of-type {
+    margin-bottom: 0;
   }
 
   footer #footer-top-wrapper {
