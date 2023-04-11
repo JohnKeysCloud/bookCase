@@ -5,6 +5,7 @@ const footer = document.createElement('footer');
 const addBookModal = document.querySelector('dialog');
 const openDialogBtn = document.getElementById('open-dialog-btn');
 const addBookBtn = document.getElementById('add-book-btn');
+const addBookForm = document.getElementById('add-book-form');
 const searchInput = document.getElementById('search-input');
 const searchCloseBtn = document.getElementById('search-close-btn');
 const modalCloseBtn = document.getElementById('modal-close-btn');
@@ -146,6 +147,8 @@ function removeBookFromCase(book) {
 
 function populateBookCase(e) {
     e.preventDefault();
+    let newBook = new Book(title.value, author.value, pages.value, read.checked);
+    addBookToCase(newBook);
 
     let bookCard = document.createElement('article');
     let descriptionList = document.createElement('dl');
@@ -153,25 +156,27 @@ function populateBookCase(e) {
     let bookAuthor = document.createElement('dt');
     let bookPages = document.createElement('dt');
     let bookRead = document.createElement('dt');
+    let removeBookBtn = document.createElement('button');
 
-    let newBook = new Book(title.value, author.value, pages.value, read.checked);
+    for (let i = 0; i < bookCaseArray.length; i++) {
+        console.log(bookCaseArray[i]);
 
-    addBookToCase(newBook);
+        bookTitle.textContent = `Title: ${newBook.title}`;
+        bookAuthor.textContent = `Author: ${newBook.author}`;
+        bookPages.textContent = `Pages: ${newBook.pages}`;
+        bookRead.textContent = `Read: ${newBook.read}`;
 
-    bookTitle.textContent = `Title: ${newBook.title}`;
-    bookAuthor.textContent = `Author: ${newBook.author}`;
-    bookPages.textContent = `Pages: ${newBook.pages}`;
-    bookRead.textContent = `Read: ${newBook.read}`;
+        descriptionList.appendChild(bookTitle);
+        descriptionList.appendChild(bookAuthor);
+        descriptionList.appendChild(bookPages);
+        descriptionList.appendChild(bookRead);
 
-    descriptionList.appendChild(bookTitle);
-    descriptionList.appendChild(bookAuthor);
-    descriptionList.appendChild(bookPages);
-    descriptionList.appendChild(bookRead);
-    
-    bookCard.appendChild(descriptionList);
-    bookCase.appendChild(bookCard);
-    
-    bookCard.classList.add('book-card');
+        bookCard.appendChild(descriptionList);
+        bookCase.appendChild(bookCard);
+
+        bookCard.classList.add('book-card');
+    }
+
 
     // get all the text input values 
     // create a new book object
@@ -179,6 +184,7 @@ function populateBookCase(e) {
     // populate the bookcase with the book object
     // clear the form
     // close the modal
+    addBookForm.reset()
     addBookModal.close();
 }
 

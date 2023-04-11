@@ -28,7 +28,7 @@ button:hover {
 }
 
 .user-status {
-  background: radial-gradient(red, white);
+  background: radial-gradient(red, cornsilk);
   border-radius: 50%;
   border: 2px solid #724b3f;
   display: inline-block;
@@ -38,7 +38,7 @@ button:hover {
 }
 
 .user-online {
-  background: radial-gradient(chartreuse, white);
+  background: radial-gradient(chartreuse, cornsilk);
 }
 
 .book-title {
@@ -100,7 +100,7 @@ header #header-left #header-logo {
 }
 
 header #header-left #header-logo a {
-  color: white;
+  color: cornsilk;
   text-decoration: none;
 }
 
@@ -119,7 +119,7 @@ header #header-left #menu-btn {
 }
 
 header #header-left #menu-btn-san {
-  background: white;
+  background: cornsilk;
   border-radius: 8px;
   display: flex;
   height: 3px;
@@ -129,7 +129,7 @@ header #header-left #menu-btn-san {
 }
 
 header #header-left #menu-btn-san::before {
-  background: white;
+  background: cornsilk;
   border-radius: 3px;
   content: '';
   height: 3px;
@@ -139,7 +139,7 @@ header #header-left #menu-btn-san::before {
 }
 
 header #header-left #menu-btn-san::after {
-  background: white;
+  background: cornsilk;
   border-radius: 3px;
   content: '';
   height: 3px;
@@ -157,7 +157,7 @@ header #header-left #menu-btn.open #menu-btn-san {
 }
 
 header #header-left #menu-btn.open #menu-btn-san::before {
-  background: white;
+  background: cornsilk;
   opacity: 0.8;
   transform: rotate(405deg);
   transition: all 1.8s ease-out;
@@ -165,7 +165,7 @@ header #header-left #menu-btn.open #menu-btn-san::before {
 }
 
 header #header-left #menu-btn.open #menu-btn-san::after {
-  background: white;
+  background: cornsilk;
   opacity: 0.8;
   transform: rotate(-405deg);
   transition: all 1.8s ease-out;
@@ -198,13 +198,13 @@ header #header-right #nav-ul li {
 }
 
 header #header-right #nav-ul li a {
-	color: white;
+	color: cornsilk;
   position: relative;
 	text-decoration: none;
 }
 
 header #header-right #nav-ul li a::before {
-  background: white;
+  background: cornsilk;
   bottom: -2px;
   content: '';
   height: 1px;
@@ -229,9 +229,9 @@ header #header-right #header-btns {
 }
 
 header #header-right .header-btn {
-  border: 2px solid white;
+  border: 2px solid cornsilk;
   border-radius: 11px;
-  color: white;
+  color: cornsilk;
   cursor: pointer;
   padding: 3px 18px;
 }
@@ -292,7 +292,7 @@ main #controls #open-dialog-btn {
   background-color: #724b3f;
   border-radius: 50%;
   border: 2px solid black;
-  color: white;
+  color: cornsilk;
 	font-weight: bold;
   cursor: pointer;
   display: inline-block;
@@ -458,7 +458,7 @@ main #controls #add-book-container :modal form input#read {
   appearance: none;
   box-shadow: inset 6px 6px 12px #dbd5bd,
               inset -6px -6px 12px #fffffb;
-  background-color: white;
+  background-color: cornsilk;
   border: 1px solid #724b3f;
   border-radius: 50%;
   display: grid;
@@ -519,7 +519,7 @@ main #controls #search-form:valid #search-input {
 main #controls #search-form:hover .fa-magnifying-glass,
 main #controls #search-form:valid .fa-magnifying-glass {
   background: #724b3f;
-  color: white;
+  color: cornsilk;
 }
 
 main #controls #search-form > #search-submit-btn {
@@ -609,7 +609,7 @@ main #controls .select-selected {
   background-color: #724b3f;
   border-radius: 25px;
   border: 2px solid black;
-  color: white;
+  color: cornsilk;
   display: grid;
   height: 48px;
   place-items: center;
@@ -834,7 +834,7 @@ footer {
     background: linear-gradient(to top, #724b3f, cornsilk);
 
   /* box-shadow: 0 -10px 20px -8px #724b3f; */
-  color: white;
+  color: cornsilk;
 }
 
 footer h3 {
@@ -892,6 +892,7 @@ footer #email:-ms-input-placeholder {
 footer #sign-up-btn {
   border-radius: 25px;
   border: 1px solid cornsilk;
+  box-shadow: inset 0 10px 10px cornsilk;
   color: #724b3f;
   padding-inline: 15px;
   position: relative;
@@ -935,48 +936,45 @@ footer #footer-logo {
   display: grid;
   grid-template-areas: 'text'
                         'logo';
-  overflow-y: hidden;                        
-  padding-bottom: 15px;
+  padding-bottom: 10px;
   place-items: center;
   justify-content: center;
 }
 
 footer #footer-logo:hover p:first-of-type {
   opacity: 0;
-  transform: scale(0);
+  transform: translateY(-18px) scale(0);
   visibility: hidden;
 }
 
 footer #footer-logo:hover p:not(:first-of-type) {
-  visibility: visible;
-  transform: scale(1);
   opacity: 1;
+  transform: translateY(-18px) scale(1.5);
+  visibility: visible;
 }
 
 footer #footer-logo:hover a {
-  transform: rotate(3turn);
-  transition-delay: 0.555s;
+  transform: translateY(-10px) scale(1.5);
 }
 
 footer #footer-logo p {
+  color: cornsilk;
   font-family: 'pixeBoy', sans-serif;
-  font-size: 1.125rem;
+  font-size: 1rem;
   grid-area: text;
-  text-shadow: 0 0 5px white;
   transition: opacity 380ms ease-in-out, transform 0.555s ease-in-out, visibility 0.555s ease-in-out;
 }
 
 footer #footer-logo p:not(:first-of-type) {
-  transform: scale(0);
+  transform: translateY(0) scale(0);
   transition: opacity 380ms ease-in-out, transform 0.555s ease-in-out, visibility 0.555s ease-in-out;
   visibility: hidden;
 }
 
 footer #footer-logo a {
-  filter: drop-shadow(0 0 5px cornsilk);
   grid-area: logo;
   transition: all 0.555s ease-in-out;
-  width: min(13vw, 77px);
+  width: min(11vw, 58px);
 }
 
 footer #footer-links {
@@ -996,7 +994,7 @@ footer #footer-links ul li {
 }
 
 footer #footer-links a {
-  color: white;
+  color: cornsilk;
   text-decoration: none;
 }
 
