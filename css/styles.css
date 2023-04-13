@@ -905,7 +905,6 @@ footer #sign-up-btn {
   color: var(--color-secondary);
   padding-inline: 15px;
   position: relative;
-  text-shadow: 0 0 8px var(--color-secondary);
   transition: all 88ms ease-in-out;
   z-index: 1;
 }
@@ -935,7 +934,7 @@ footer #subscribe {
 
 footer #subscribe-text-content {
   text-align: center;
-  text-shadow: 0 0 8px var(--color-secondary);
+  text-shadow: 0 0 3px var(--color-secondary);
 }
 
 footer #subscribe-text-content p:not(:last-child) {
@@ -990,7 +989,7 @@ footer #footer-logo a {
 }
 
 footer #footer-links-header {
-  text-shadow: 0 0 8px var(--color-secondary);
+  text-shadow: 0 0 3px var(--color-secondary);
 }
 
 footer #footer-links {
@@ -1012,7 +1011,7 @@ footer #footer-links ul li {
 footer #footer-links a {
   color: var(--color-primary);
   text-decoration: none;
-  text-shadow: 0 0 8px var(--color-secondary);
+  text-shadow: 0 0 3px var(--color-secondary);
 }
 
 @media only screen and (min-width: 768px) {
