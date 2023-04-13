@@ -135,6 +135,9 @@ function Book(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.info = function () {
+        return `${this.title} by ${this.author} is ${this.pages} long, and is marked as ${this.read}`;
+    }
 }
 
 function addBookToCase(book) {
@@ -156,6 +159,7 @@ function populateBookCase(e) {
     let bookAuthor = document.createElement('dt');
     let bookPages = document.createElement('dt');
     let bookRead = document.createElement('dt');
+    let changeReadStatus = document.createElement('button');
     let removeBookBtn = document.createElement('button');
 
     for (let i = 0; i < bookCaseArray.length; i++) {
@@ -165,11 +169,19 @@ function populateBookCase(e) {
         bookAuthor.textContent = `Author: ${newBook.author}`;
         bookPages.textContent = `Pages: ${newBook.pages}`;
         bookRead.textContent = `Read: ${newBook.read}`;
+        if (newBook.read === true) {
+            changeReadStatus.textContent = 'Mark as Unread';
+        } else {
+            changeReadStatus.textContent = 'Mark as Read';
+        }
+        removeBookBtn.textContent = 'Remove Book';
 
         descriptionList.appendChild(bookTitle);
         descriptionList.appendChild(bookAuthor);
         descriptionList.appendChild(bookPages);
         descriptionList.appendChild(bookRead);
+        descriptionList.appendChild(changeReadStatus);
+        descriptionList.appendChild(removeBookBtn);
 
         bookCard.appendChild(descriptionList);
         bookCase.appendChild(bookCard);
