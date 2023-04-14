@@ -225,7 +225,7 @@ function populateBookCase(e) {
         bookCase.appendChild(bookCard);
     });
 
-    addBookForm.reset()
+    addBookForm.reset();
     addBookModal.close();
 }
 
@@ -238,6 +238,7 @@ function closeSearchInput(e) {
 }
 
 function closeModal() {
+    addBookForm.reset();
     addBookModal.close();
 }
 
