@@ -349,7 +349,7 @@ main #controls #add-book-container :modal form input:not([type='checkbox']):focu
 
 main #controls #add-book-container :modal .input-wrapper {
   display: flex;
-  justify-content: left;
+  justify-content: center;
   align-items: center;
   /* * ⬇️ if modal labels are visible ⬇️ * */
   /* gap: 5px; */
@@ -387,6 +387,7 @@ main #controls #add-book-container :modal form {
   grid-template-areas: 'title title'
                       'author author'
                       'bottomModal bottomModal'
+                      'book-cover book-cover'
                       'addbook addbook';
 }
 
@@ -400,13 +401,17 @@ main #controls #add-book-container :modal form #author-input {
 
 main #controls #add-book-container :modal form #bottom-modal {
   display: flex;
-  justify-content: left;
+  justify-content: center;
   gap: 16px;
   grid-area: bottomModal;
 }
 
 main #controls #add-book-container :modal form #bottom-modal #pages-input input {
   width: 100px;
+}
+
+main #controls #add-book-container :modal form #book-cover-input {
+  grid-area: book-cover;
 }
 
 main #controls #add-book-container :modal form #add-book-btn {
@@ -695,19 +700,75 @@ main {
 main #book-case {
   align-self: start;
   background-color: var(--color-primary);
+  border-radius: 50px;
   box-shadow: inset 5px 5px 9px #d4ceb7,
               inset -5px -5px 9px #ffffff;
   display: grid;
+  gap: 25px;
   grid-auto-rows: minmax(175px, auto);
-  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   min-height: 225px;
   padding-block: 25px;
 }
 
 main #book-case .book-card {
   border: 1px solid red;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+}
+
+main #book-case .description-wrapper {
+  display: flex;
+}
+
+main #book-case .description-wrapper .bookcase-cover-img {
+  height: 150px;
+}
+
+main #book-case .description-list {
+  border: 3px dashed #724b3f;
+  border-radius: 25px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+} 
+
+main #book-case .description-div {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+}
+
+main #book-case .description-term {
+  font-family: 'Cyclone', monospace;
+  font-size: 1.688rem;
+  line-height: 1;
+  padding-bottom: 3px;
+  /* font-weight: bold; */
+}
+
+main #book-case .description {
+  text-align: center;
+}
+
+main #book-case .book-card .description-btn-wrapper {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+
+}
+
+main #book-case .book-card .book-card-btn {
+  background-color: #724b3f;
+  border: 2px solid black;
+  border-radius: 25px;
+  color: cornsilk;
+  cursor: pointer;
+  padding: 5px 15px;
 }
 
 /* article {
@@ -1072,13 +1133,6 @@ footer #footer-links a {
     width: 300px;
   }
 
-  main #book-case {
-    background-color: var(--color-primary);
-    border-radius: 50px;
-    box-shadow: inset 5px 5px 9px #d4ceb7,
-              inset -5px -5px 9px #ffffff;
-  }
-
   aside {
     border-radius: 55px;
     box-shadow:  7px 7px 11px #dbd5bd,
@@ -1169,7 +1223,7 @@ footer #footer-links a {
   }
 
   main #book-case {
-    height: 100%;
+    max-height: 100%;
   }
 
   aside {

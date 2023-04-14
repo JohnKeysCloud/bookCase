@@ -2,6 +2,7 @@ const body = document.body;
 const header = document.createElement('header');
 const main = document.createElement('main');
 const footer = document.createElement('footer');
+
 const addBookModal = document.querySelector('dialog');
 const openDialogBtn = document.getElementById('open-dialog-btn');
 const addBookBtn = document.getElementById('add-book-btn');
@@ -15,6 +16,11 @@ const titleInput = document.getElementById('title');
 const authorInput = document.getElementById('author');
 const pagesInput = document.getElementById('pages');
 const readInput = document.getElementById('read');
+const bookCoverInput = document.getElementById('book-cover');
+
+// ! add this to bottom of each card
+const today = new Date().toLocaleDateString();
+const dateAddedStr = `added ${today}`;
 
 let bookCaseArray = [];
 
@@ -98,7 +104,7 @@ selectedOptionDiv.addEventListener('keydown', function (e) {
     }
 
     // ! add keydown event listener to each li => goes to next sibling => enter simulates click
-    
+
     if (e.key === 'ArrowDown') {
         console.log(this.nextSibling.firstChild);
         this.nextSibling.firstChild.focus();
@@ -130,18 +136,12 @@ document.addEventListener('click', closeAllSelect);
 
 // ! ---------------------------------------------------
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, read, cover) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.info = function () {
-        return `${this.title} by ${this.author} is ${this.pages} long, and is marked as ${this.read}`;
-    }
-}
-
-function addBookToCase(book) {
-    bookCaseArray.push(book);
+    this.cover = cover;
 }
 
 function removeBookFromCase(book) {
@@ -150,52 +150,81 @@ function removeBookFromCase(book) {
 
 function populateBookCase(e) {
     e.preventDefault();
-    let newBook = new Book(title.value, author.value, pages.value, read.checked);
-    addBookToCase(newBook);
 
-    let bookCard = document.createElement('article');
-    let descriptionList = document.createElement('dl');
-    let bookTitle = document.createElement('dt');
-    let bookAuthor = document.createElement('dt');
-    let bookPages = document.createElement('dt');
-    let bookRead = document.createElement('dt');
-    let changeReadStatus = document.createElement('button');
-    let removeBookBtn = document.createElement('button');
+    let newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, readInput.checked, bookCoverInput.value);
+    bookCaseArray.push(newBook);
+    bookCase.innerHTML = '';
 
-    for (let i = 0; i < bookCaseArray.length; i++) {
-        console.log(bookCaseArray[i]);
+    bookCaseArray.forEach(book => {
+        const bookCard = document.createElement('article');
+        const bookImg = document.createElement('img');
+        const bookImgDefault = '../assets/images/book-case/no-image-placeholder.svg';
+        const changeReadStatus = document.createElement('button');
+        const descriptionList = document.createElement('dl');
+        const descriptionWrapper = document.createElement('div');
+        const descriptionBtnWrapper = document.createElement('div');
+        const removeBookBtn = document.createElement('button');
+        
+        bookImg.classList.add('bookcase-cover-img');
+        changeReadStatus.classList.add('book-card-btn');
+        descriptionList.classList.add('description-list');
+        descriptionWrapper.classList.add('description-wrapper');
+        descriptionBtnWrapper.classList.add('description-btn-wrapper');
+        removeBookBtn.classList.add('book-card-btn');
+        
+        const descriptionListFragment = document.createDocumentFragment();
+        for (info in book) {
+            if (info === 'cover') continue;
+            const descriptionDiv = document.createElement('div');
+            const descriptionTerm = document.createElement('dt');
+            const description = document.createElement('dd');
 
-        bookTitle.textContent = `Title: ${newBook.title}`;
-        bookAuthor.textContent = `Author: ${newBook.author}`;
-        bookPages.textContent = `Pages: ${newBook.pages}`;
-        bookRead.textContent = `Read: ${newBook.read}`;
-        if (newBook.read === true) {
-            changeReadStatus.textContent = 'Mark as Unread';
-        } else {
-            changeReadStatus.textContent = 'Mark as Read';
+            // ! fix this
+            bookImg.src = bookCoverInput.value || bookImgDefault;
+
+            descriptionDiv.classList.add('description-div');
+            descriptionTerm.classList.add('accessibility');
+            description.classList.add('description');
+
+            descriptionTerm.textContent = info;
+            switch (info) {
+                case 'title':
+                    description.innerHTML = `<span class="book-info bookcase-title">${titleInput.value}</span>`;
+                    break;
+                case 'author':
+                    description.innerHTML = `by <span class="book-info bookcase-author-name">${authorInput.value}</span>`;
+                    break;
+                case 'pages':
+                    description.innerHTML = `<span class="book-info bookcase-page-amount">${pagesInput.value}</span> pages`;
+                    break;
+                case 'read':
+                    description.innerHTML = readInput.checked === true
+                        ? '<span class="book-info bookcase-read-status">Read</span>'
+                        : '<span class="book-info bookcase-read-status">Unread</span>';
+                    break;
+                default:
+                    description.textContent = book[info];
+            }
+
+            book.read === true
+                ? (changeReadStatus.textContent = 'Mark as Unread')
+                : (changeReadStatus.textContent = 'Mark as Read');
+            removeBookBtn.textContent = 'Remove Book';
+            
+            descriptionDiv.append(descriptionTerm, description);
+            descriptionListFragment.appendChild(descriptionDiv);
+            descriptionList.appendChild(descriptionListFragment);
         }
-        removeBookBtn.textContent = 'Remove Book';
 
-        descriptionList.appendChild(bookTitle);
-        descriptionList.appendChild(bookAuthor);
-        descriptionList.appendChild(bookPages);
-        descriptionList.appendChild(bookRead);
-        descriptionList.appendChild(changeReadStatus);
-        descriptionList.appendChild(removeBookBtn);
-
-        bookCard.appendChild(descriptionList);
-        bookCase.appendChild(bookCard);
-
+        descriptionWrapper.append(bookImg, descriptionList);
+        bookCard.appendChild(descriptionWrapper);
+        descriptionBtnWrapper.append(changeReadStatus, removeBookBtn);
+        bookCard.appendChild(descriptionBtnWrapper);
         bookCard.classList.add('book-card');
-    }
 
+        bookCase.appendChild(bookCard);
+    });
 
-    // get all the text input values 
-    // create a new book object
-    // add the book object to the bookcase array
-    // populate the bookcase with the book object
-    // clear the form
-    // close the modal
     addBookForm.reset()
     addBookModal.close();
 }
