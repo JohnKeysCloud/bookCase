@@ -18,10 +18,6 @@ const pagesInput = document.getElementById('pages');
 const readInput = document.getElementById('read');
 const bookCoverInput = document.getElementById('book-cover');
 
-// ! add this to bottom of each card
-const today = new Date().toLocaleDateString();
-const dateAddedStr = `added ${today}`;
-
 let bookCaseArray = [];
 
 const menuBtn = document.querySelector('#menu-btn');
@@ -164,6 +160,12 @@ function populateBookCase(e) {
         const descriptionWrapper = document.createElement('div');
         const descriptionBtnWrapper = document.createElement('div');
         const removeBookBtn = document.createElement('button');
+
+        // ! add this to bottom of each card
+        const today = new Date().toLocaleDateString();
+        const dateTime = document.createElement('time');
+        const dateAddedInnerHTML = `<span class="book-info">added</span> <span class="date-added">${today}</span>`;
+        dateTime.innerHTML = dateAddedInnerHTML;
         
         bookImg.classList.add('bookcase-cover-img');
         changeReadStatus.classList.add('book-card-btn');
@@ -199,8 +201,8 @@ function populateBookCase(e) {
                     break;
                 case 'read':
                     description.innerHTML = readInput.checked === true
-                        ? '<span class="book-info bookcase-read-status">Read</span>'
-                        : '<span class="book-info bookcase-read-status">Unread</span>';
+                        ? '<span class="book-info bookcase-read-status">Status:</span> Read'
+                        : '<span class="book-info bookcase-read-status">Status:</span> Unread';
                     break;
                 default:
                     description.textContent = book[info];
@@ -218,7 +220,7 @@ function populateBookCase(e) {
 
         descriptionWrapper.append(bookImg, descriptionList);
         bookCard.appendChild(descriptionWrapper);
-        descriptionBtnWrapper.append(changeReadStatus, removeBookBtn);
+        descriptionBtnWrapper.append(dateTime, changeReadStatus, removeBookBtn);
         bookCard.appendChild(descriptionBtnWrapper);
         bookCard.classList.add('book-card');
 

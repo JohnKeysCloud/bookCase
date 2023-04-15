@@ -712,7 +712,8 @@ main #book-case {
 }
 
 main #book-case .book-card {
-  border: 1px solid red;
+  border: 3px solid #724b3f;
+  border-radius: 25px;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -720,15 +721,32 @@ main #book-case .book-card {
 }
 
 main #book-case .description-wrapper {
-  display: flex;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+
 }
 
 main #book-case .description-wrapper .bookcase-cover-img {
+  border-top-left-radius: 25px;
   height: 150px;
 }
 
+main #book-case .description-wrapper .book-info {
+  font-weight: bold;
+}
+
+main #book-case .description-wrapper .bookcase-title {
+  font-size: 1.125rem;
+}
+
+main #book-case .description-wrapper .bookcase-author-name {
+  font-style: italic;
+}
+
+
+
 main #book-case .description-list {
-  border: 3px dashed #724b3f;
+  /* border: 1px solid #724b3f; */
   border-radius: 25px;
   padding: 10px;
   display: flex;
@@ -738,9 +756,9 @@ main #book-case .description-list {
 
 main #book-case .description-div {
   align-items: center;
-  display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
+  /* border: 2px solid red; */
+  /* display: flex; */
+  /* flex-direction: column; */
 }
 
 main #book-case .description-term {
@@ -752,7 +770,7 @@ main #book-case .description-term {
 }
 
 main #book-case .description {
-  text-align: center;
+  text-align: right;
 }
 
 main #book-case .book-card .description-btn-wrapper {
