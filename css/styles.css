@@ -712,27 +712,34 @@ main #book-case {
 }
 
 main #book-case .book-card {
-  border: 3px solid #724b3f;
+  /* border: 2px solid #724b3f; */
+  background: linear-gradient(145deg, #ffffeb, #e6dfc6);
   border-radius: 25px;
+  box-shadow:  5px 5px 12px #a8a491,
+              -5px -5px 12px #ffffff;
   display: flex;
   flex-direction: column;
   gap: 15px;
   justify-content: center;
+  min-width: 250px;
+  padding: 15px 25px;
+}
+
+main #book-case .book-card .book-info {
+  font-weight: bold;
 }
 
 main #book-case .description-wrapper {
   display: grid;
-  grid-template-columns: 2fr 3fr;
-
+  grid-template-columns: 1fr 2fr;
 }
+
+/* main #book-case .description-wrapper .bookcase-cover-img-wrapper {
+  height: ;
+} */
 
 main #book-case .description-wrapper .bookcase-cover-img {
-  border-top-left-radius: 25px;
-  height: 150px;
-}
-
-main #book-case .description-wrapper .book-info {
-  font-weight: bold;
+  border-radius: 8px;
 }
 
 main #book-case .description-wrapper .bookcase-title {
@@ -743,23 +750,14 @@ main #book-case .description-wrapper .bookcase-author-name {
   font-style: italic;
 }
 
-
-
 main #book-case .description-list {
-  /* border: 1px solid #724b3f; */
   border-radius: 25px;
-  padding: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  justify-content: space-evenly;
+  padding: 10px;
 } 
-
-main #book-case .description-div {
-  align-items: center;
-  /* border: 2px solid red; */
-  /* display: flex; */
-  /* flex-direction: column; */
-}
 
 main #book-case .description-term {
   font-family: 'Cyclone', monospace;
@@ -773,11 +771,12 @@ main #book-case .description {
   text-align: right;
 }
 
-main #book-case .book-card .description-btn-wrapper {
-  display: flex;
-  gap: 8px;
-  justify-content: space-between;
-
+main #book-case .book-card .bottom-book-card-div {
+  display: grid;
+  column-gap: 25px;
+  row-gap: 10px;
+  grid-template-areas:  'unreadBtn removeBtn'
+                        'dateAdded dateAdded';
 }
 
 main #book-case .book-card .book-card-btn {
@@ -789,11 +788,18 @@ main #book-case .book-card .book-card-btn {
   padding: 5px 15px;
 }
 
-/* article {
-	border: 2px solid red;
-	border-radius: 12px;
+main #book-case .book-card .book-card-btn:first-of-type {
+  grid-area: unreadBtn;
 }
-*/
+
+main #book-case .book-card .book-card-btn:nth-of-type(2) {
+  grid-area: removeBtn;
+}
+
+main #book-case .book-card .date-added-div {
+  grid-area: dateAdded;
+  text-align: right;
+}
 
 aside section {
   border-radius: 55px;

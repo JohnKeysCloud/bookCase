@@ -154,24 +154,34 @@ function populateBookCase(e) {
     bookCaseArray.forEach(book => {
         const bookCard = document.createElement('article');
         const bookImg = document.createElement('img');
+        const bookImgWrapper = document.createElement('div');
         const bookImgDefault = '../assets/images/book-case/no-image-placeholder.svg';
         const changeReadStatus = document.createElement('button');
         const descriptionList = document.createElement('dl');
         const descriptionWrapper = document.createElement('div');
-        const descriptionBtnWrapper = document.createElement('div');
+        const bottomBookCardDiv = document.createElement('div');
         const removeBookBtn = document.createElement('button');
 
-        // ! add this to bottom of each card
         const today = new Date().toLocaleDateString();
+        let todaySplit = today.split('/');
+        [todaySplit[0], todaySplit[1], todaySplit[2]] = [todaySplit[2], todaySplit[0], todaySplit[1]];
+        let todayFormatted = todaySplit.join('-');
+
+        const dateAddedDiv = document.createElement('div');
         const dateTime = document.createElement('time');
-        const dateAddedInnerHTML = `<span class="book-info">added</span> <span class="date-added">${today}</span>`;
-        dateTime.innerHTML = dateAddedInnerHTML;
+        dateTime.setAttribute('date-time', todayFormatted);
+        dateTime.textContent = today;
+
+        dateAddedDiv.classList.add('date-added-div');
+        dateAddedDiv.innerHTML = '<span class="book-info">Date added:</span> ';
+        dateAddedDiv.appendChild(dateTime);
         
+        bookImgWrapper.classList.add('bookcase-cover-img-wrapper');
         bookImg.classList.add('bookcase-cover-img');
         changeReadStatus.classList.add('book-card-btn');
         descriptionList.classList.add('description-list');
         descriptionWrapper.classList.add('description-wrapper');
-        descriptionBtnWrapper.classList.add('description-btn-wrapper');
+        bottomBookCardDiv.classList.add('bottom-book-card-div');
         removeBookBtn.classList.add('book-card-btn');
         
         const descriptionListFragment = document.createDocumentFragment();
@@ -218,10 +228,11 @@ function populateBookCase(e) {
             descriptionList.appendChild(descriptionListFragment);
         }
 
-        descriptionWrapper.append(bookImg, descriptionList);
+        bookImgWrapper.appendChild(bookImg);
+        descriptionWrapper.append(bookImgWrapper, descriptionList);
         bookCard.appendChild(descriptionWrapper);
-        descriptionBtnWrapper.append(dateTime, changeReadStatus, removeBookBtn);
-        bookCard.appendChild(descriptionBtnWrapper);
+        bottomBookCardDiv.append(changeReadStatus, removeBookBtn, dateAddedDiv);
+        bookCard.appendChild(bottomBookCardDiv);
         bookCard.classList.add('book-card');
 
         bookCase.appendChild(bookCard);
