@@ -191,7 +191,7 @@ function populateBookCase(e) {
             const descriptionTerm = document.createElement('dt');
             const description = document.createElement('dd');
 
-            // ! fix this
+            // ! fix this so all books dont inherit the new img
             bookImg.src = bookCoverInput.value || bookImgDefault;
 
             descriptionDiv.classList.add('description-div');
@@ -236,6 +236,8 @@ function populateBookCase(e) {
         bookCard.classList.add('book-card');
 
         bookCase.appendChild(bookCard);
+
+        removeBookBtn.addEventListener('click', removeBookFromCase);
     });
 
     addBookForm.reset();

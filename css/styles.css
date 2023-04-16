@@ -706,7 +706,7 @@ main #book-case {
   display: grid;
   gap: 25px;
   grid-auto-rows: minmax(175px, auto);
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
   min-height: 225px;
   padding-block: 25px;
 }
@@ -721,7 +721,7 @@ main #book-case .book-card {
   flex-direction: column;
   gap: 15px;
   justify-content: center;
-  min-width: 250px;
+  min-width: 275px;
   padding: 15px 25px;
 }
 
@@ -731,15 +731,18 @@ main #book-case .book-card .book-info {
 
 main #book-case .description-wrapper {
   display: grid;
+  /* gap: 10px; */
   grid-template-columns: 1fr 2fr;
+  place-items: center;
 }
 
-/* main #book-case .description-wrapper .bookcase-cover-img-wrapper {
-  height: ;
-} */
+main #book-case .description-wrapper .bookcase-cover-img-wrapper {
+  border: 2px solid #724b3f;
+  border-radius: 15px;
+}
 
 main #book-case .description-wrapper .bookcase-cover-img {
-  border-radius: 8px;
+  border-radius: inherit;
 }
 
 main #book-case .description-wrapper .bookcase-title {
@@ -945,7 +948,7 @@ footer #footer-top-wrapper {
   display: grid;
   grid-template-columns: 1fr;
   margin-inline: auto;
-  max-width: 1400px;
+  max-width: 1700px;
   padding-block: 25px;  
   padding-inline: 5vw;
   justify-content: center;
@@ -1223,7 +1226,7 @@ footer #footer-links a {
     gap: 40px;
     grid-template-columns: 2fr 1fr;
     margin-inline: auto;
-    max-width: 1400px;
+    max-width: 1700px;
   }
 
   main {
@@ -1249,7 +1252,7 @@ footer #footer-links a {
   main #book-case {
     max-height: 100%;
   }
-
+  
   aside {
     background: unset;
     border-radius: unset;
