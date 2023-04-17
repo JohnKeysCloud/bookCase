@@ -244,7 +244,6 @@ header #header-right .header-btn {
 	color: red;
 }  */
 
-main > :not(#controls-wrapper), 
 aside {
   padding-inline: 3vw;
 }
@@ -267,6 +266,7 @@ main #controls-wrapper {
   display: grid;
   height: max-content;
   max-width: 100%;
+  margin-bottom: 25px;
   padding-block: 16px;
   place-items: center;
 }
@@ -697,10 +697,9 @@ main {
   height: 100%;
 }
 
-main #book-case {
+main #bookcase {
   align-self: start;
   background-color: var(--color-primary);
-  border-radius: 50px;
   box-shadow: inset 5px 5px 9px #d4ceb7,
               inset -5px -5px 9px #ffffff;
   display: grid;
@@ -709,9 +708,10 @@ main #book-case {
   grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
   min-height: 225px;
   padding-block: 25px;
+  padding-inline: 3vw;
 }
 
-main #book-case .book-card {
+main #bookcase .book-card {
   /* border: 2px solid #724b3f; */
   background: linear-gradient(145deg, #ffffeb, #e6dfc6);
   border-radius: 25px;
@@ -725,35 +725,35 @@ main #book-case .book-card {
   padding: 15px 25px;
 }
 
-main #book-case .book-card .book-info {
+main #bookcase .book-card .book-info {
   font-weight: bold;
 }
 
-main #book-case .description-wrapper {
+main #bookcase .description-wrapper {
   display: grid;
   /* gap: 10px; */
   grid-template-columns: 1fr 2fr;
   place-items: center;
 }
 
-main #book-case .description-wrapper .bookcase-cover-img-wrapper {
+main #bookcase .description-wrapper .bookcase-cover-img-wrapper {
   border: 2px solid #724b3f;
   border-radius: 15px;
 }
 
-main #book-case .description-wrapper .bookcase-cover-img {
+main #bookcase .description-wrapper .bookcase-cover-img {
   border-radius: inherit;
 }
 
-main #book-case .description-wrapper .bookcase-title {
+main #bookcase .description-wrapper .bookcase-title {
   font-size: 1.125rem;
 }
 
-main #book-case .description-wrapper .bookcase-author-name {
+main #bookcase .description-wrapper .bookcase-author-name {
   font-style: italic;
 }
 
-main #book-case .description-list {
+main #bookcase .description-list {
   border-radius: 25px;
   display: flex;
   flex-direction: column;
@@ -762,7 +762,7 @@ main #book-case .description-list {
   padding: 10px;
 } 
 
-main #book-case .description-term {
+main #bookcase .description-term {
   font-family: 'Cyclone', monospace;
   font-size: 1.688rem;
   line-height: 1;
@@ -770,11 +770,11 @@ main #book-case .description-term {
   /* font-weight: bold; */
 }
 
-main #book-case .description {
+main #bookcase .description {
   text-align: right;
 }
 
-main #book-case .book-card .bottom-book-card-div {
+main #bookcase .book-card .bottom-book-card-div {
   display: grid;
   column-gap: 25px;
   row-gap: 10px;
@@ -782,7 +782,7 @@ main #book-case .book-card .bottom-book-card-div {
                         'dateAdded dateAdded';
 }
 
-main #book-case .book-card .book-card-btn {
+main #bookcase .book-card .book-card-btn {
   background-color: #724b3f;
   border: 2px solid black;
   border-radius: 25px;
@@ -791,15 +791,15 @@ main #book-case .book-card .book-card-btn {
   padding: 5px 15px;
 }
 
-main #book-case .book-card .book-card-btn:first-of-type {
+main #bookcase .book-card .book-card-btn:first-of-type {
   grid-area: unreadBtn;
 }
 
-main #book-case .book-card .book-card-btn:nth-of-type(2) {
+main #bookcase .book-card .book-card-btn:nth-of-type(2) {
   grid-area: removeBtn;
 }
 
-main #book-case .book-card .date-added-div {
+main #bookcase .book-card .date-added-div {
   grid-area: dateAdded;
   text-align: right;
 }
@@ -1139,6 +1139,7 @@ footer #footer-links a {
   main #controls-wrapper {
     background-color: unset;
     box-shadow: unset;
+    margin-bottom: unset;
   }
 
   main #controls {
@@ -1158,6 +1159,10 @@ footer #footer-links a {
   main #controls #search-form:hover, 
   main #controls #search-form:valid {
     width: 300px;
+  }
+
+  main #bookcase {
+    border-radius: 50px;
   }
 
   aside {
@@ -1249,7 +1254,7 @@ footer #footer-links a {
     width: 180px;
   }
 
-  main #book-case {
+  main #bookcase {
     max-height: 100%;
   }
   

@@ -10,7 +10,7 @@ const addBookForm = document.getElementById('add-book-form');
 const searchInput = document.getElementById('search-input');
 const searchCloseBtn = document.getElementById('search-close-btn');
 const modalCloseBtn = document.getElementById('modal-close-btn');
-const bookCase = document.getElementById('book-case');
+const bookCase = document.getElementById('bookcase');
 
 const titleInput = document.getElementById('title');
 const authorInput = document.getElementById('author');
@@ -140,17 +140,31 @@ function Book(title, author, pages, read, cover) {
     this.cover = cover;
 }
 
-function removeBookFromCase(book) {
-    bookCaseArray.splice(bookCaseArray.indexOf(book), 1);
+function toggleReadStatus(e) {
+    this.read
 }
 
-function populateBookCase(e) {
-    e.preventDefault();
+function removeBookFromCase(e) {
+    let targetedBookCard = e.target.parentNode.parentNode;
+    let targetedBookTitle = targetedBookCard.querySelector('.bookcase-title').textContent;
+    console.log(targetedBookTitle);
+    bookCaseArray.splice(bookCaseArray.indexOf(targetedBookTitle), 1);
+    console.log(bookCaseArray);
+    populateBookCase();
+}
 
-    let newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, readInput.checked, bookCoverInput.value);
-    bookCaseArray.push(newBook);
+function addEventListeners() {
+    const readToggleBtns = document.querySelectorAll('.book-card-btn:first-of-type');
+    const removeBookBtns = document.querySelectorAll('.book-card-btn:nth-of-type(2)');
+    
+    for (let i = 0; i < readToggleBtns.length; ++i) {
+        readToggleBtns[i].addEventListener('click', toggleReadStatus);
+        removeBookBtns[i].addEventListener('click', removeBookFromCase);
+    }
+}
+
+function populateBookCase() {
     bookCase.innerHTML = '';
-
     bookCaseArray.forEach(book => {
         const bookCard = document.createElement('article');
         const bookImg = document.createElement('img');
@@ -183,7 +197,7 @@ function populateBookCase(e) {
         descriptionWrapper.classList.add('description-wrapper');
         bottomBookCardDiv.classList.add('bottom-book-card-div');
         removeBookBtn.classList.add('book-card-btn');
-        
+
         const descriptionListFragment = document.createDocumentFragment();
         for (info in book) {
             if (info === 'cover') continue;
@@ -191,8 +205,7 @@ function populateBookCase(e) {
             const descriptionTerm = document.createElement('dt');
             const description = document.createElement('dd');
 
-            // ! fix this so all books dont inherit the new img
-            bookImg.src = bookCoverInput.value || bookImgDefault;
+            bookImg.src = book.cover || bookImgDefault;
 
             descriptionDiv.classList.add('description-div');
             descriptionTerm.classList.add('accessibility');
@@ -201,13 +214,13 @@ function populateBookCase(e) {
             descriptionTerm.textContent = info;
             switch (info) {
                 case 'title':
-                    description.innerHTML = `<span class="book-info bookcase-title">${titleInput.value}</span>`;
+                    description.innerHTML = `<span class="book-info bookcase-title">${book.title}</span>`;
                     break;
                 case 'author':
-                    description.innerHTML = `by <span class="book-info bookcase-author-name">${authorInput.value}</span>`;
+                    description.innerHTML = `by <span class="book-info bookcase-author-name">${book.author}</span>`;
                     break;
                 case 'pages':
-                    description.innerHTML = `<span class="book-info bookcase-page-amount">${pagesInput.value}</span> pages`;
+                    description.innerHTML = `<span class="book-info bookcase-page-amount">${book.pages}</span> pages`;
                     break;
                 case 'read':
                     description.innerHTML = readInput.checked === true
@@ -236,9 +249,18 @@ function populateBookCase(e) {
         bookCard.classList.add('book-card');
 
         bookCase.appendChild(bookCard);
-
-        removeBookBtn.addEventListener('click', removeBookFromCase);
     });
+
+    addEventListeners();    
+}
+
+function initializeNewBook(e) {
+    e.preventDefault();
+
+    let newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, readInput.checked, bookCoverInput.value);
+    bookCaseArray.push(newBook);
+
+    populateBookCase();
 
     addBookForm.reset();
     addBookModal.close();
@@ -260,4 +282,4 @@ function closeModal() {
 openDialogBtn.addEventListener('click', openAddBookModal);
 searchCloseBtn.addEventListener('click', closeSearchInput);
 modalCloseBtn.addEventListener('click', closeModal);
-addBookBtn.addEventListener('click', populateBookCase);
+addBookBtn.addEventListener('click', initializeNewBook);
