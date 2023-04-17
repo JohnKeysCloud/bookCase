@@ -1163,6 +1163,7 @@ footer #footer-links a {
 
   main #bookcase {
     border-radius: 50px;
+    padding-inline: 25px;
   }
 
   aside {
