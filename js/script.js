@@ -144,8 +144,8 @@ function toggleReadStatus(e) {
     this.read
 }
 
-function removeBookFromCase(e) {
-    let targetedBookCard = e.target.parentNode.parentNode;
+function removeBookFromCase() {
+    let targetedBookCard = this.parentNode.parentNode;
     let targetedBookTitle = targetedBookCard.querySelector('.bookcase-title').textContent;
     console.log(targetedBookTitle);
     bookCaseArray.splice(bookCaseArray.indexOf(targetedBookTitle), 1);
