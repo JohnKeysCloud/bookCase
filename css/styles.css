@@ -313,7 +313,6 @@ main #controls #add-book-container :modal {
   border-radius: 75px;
   color: var(--color-secondary);
   display: none;
-  height: max-content;
   padding-block: 15px;
   place-items: center;
   position: fixed;
