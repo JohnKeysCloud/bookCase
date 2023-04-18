@@ -145,11 +145,11 @@ function toggleReadStatus(e) {
 }
 
 function removeBookFromCase() {
-    let targetedBookCard = this.parentNode.parentNode;
-    let targetedBookTitle = targetedBookCard.querySelector('.bookcase-title').textContent;
-    console.log(targetedBookTitle);
+    let targetedBookTitle = this.parentNode.parentNode.querySelector('.bookcase-title').textContent;
+    console.log(1, targetedBookTitle);
+    // ? why does this work?
     bookCaseArray.splice(bookCaseArray.indexOf(targetedBookTitle), 1);
-    console.log(bookCaseArray);
+    console.log(2, bookCaseArray);
     populateBookCase();
 }
 
@@ -165,24 +165,24 @@ function addEventListeners() {
 
 function populateBookCase() {
     bookCase.innerHTML = '';
-    bookCaseArray.forEach(book => {
+    bookCaseArray.forEach( book => {
         const bookCard = document.createElement('article');
         const bookImg = document.createElement('img');
         const bookImgWrapper = document.createElement('div');
-        const bookImgDefault = '../assets/images/book-case/no-image-placeholder.svg';
+        const bookImgDefaultSource = '../assets/images/book-case/no-image-placeholder.svg';
         const changeReadStatus = document.createElement('button');
         const descriptionList = document.createElement('dl');
         const descriptionWrapper = document.createElement('div');
         const bottomBookCardDiv = document.createElement('div');
         const removeBookBtn = document.createElement('button');
+        const dateAddedDiv = document.createElement('div');
+        const dateTime = document.createElement('time');
 
         const today = new Date().toLocaleDateString();
         let todaySplit = today.split('/');
         [todaySplit[0], todaySplit[1], todaySplit[2]] = [todaySplit[2], todaySplit[0], todaySplit[1]];
         let todayFormatted = todaySplit.join('-');
 
-        const dateAddedDiv = document.createElement('div');
-        const dateTime = document.createElement('time');
         dateTime.setAttribute('date-time', todayFormatted);
         dateTime.textContent = today;
 
@@ -198,20 +198,20 @@ function populateBookCase() {
         bottomBookCardDiv.classList.add('bottom-book-card-div');
         removeBookBtn.classList.add('book-card-btn');
 
+        bookImg.src = book.cover || bookImgDefaultSource;
+
         const descriptionListFragment = document.createDocumentFragment();
         for (info in book) {
             if (info === 'cover') continue;
+            const description = document.createElement('dd');
             const descriptionDiv = document.createElement('div');
             const descriptionTerm = document.createElement('dt');
-            const description = document.createElement('dd');
 
-            bookImg.src = book.cover || bookImgDefault;
-
+            description.classList.add('description');
             descriptionDiv.classList.add('description-div');
             descriptionTerm.classList.add('accessibility');
-            description.classList.add('description');
-
             descriptionTerm.textContent = info;
+
             switch (info) {
                 case 'title':
                     description.innerHTML = `<span class="book-info bookcase-title">${book.title}</span>`;
@@ -254,6 +254,18 @@ function populateBookCase() {
     addEventListeners();    
 }
 
+function closeModal() {
+    addBookModal.classList.toggle('is-hidden');
+    addBookModal.close();
+    addBookForm.reset();
+    addBookModal.removeEventListener('animationend', closeModal);
+}
+
+function animateModalClose() {
+    addBookModal.classList.toggle('is-hidden');
+    addBookModal.addEventListener('animationend', closeModal);
+}
+
 function initializeNewBook(e) {
     e.preventDefault();
 
@@ -262,8 +274,7 @@ function initializeNewBook(e) {
 
     populateBookCase();
 
-    addBookForm.reset();
-    addBookModal.close();
+    animateModalClose();
 }
 
 function openAddBookModal() {
@@ -274,12 +285,7 @@ function closeSearchInput(e) {
     searchInput.value = '';
 }
 
-function closeModal() {
-    addBookForm.reset();
-    addBookModal.close();
-}
-
 openDialogBtn.addEventListener('click', openAddBookModal);
 searchCloseBtn.addEventListener('click', closeSearchInput);
-modalCloseBtn.addEventListener('click', closeModal);
+modalCloseBtn.addEventListener('click', animateModalClose);
 addBookBtn.addEventListener('click', initializeNewBook);

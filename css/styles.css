@@ -1,3 +1,69 @@
+@-webkit-keyframes slidein {
+  from {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slidein {
+  from {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  to {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes minimize {
+  to {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+@keyframes minimize {
+  to {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
 :root {
   --color-primary: cornsilk;
   --color-secondary: #724b3f;
@@ -304,35 +370,59 @@ main #controls #open-dialog-btn {
   width: 55px;
 }
 
-main #controls #add-book-container :modal {
+main #controls #add-book-container #add-book-modal {
   background: linear-gradient(145deg, #ffffeb, #e6dfc6);
-  box-shadow:  5px 5px 39px #b5b09c,
-              -5px -5px 39px var(--color-secondary),
-              inset -2px -2px 3px 2px var(--color-secondary);
-  border: none;
-  border-radius: 75px;
+  box-shadow: 0 7px 3px -3px #724b3f, inset 0 -3px 15px #724b3f;
+  border: 2px solid #724b3f;
+  border-radius: 50px;
   color: var(--color-secondary);
-  display: none;
-  padding-block: 15px;
-  place-items: center;
+  padding: 10px 25px;
   position: fixed;
-  width: 333px;
+  width: min(88vw, 550px);
   z-index: 1;
 }
 
-main #controls #add-book-container :modal[open] {
-  display: grid;
+main #controls #add-book-container #add-book-modal[open] {
+  display: flex;
+  flex-direction: column;
+  -webkit-animation: slidein 380ms cubic-bezier(0.25, 0, 0.3, 1) normal;
+  animation: slidein 380ms cubic-bezier(0.25, 0, 0.3, 1) normal;
 }
 
-main #controls #add-book-container :modal::backdrop {
-  background: linear-gradient(transparent, hwb(0 0% 100% / 0.5), hwb(14 25% 55% / 0.7));
+@media (prefers-reduced-motion: reduce) {
+  main #controls #add-book-container #add-book-modal[open] {
+    -webkit-animation: fadein 380ms cubic-bezier(0.5, -0.5, 0.1, 1.5) normal;
+    animation: fadein 380ms cubic-bezier(0.5, -0.5, 0.1, 1.5) normal;
+  }
 }
 
-main #controls #add-book-container :modal #modal-header {
+main #controls #add-book-container #add-book-modal.is-hidden {
+  -webkit-animation: minimize 380ms cubic-bezier(0.5, -0.5, 0.1, 1.5) normal;
+  animation: minimize 380ms cubic-bezier(0.5, -0.5, 0.1, 1.5) normal;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main #controls #add-book-container #add-book-modal.is-hidden {
+    -webkit-animation: fadeout 380ms cubic-bezier(0.5, -0.5, 0.1, 1.5) normal;
+    animation: fadeout 380ms cubic-bezier(0.5, -0.5, 0.1, 1.5) normal;
+  }
+}
+
+main #controls #add-book-container #add-book-modal::backdrop {
+  animation: none;
+  background: rgba(0, 0, 0, 0.3);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+main #controls #add-book-container #add-book-modal #top-modal {
+  display: flex;
+  justify-content: center;
   margin-bottom: 10px;
+
 }
 
-main #controls #add-book-container :modal ::placeholder {
+main #controls #add-book-container #add-book-modal ::placeholder {
   color: var(--color-secondary);
   font-family: 'Cyclone';
   font-size: 1.313rem;
@@ -342,47 +432,45 @@ main #controls #add-book-container :modal ::placeholder {
   transform: translateY(3px);
 }
 
-main #controls #add-book-container :modal form input:not([type='checkbox']):focus::placeholder {
+main #controls #add-book-container #add-book-modal form input:not([type='checkbox']):focus::placeholder {
   opacity: 0;
 }
 
-main #controls #add-book-container :modal .input-wrapper {
+main #controls #add-book-container #add-book-modal .input-wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   /* * ⬇️ if modal labels are visible ⬇️ * */
   /* gap: 5px; */
 }
 
-main #controls #add-book-container :modal .input-label {
+main #controls #add-book-container #add-book-modal .input-label {
   display: grid;
   font-family: 'Cyclone', sans-serif;
   font-size: 1.313rem;
   letter-spacing: 1px;
   padding-bottom: 5px;
-  place-items: center;
   width: 55px;
 }
 
-main #controls #add-book-container :modal #modal-close-btn {
+main #controls #add-book-container #add-book-modal #modal-close-btn {
   color: var(--color-secondary);
   cursor: pointer;
   font-size: 1.5rem;
   position: absolute;
-  right: 35px;
-  top: 22px;
+  right: 25px;
+  top: 15px;
   transition: all 333ms ease-in-out;
 }
 
-main #controls #add-book-container :modal #modal-close-btn:hover {
+main #controls #add-book-container #add-book-modal #modal-close-btn:hover {
   transform: scale(1.1) rotate(90deg);
 }
 
-main #controls #add-book-container :modal form {
-  border-radius: inherit;
+main #controls #add-book-container #add-book-modal form {
   display: grid;
   gap: 20px;
-  justify-content: center;
+  justify-content: space-between;
   grid-template-areas: 'title title'
                       'author author'
                       'bottomModal bottomModal'
@@ -390,30 +478,35 @@ main #controls #add-book-container :modal form {
                       'addbook addbook';
 }
 
-main #controls #add-book-container :modal form #title-input {
+main #controls #add-book-container #add-book-modal form input {
+  width: 100%;
+}
+
+main #controls #add-book-container #add-book-modal form #title-input {
   grid-area: title;
 }
 
-main #controls #add-book-container :modal form #author-input {
+main #controls #add-book-container #add-book-modal form #author-input {
   grid-area: author;
 }
 
-main #controls #add-book-container :modal form #bottom-modal {
+main #controls #add-book-container #add-book-modal form #bottom-modal {
   display: flex;
   justify-content: center;
   gap: 16px;
   grid-area: bottomModal;
+  width: 100%;
 }
 
-main #controls #add-book-container :modal form #bottom-modal #pages-input input {
-  width: 100px;
+main #controls #add-book-container #add-book-modal form #bottom-modal #pages-input input {
+  width: 75px;
 }
 
-main #controls #add-book-container :modal form #book-cover-input {
+main #controls #add-book-container #add-book-modal form #book-cover-input {
   grid-area: book-cover;
 }
 
-main #controls #add-book-container :modal form #add-book-btn {
+main #controls #add-book-container #add-book-modal form #add-book-btn {
   border-radius: 25px;
   border: 1px solid var(--color-secondary);
   color: var(--color-secondary);
@@ -426,11 +519,11 @@ main #controls #add-book-container :modal form #add-book-btn {
   z-index: 1;
 }
 
-main #controls #add-book-container :modal form #add-book-btn:active {
+main #controls #add-book-container #add-book-modal form #add-book-btn:active {
   transform: translateY(2px);
 } 
 
-main #controls #add-book-container :modal form #add-book-btn::before {
+main #controls #add-book-container #add-book-modal form #add-book-btn::before {
   border-radius: inherit;
   box-shadow: 0 4px 0px -1px hsla(14, 29%, 35%, 0.8);
   content: '';
@@ -440,12 +533,12 @@ main #controls #add-book-container :modal form #add-book-btn::before {
   z-index: -1;
 }
 
-main #controls #add-book-container :modal form #add-book-btn:active::before {
+main #controls #add-book-container #add-book-modal form #add-book-btn:active::before {
   opacity: 0.3;
   transform: translateY(-3px);
 }
 
-main #controls #add-book-container :modal form input:not([type='checkbox']) {
+main #controls #add-book-container #add-book-modal form input:not([type='checkbox']) {
   appearance: none;
   background: #fff8dc;
   border: 1px solid var(--color-secondary);
@@ -460,7 +553,7 @@ main #controls #add-book-container :modal form input:not([type='checkbox']) {
   /* ! ⬆️ the fuck? */
 }
 
-main #controls #add-book-container :modal form input#read {
+main #controls #add-book-container #add-book-modal form input#read {
   -webkit-appearance: none;
   appearance: none;
   box-shadow: inset 6px 6px 12px #dbd5bd,
@@ -475,7 +568,7 @@ main #controls #add-book-container :modal form input#read {
   width: 25px;
 }
 
-main #controls #add-book-container :modal form input#read::before {
+main #controls #add-book-container #add-book-modal form input#read::before {
   border-radius: inherit;
   box-shadow: inset 1rem 1rem var(--color-secondary);
   content: '';
@@ -486,7 +579,7 @@ main #controls #add-book-container :modal form input#read::before {
 }
 /* ? Use of box-shadow instead of background-color will enable the state of the radio to be visible when printed (h/t Alvaro Montoro). */
 
-main #controls #add-book-container :modal form input#read:checked::before {
+main #controls #add-book-container #add-book-modal form input#read:checked::before {
   transform: scale(1);
 }
 
