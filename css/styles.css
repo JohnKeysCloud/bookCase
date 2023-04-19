@@ -864,6 +864,7 @@ main #bookcase .description-list {
   gap: 10px;
   justify-content: space-evenly;
   padding: 10px;
+  width: 100%;
 } 
 
 main #bookcase .description-term {
@@ -871,7 +872,6 @@ main #bookcase .description-term {
   font-size: 1.688rem;
   line-height: 1;
   padding-bottom: 3px;
-  /* font-weight: bold; */
 }
 
 main #bookcase .description {

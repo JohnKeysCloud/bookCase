@@ -140,16 +140,27 @@ function Book(title, author, pages, read, cover) {
     this.cover = cover;
 }
 
-function toggleReadStatus(e) {
-    this.read
+Book.prototype.toggleReadStatus = function () {
+    this.read === false ? (this.read = true) : (this.read = false);
+};
+
+function findBookObject() {
+    let targetedBookTitle = this.parentNode.parentNode.querySelector('.bookcase-title').textContent;
+
+    for (let i = 0; i < bookCaseArray.length; i++) {
+        console.log(bookCaseArray[i]);
+        if (bookCaseArray[i].title === targetedBookTitle) {
+            bookCaseArray[i].toggleReadStatus();
+            console.log(bookCaseArray[i]);
+        }
+    }
+    populateBookCase();
 }
 
 function removeBookFromCase() {
     let targetedBookTitle = this.parentNode.parentNode.querySelector('.bookcase-title').textContent;
-    console.log(1, targetedBookTitle);
     // ? why does this work?
     bookCaseArray.splice(bookCaseArray.indexOf(targetedBookTitle), 1);
-    console.log(2, bookCaseArray);
     populateBookCase();
 }
 
@@ -158,7 +169,7 @@ function addEventListeners() {
     const removeBookBtns = document.querySelectorAll('.book-card-btn:nth-of-type(2)');
     
     for (let i = 0; i < readToggleBtns.length; ++i) {
-        readToggleBtns[i].addEventListener('click', toggleReadStatus);
+        readToggleBtns[i].addEventListener('click', findBookObject);
         removeBookBtns[i].addEventListener('click', removeBookFromCase);
     }
 }
@@ -202,7 +213,8 @@ function populateBookCase() {
 
         const descriptionListFragment = document.createDocumentFragment();
         for (info in book) {
-            if (info === 'cover') continue;
+            if (info === 'cover' || info === 'toggleReadStatus') continue;
+        
             const description = document.createElement('dd');
             const descriptionDiv = document.createElement('div');
             const descriptionTerm = document.createElement('dt');
@@ -223,7 +235,7 @@ function populateBookCase() {
                     description.innerHTML = `<span class="book-info bookcase-page-amount">${book.pages}</span> pages`;
                     break;
                 case 'read':
-                    description.innerHTML = readInput.checked === true
+                    description.innerHTML = book.read === true
                         ? '<span class="book-info bookcase-read-status">Status:</span> Read'
                         : '<span class="book-info bookcase-read-status">Status:</span> Unread';
                     break;
