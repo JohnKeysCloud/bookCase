@@ -11,6 +11,7 @@ const searchInput = document.getElementById('search-input');
 const searchCloseBtn = document.getElementById('search-close-btn');
 const modalCloseBtn = document.getElementById('modal-close-btn');
 const bookCase = document.getElementById('bookcase');
+const bookCaseEmpty = document.getElementById('bookcase-empty');
 
 const titleInput = document.getElementById('title');
 const authorInput = document.getElementById('author');
@@ -148,10 +149,8 @@ function findBookObject() {
     let targetedBookTitle = this.parentNode.parentNode.querySelector('.bookcase-title').textContent;
 
     for (let i = 0; i < bookCaseArray.length; i++) {
-        console.log(bookCaseArray[i]);
         if (bookCaseArray[i].title === targetedBookTitle) {
             bookCaseArray[i].toggleReadStatus();
-            console.log(bookCaseArray[i]);
         }
     }
     populateBookCase();
@@ -285,7 +284,6 @@ function initializeNewBook(e) {
     bookCaseArray.push(newBook);
 
     populateBookCase();
-
     animateModalClose();
 }
 
@@ -301,3 +299,4 @@ openDialogBtn.addEventListener('click', openAddBookModal);
 searchCloseBtn.addEventListener('click', closeSearchInput);
 modalCloseBtn.addEventListener('click', animateModalClose);
 addBookBtn.addEventListener('click', initializeNewBook);
+bookCaseEmpty.addEventListener('click', openAddBookModal);

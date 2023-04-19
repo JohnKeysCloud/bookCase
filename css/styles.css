@@ -83,7 +83,7 @@
 }
 
 h3 {
-  font-family: 'Cyclone', sans-serif;
+  font-family: 'Cyclone', monospace;
   font-size: clamp(1.875rem, 4vw, 2.125rem);
 }
 
@@ -163,7 +163,7 @@ header #header-left {
 }
 
 header #header-left #header-logo {
-  font-family: 'Cyclone';
+  font-family: 'Cyclone', monospace;
 	font-size: 2.5rem;
 	padding-bottom: 7px;
 }
@@ -423,6 +423,10 @@ main #controls #add-book-container #add-book-modal #top-modal {
 
 }
 
+main #controls #add-book-container #add-book-modal #top-modal #modal-header {
+  font-size: 3rem;
+}
+
 main #controls #add-book-container #add-book-modal ::placeholder {
   color: var(--color-secondary);
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -445,9 +449,8 @@ main #controls #add-book-container #add-book-modal .input-wrapper {
 
 main #controls #add-book-container #add-book-modal .input-label {
   display: grid;
-  font-family: 'Cyclone', sans-serif;
+  font-family: 'Cyclone', monospace;
   font-size: 1.313rem;
-  /* letter-spacing: 1px; */
   padding-bottom: 3px;
 }
 
@@ -455,14 +458,17 @@ main #controls #add-book-container #add-book-modal #modal-close-btn {
   color: var(--color-secondary);
   cursor: pointer;
   font-size: 1.5rem;
+  outline: none;
   position: absolute;
   right: 25px;
   top: 15px;
   transition: all 333ms ease-in-out;
 }
 
+main #controls #add-book-container #add-book-modal #modal-close-btn:focus-within,
 main #controls #add-book-container #add-book-modal #modal-close-btn:hover {
-  transform: scale(1.1) rotate(90deg);
+  color: red;
+  transform: scale(1.2) rotate(90deg);
 }
 
 main #controls #add-book-container #add-book-modal form {
@@ -657,6 +663,7 @@ main #controls #search-form:valid > #search-close-btn {
 }
 
 main #controls #search-form:valid > #search-close-btn:hover {
+  color: red;
 	transform: translateY(-50%) scale(1.1) rotate(90deg);
 }
 
@@ -803,16 +810,101 @@ main {
 
 main #bookcase {
   align-self: start;
-  background-color: var(--color-primary);
+  background: linear-gradient(145deg, #ffffeb, #e6dfc6);
   box-shadow: inset 5px 5px 9px #d4ceb7,
               inset -5px -5px 9px #ffffff;
   display: grid;
   gap: 25px;
   grid-auto-rows: minmax(175px, auto);
   grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
-  min-height: 225px;
+  min-height: 300px;
   padding-block: 25px;
   padding-inline: 3vw;
+  position: relative;
+}
+
+/* * add .emmpty class for when there are no books, and remove it when there are books main #bookcase.empty::before */
+main #bookcase-empty {
+  border-radius: inherit;
+  cursor: pointer;
+  inset: 0;
+  font-family: 'Cyclone', monospace;
+  font-size: clamp(1.875rem, 5vw, 2.5rem);
+  position: absolute;
+  display: grid;
+  grid-template-areas: 'paragraph';
+  place-items: center;
+  z-index: 1;
+} 
+
+main #bookcase-empty:hover::before {
+  opacity: 0.1;
+}
+
+main #bookcase-empty:hover::after {
+  opacity: 1;
+}
+
+main #bookcase-empty:hover p:first-of-type {
+  opacity: 0;
+  transform: scale(0);
+  visibility: hidden;
+}
+
+main #bookcase-empty:hover p:nth-of-type(2) {
+  opacity: 0.7;
+  transform: scale(1);
+  visibility: visible;
+}
+
+main #bookcase-empty::before {
+  background: linear-gradient(to bottom right, cornsilk, #724b3f, black);
+  opacity: 0;
+  border-radius: inherit;
+  content: '';
+  position: absolute;
+  inset: 0;
+  transition: all 222ms ease-in-out;
+  z-index: -1;
+}
+
+main #bookcase-empty::after {
+  border-radius: inherit;
+  box-shadow: inset 0 0 10px #724b3f;
+  content: '';
+  inset: 0;
+  opacity: 0;
+  position: absolute;
+  transition: all 222ms ease-in-out;
+}
+
+main #bookcase-empty p {
+  grid-area: paragraph;
+  opacity: 0.7;
+  transition: all 222ms ease-in-out;
+}
+
+main #bookcase-empty p:nth-of-type(2) {
+  font-size: 3rem;
+  opacity: 0;
+  transform: scale(0);
+  visibility: hidden;
+}
+
+main #bookcase-empty p:nth-of-type(2):hover {
+  opacity: 1;
+  transform: scale(1.3);
+}
+
+main #bookcase-empty #bookcase-empty-periods {
+  font-size: 1.313rem;
+
+}
+
+main #bookcase-empty .add-symbol {
+  font-size: 2rem;
+  vertical-align: 5px;
+  /* text-shadow: 0 0 3px #724b3f; */
 }
 
 main #bookcase .book-card {
