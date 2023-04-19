@@ -116,7 +116,41 @@ button:hover {
   font-style: italic;
 }
 
+.cyclone-c-outline {
+  position: absolute;
+  bottom: 0;
+  height: 700px;
+  width: 700px;
+  fill: #724b3f;
+  opacity: 0.1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0;
+  z-index: -1;
+}
+
 /* DEFAULT gameOver */
+
+@keyframes float {
+  from {
+    transform: translate(-50%, -50%) translateY(-222px)  rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) translateY(222px) rotate(360deg);
+  }
+}
+
+body > .cyclone-c-outline {
+  animation: float 33s linear infinite alternate;
+  opacity: 0.1;
+  transition: opacity 1.21s ease-in;
+}
+
+body:hover > .cyclone-c-outline {
+  animation: float 33s linear infinite alternate;
+  opacity: 0;
+}
 
 body {
 	background-color: var(--color-primary);
@@ -585,20 +619,6 @@ main #controls #add-book-container #add-book-modal form input#read::before {
 
 main #controls #add-book-container #add-book-modal form input#read:checked::before {
   transform: scale(1);
-}
-
-main #controls #add-book-container #add-book-modal #cyclone-c-outline {
-  position: absolute;
-  bottom: 0;
-  height: 700px;
-  width: 700px;
-  fill: #724b3f;
-  opacity: 0.1;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  padding: 0;
-  z-index: -1;
 }
 
 main #controls #add-book-text {

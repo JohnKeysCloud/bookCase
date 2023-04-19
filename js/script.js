@@ -11,7 +11,17 @@ const searchInput = document.getElementById('search-input');
 const searchCloseBtn = document.getElementById('search-close-btn');
 const modalCloseBtn = document.getElementById('modal-close-btn');
 const bookCase = document.getElementById('bookcase');
-const bookCaseEmpty = document.getElementById('bookcase-empty');
+
+const bookCaseEmptyDiv = document.createElement('div');
+const bookCaseEmptyDivP = document.createElement('p');
+const bookCaseEmptyDivP2 = document.createElement('p')
+bookCaseEmptyDiv.setAttribute('id', 'bookcase-empty');
+bookCaseEmptyDivP.classList.add('no-select');
+bookCaseEmptyDivP.innerHTML = 'your bookcase is empty<span id="bookcase-empty-periods">...</span> read a book ♡';
+bookCaseEmptyDivP2.classList.add('no-select');
+bookCaseEmptyDivP2.innerHTML = '<span class="add-symbol">⨭</span> Click to Add';
+bookCaseEmptyDiv.append(bookCaseEmptyDivP, bookCaseEmptyDivP2);
+bookCase.append(bookCaseEmptyDiv);
 
 const titleInput = document.getElementById('title');
 const authorInput = document.getElementById('author');
@@ -160,7 +170,13 @@ function removeBookFromCase() {
     let targetedBookTitle = this.parentNode.parentNode.querySelector('.bookcase-title').textContent;
     // ? why does this work?
     bookCaseArray.splice(bookCaseArray.indexOf(targetedBookTitle), 1);
-    populateBookCase();
+
+    if (bookCaseArray.length === 0) {
+        populateBookCase();
+        bookCase.appendChild(bookCaseEmptyDiv);
+    } else {
+        populateBookCase();
+    }
 }
 
 function addEventListeners() {
@@ -299,4 +315,4 @@ openDialogBtn.addEventListener('click', openAddBookModal);
 searchCloseBtn.addEventListener('click', closeSearchInput);
 modalCloseBtn.addEventListener('click', animateModalClose);
 addBookBtn.addEventListener('click', initializeNewBook);
-bookCaseEmpty.addEventListener('click', openAddBookModal);
+bookCaseEmptyDiv.addEventListener('click', openAddBookModal);
