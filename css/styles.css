@@ -376,6 +376,7 @@ main #controls #add-book-container #add-book-modal {
   border: 2px solid #724b3f;
   border-radius: 50px;
   color: var(--color-secondary);
+  overflow: hidden;
   padding: 10px 25px;
   position: fixed;
   width: min(88vw, 550px);
@@ -424,12 +425,11 @@ main #controls #add-book-container #add-book-modal #top-modal {
 
 main #controls #add-book-container #add-book-modal ::placeholder {
   color: var(--color-secondary);
-  font-family: 'Cyclone';
-  font-size: 1.313rem;
-  letter-spacing: 1px;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 0.8313rem;
   opacity: 0.7;
   text-align: center;
-  transform: translateY(3px);
+  /* transform: translateY(10px); */
 }
 
 main #controls #add-book-container #add-book-modal form input:not([type='checkbox']):focus::placeholder {
@@ -438,19 +438,17 @@ main #controls #add-book-container #add-book-modal form input:not([type='checkbo
 
 main #controls #add-book-container #add-book-modal .input-wrapper {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  /* * ⬇️ if modal labels are visible ⬇️ * */
-  /* gap: 5px; */
+  gap: 8px;
 }
 
 main #controls #add-book-container #add-book-modal .input-label {
   display: grid;
   font-family: 'Cyclone', sans-serif;
   font-size: 1.313rem;
-  letter-spacing: 1px;
-  padding-bottom: 5px;
-  width: 55px;
+  /* letter-spacing: 1px; */
+  padding-bottom: 3px;
 }
 
 main #controls #add-book-container #add-book-modal #modal-close-btn {
@@ -493,13 +491,13 @@ main #controls #add-book-container #add-book-modal form #author-input {
 main #controls #add-book-container #add-book-modal form #bottom-modal {
   display: flex;
   justify-content: center;
-  gap: 16px;
+  gap: 50px;
   grid-area: bottomModal;
   width: 100%;
 }
 
 main #controls #add-book-container #add-book-modal form #bottom-modal #pages-input input {
-  width: 75px;
+  width: 100px;
 }
 
 main #controls #add-book-container #add-book-modal form #book-cover-input {
@@ -507,6 +505,7 @@ main #controls #add-book-container #add-book-modal form #book-cover-input {
 }
 
 main #controls #add-book-container #add-book-modal form #add-book-btn {
+  background-color: cornsilk;
   border-radius: 25px;
   border: 1px solid var(--color-secondary);
   color: var(--color-secondary);
@@ -562,10 +561,9 @@ main #controls #add-book-container #add-book-modal form input#read {
   border: 1px solid var(--color-secondary);
   border-radius: 50%;
   display: grid;
-  margin: 0;
-  height: 25px;
+  height: 35px;
   place-items: center;
-  width: 25px;
+  width: 35px;
 }
 
 main #controls #add-book-container #add-book-modal form input#read::before {
@@ -581,6 +579,20 @@ main #controls #add-book-container #add-book-modal form input#read::before {
 
 main #controls #add-book-container #add-book-modal form input#read:checked::before {
   transform: scale(1);
+}
+
+main #controls #add-book-container #add-book-modal #cyclone-c-outline {
+  position: absolute;
+  bottom: 0;
+  height: 700px;
+  width: 700px;
+  fill: #724b3f;
+  opacity: 0.1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0;
+  z-index: -1;
 }
 
 main #controls #add-book-text {
