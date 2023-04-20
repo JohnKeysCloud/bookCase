@@ -141,14 +141,20 @@ button:hover {
   }
 }
 
-body > .cyclone-c-outline {
+#cyclone-wrapper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+#cyclone-wrapper .cyclone-c-outline {
   animation: float 33s linear infinite alternate;
   opacity: 0.1;
   transition: opacity 1.21s ease-in;
 }
 
-body:hover > .cyclone-c-outline {
-  animation: float 33s linear infinite alternate;
+body:hover #cyclone-wrapper .cyclone-c-outline {
   opacity: 0;
 }
 
