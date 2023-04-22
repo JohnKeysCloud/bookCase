@@ -21,7 +21,6 @@ bookCaseEmptyDivP.innerHTML = 'your bookcase is empty<span id="bookcase-empty-pe
 bookCaseEmptyDivP2.classList.add('no-select');
 bookCaseEmptyDivP2.innerHTML = '<span class="add-symbol">⨭</span> Click to Add';
 bookCaseEmptyDiv.append(bookCaseEmptyDivP, bookCaseEmptyDivP2);
-bookCase.append(bookCaseEmptyDiv);
 
 const titleInput = document.getElementById('title');
 const authorInput = document.getElementById('author');
@@ -44,137 +43,6 @@ menuBtn.addEventListener('click', () => {
         menuOpen = false;
     }
 }); 
-
-// ! ---------------------------------------------------
-// * REVIEW 
-
-let selectContainers = document.getElementsByClassName('custom-select');
-let selectedOptionDiv = document.createElement('div');
-
-function applySorting() {
-    let sortSelectValue = sortSelect.options[sortSelect.selectedIndex].value;
-
-    switch (sortSelectValue) {
-        case 'title':
-            bookCaseArray.sort((a, b) => a.title < b.title ? -1 : 1);
-            break;
-        case 'author':
-            bookCaseArray.sort((a, b) => a.author < b.author ? -1 : 1);
-            break;
-        case 'pages':
-            bookCaseArray.sort((a, b) => +a.pages > +b.pages ? -1 : 1);
-            break;
-        case 'unread':
-            bookCaseArray.sort((a, b) => a.read === false ? -1 : 1);
-            break;
-    } 
-
-    // ? save to local storage and repopulate bookcase
-    localStorage.setItem('sortBy', JSON.stringify(sortSelectValue));
-
-    populateBookCase();
-}
-
-// ? look for any elements with the class 'custom-select':
-for (let i = 0; i < selectContainers.length; i++) {
-    let selectElement = selectContainers[i].getElementsByTagName('select')[0];
-    // ? for each element, create a new DIV that will contain the option list:
-    let optionsList = document.createElement('ul');
-    
-    // ? for each element, create a new DIV that will act as the selected item:
-    selectedOptionDiv.setAttribute('class', 'select-selected');
-    selectedOptionDiv.setAttribute('tabindex', '0');
-
-    selectedOptionDiv.innerHTML = selectElement.options[selectElement.selectedIndex].innerHTML;
-    selectContainers[i].appendChild(selectedOptionDiv);
-    
-    optionsList.setAttribute('class', 'select-items select-hide');
-
-    for (let j = 1; j < selectElement.length; j++) {
-        // ? for each option in the original select element, create a new DIV that will act as an option item:
-        let optionsListItem = document.createElement('li');
-        optionsListItem.setAttribute('tabindex', '0');
-        optionsListItem.innerHTML = selectElement.options[j].innerHTML;
-
-        optionsListItem.addEventListener('click', function(e) {
-            // ? when an item is clicked, update the original select box, and the selected item:
-            let currentSelectedLiElem = this.parentNode.getElementsByClassName('same-as-selected');
-            let listItemParent = this.parentNode.parentNode.getElementsByTagName('select')[0];
-            let currentSelectedDiv = this.parentNode.previousSibling;
-
-            if (bookCaseArray.length === 0) {
-                return alert('Your bookcase is empty though… How? 🤔');
-            } else if (bookCaseArray.length === 1) {
-                return alert('You can\'t sort one book, you silly duck 🦆');
-            }
-
-            for (let i = 0; i < listItemParent.length; i++) {
-                if (listItemParent.options[i].innerHTML === this.innerHTML) {
-                    listItemParent.selectedIndex = i;
-                    currentSelectedDiv.innerHTML = this.innerHTML;
-                    
-                    for (let k = 0; k < currentSelectedLiElem.length; k++) {
-                        currentSelectedLiElem[k].removeAttribute('class');
-                    }
-                    this.setAttribute('class', 'same-as-selected');
-                    break;
-                }
-
-            }
-            currentSelectedDiv.click();
-            applySorting();
-        });
-        optionsList.appendChild(optionsListItem);
-    }
-    selectContainers[i].appendChild(optionsList);
-
-    selectedOptionDiv.addEventListener('click', function(e) {
-        // ? when the select box is clicked, close any other select boxes, and open/close the current select box:*
-        e.stopPropagation();
-        closeAllSelect(this);
-        this.nextSibling.classList.toggle('select-hide');
-        this.classList.toggle('select-arrow-active');
-    });
-}
-
-selectedOptionDiv.addEventListener('keydown', function (e) {
-    console.log(e.key);
-    if (e.key === 'Enter' && document.activeElement === selectedOptionDiv) {
-        this.click();
-    }
-
-    // ! add keydown event listener to each li => goes to next sibling => enter simulates click
-
-    if (e.key === 'ArrowDown') {
-        console.log(this.nextSibling.firstChild);
-        this.nextSibling.firstChild.focus();
-    }
-});
-
-function closeAllSelect(currentSelectedDivOption) {
-    // ? a function that will close all select boxes in the document, except the current select box:
-    var arrNo = [];
-    let customSelectULs = document.getElementsByClassName('select-items');
-    let allSelectedDivOptions = document.getElementsByClassName('select-selected');
-
-    for (let i = 0; i < allSelectedDivOptions.length; i++) {
-        if (currentSelectedDivOption === allSelectedDivOptions[i]) {
-            arrNo.push(i)
-        } else {
-            allSelectedDivOptions[i].classList.remove('select-arrow-active');
-        }
-    }
-
-    for (let i = 0; i < customSelectULs.length; i++) {
-        if (arrNo.indexOf(i)) {
-        customSelectULs[i].classList.add('select-hide');
-        }
-    }
-}
-// ? if the user clicks anywhere outside the select box, then close all select boxes:
-document.addEventListener('click', closeAllSelect);
-
-// ! ---------------------------------------------------
 
 function sortBooks() {
     switch (sortSelect.value) {
@@ -400,6 +268,141 @@ if (localStorage.getItem('bookCaseArray')) {
 } else {
     bookCaseArray = [];
 }
+
+if (bookCaseArray.length === 0) {
+    bookCase.append(bookCaseEmptyDiv);
+}
+
+// ! ---------------------------------------------------
+// * REVIEW 
+
+let selectContainers = document.getElementsByClassName('custom-select');
+let selectedOptionDiv = document.createElement('div');
+
+function applySorting() {
+    let sortSelectValue = sortSelect.options[sortSelect.selectedIndex].value;
+
+    switch (sortSelectValue) {
+        case 'title':
+            bookCaseArray.sort((a, b) => a.title < b.title ? -1 : 1);
+            break;
+        case 'author':
+            bookCaseArray.sort((a, b) => a.author < b.author ? -1 : 1);
+            break;
+        case 'pages':
+            bookCaseArray.sort((a, b) => +a.pages > +b.pages ? -1 : 1);
+            break;
+        case 'unread':
+            bookCaseArray.sort((a, b) => a.read === false ? -1 : 1);
+            break;
+    } 
+
+    // ? save to local storage and repopulate bookcase
+    localStorage.setItem('sortBy', JSON.stringify(sortSelectValue));
+
+    populateBookCase();
+}
+
+// ? look for any elements with the class 'custom-select':
+for (let i = 0; i < selectContainers.length; i++) {
+    let selectElement = selectContainers[i].getElementsByTagName('select')[0];
+    // ? for each element, create a new DIV that will contain the option list:
+    let optionsList = document.createElement('ul');
+    
+    // ? for each element, create a new DIV that will act as the selected item:
+    selectedOptionDiv.setAttribute('class', 'select-selected');
+    selectedOptionDiv.setAttribute('tabindex', '0');
+
+    selectedOptionDiv.innerHTML = selectElement.options[selectElement.selectedIndex].innerHTML;
+    selectContainers[i].appendChild(selectedOptionDiv);
+    
+    optionsList.setAttribute('class', 'select-items select-hide');
+
+    for (let j = 1; j < selectElement.length; j++) {
+        // ? for each option in the original select element, create a new DIV that will act as an option item:
+        let optionsListItem = document.createElement('li');
+        optionsListItem.setAttribute('tabindex', '0');
+        optionsListItem.innerHTML = selectElement.options[j].innerHTML;
+
+        optionsListItem.addEventListener('click', function(e) {
+            // ? when an item is clicked, update the original select box, and the selected item:
+            let currentSelectedLiElem = this.parentNode.getElementsByClassName('same-as-selected');
+            let listItemParent = this.parentNode.parentNode.getElementsByTagName('select')[0];
+            let currentSelectedDiv = this.parentNode.previousSibling;
+
+            if (bookCaseArray.length === 0) {
+                return alert('Your bookcase is empty though… How? 🤔');
+            } else if (bookCaseArray.length === 1) {
+                return alert('You can\'t sort one book, you silly duck 🦆');
+            }
+
+            for (let i = 0; i < listItemParent.length; i++) {
+                if (listItemParent.options[i].innerHTML === this.innerHTML) {
+                    listItemParent.selectedIndex = i;
+                    currentSelectedDiv.innerHTML = this.innerHTML;
+                    
+                    for (let k = 0; k < currentSelectedLiElem.length; k++) {
+                        currentSelectedLiElem[k].removeAttribute('class');
+                    }
+                    this.setAttribute('class', 'same-as-selected');
+                    break;
+                }
+
+            }
+            currentSelectedDiv.click();
+            applySorting();
+        });
+        optionsList.appendChild(optionsListItem);
+    }
+    selectContainers[i].appendChild(optionsList);
+
+    selectedOptionDiv.addEventListener('click', function(e) {
+        // ? when the select box is clicked, close any other select boxes, and open/close the current select box:*
+        e.stopPropagation();
+        closeAllSelect(this);
+        this.nextSibling.classList.toggle('select-hide');
+        this.classList.toggle('select-arrow-active');
+    });
+}
+
+selectedOptionDiv.addEventListener('keydown', function (e) {
+    console.log(e.key);
+    if (e.key === 'Enter' && document.activeElement === selectedOptionDiv) {
+        this.click();
+    }
+
+    // ! add keydown event listener to each li => goes to next sibling => enter simulates click
+
+    if (e.key === 'ArrowDown') {
+        console.log(this.nextSibling.firstChild);
+        this.nextSibling.firstChild.focus();
+    }
+});
+
+function closeAllSelect(currentSelectedDivOption) {
+    // ? a function that will close all select boxes in the document, except the current select box:
+    var arrNo = [];
+    let customSelectULs = document.getElementsByClassName('select-items');
+    let allSelectedDivOptions = document.getElementsByClassName('select-selected');
+
+    for (let i = 0; i < allSelectedDivOptions.length; i++) {
+        if (currentSelectedDivOption === allSelectedDivOptions[i]) {
+            arrNo.push(i)
+        } else {
+            allSelectedDivOptions[i].classList.remove('select-arrow-active');
+        }
+    }
+
+    for (let i = 0; i < customSelectULs.length; i++) {
+        if (arrNo.indexOf(i)) {
+        customSelectULs[i].classList.add('select-hide');
+        }
+    }
+}
+// ? if the user clicks anywhere outside the select box, then close all select boxes:
+document.addEventListener('click', closeAllSelect);
+
+// ! ---------------------------------------------------
 
 openDialogBtn.addEventListener('click', openAddBookModal);
 searchCloseBtn.addEventListener('click', closeSearchInput);
