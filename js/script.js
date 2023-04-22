@@ -28,6 +28,7 @@ const authorInput = document.getElementById('author');
 const pagesInput = document.getElementById('pages');
 const readInput = document.getElementById('read');
 const bookCoverInput = document.getElementById('book-cover');
+const sortSelect = document.getElementById('sort-select');
 
 let bookCaseArray = [];
 
@@ -49,6 +50,30 @@ menuBtn.addEventListener('click', () => {
 
 let selectContainers = document.getElementsByClassName('custom-select');
 let selectedOptionDiv = document.createElement('div');
+
+function applySorting() {
+    let sortSelectValue = sortSelect.options[sortSelect.selectedIndex].value;
+
+    switch (sortSelectValue) {
+        case 'title':
+            bookCaseArray.sort((a, b) => a.title < b.title ? -1 : 1);
+            break;
+        case 'author':
+            bookCaseArray.sort((a, b) => a.author < b.author ? -1 : 1);
+            break;
+        case 'pages':
+            bookCaseArray.sort((a, b) => +a.pages > +b.pages ? -1 : 1);
+            break;
+        case 'unread':
+            bookCaseArray.sort((a, b) => a.read === false ? -1 : 1);
+            break;
+    } 
+
+    // ? save to local storage and repopulate bookcase
+    localStorage.setItem('sortBy', JSON.stringify(sortSelectValue));
+
+    populateBookCase();
+}
 
 // ? look for any elements with the class 'custom-select':
 for (let i = 0; i < selectContainers.length; i++) {
@@ -77,6 +102,12 @@ for (let i = 0; i < selectContainers.length; i++) {
             let listItemParent = this.parentNode.parentNode.getElementsByTagName('select')[0];
             let currentSelectedDiv = this.parentNode.previousSibling;
 
+            if (bookCaseArray.length === 0) {
+                return alert('Your bookcase is empty though… How? 🤔');
+            } else if (bookCaseArray.length === 1) {
+                return alert('You can\'t sort one book, you silly duck 🦆');
+            }
+
             for (let i = 0; i < listItemParent.length; i++) {
                 if (listItemParent.options[i].innerHTML === this.innerHTML) {
                     listItemParent.selectedIndex = i;
@@ -88,8 +119,10 @@ for (let i = 0; i < selectContainers.length; i++) {
                     this.setAttribute('class', 'same-as-selected');
                     break;
                 }
+
             }
             currentSelectedDiv.click();
+            applySorting();
         });
         optionsList.appendChild(optionsListItem);
     }
@@ -143,6 +176,26 @@ document.addEventListener('click', closeAllSelect);
 
 // ! ---------------------------------------------------
 
+function sortBooks() {
+    switch (sortSelect.value) {
+        case 'title':
+            bookCaseArray.sort((a, b) => (a.title < b.title) ? -1 : 1);
+            break;
+        case 'author':
+            bookCaseArray.sort((a, b) => (a.author < b.author) ? -1 : 1);
+            break;
+        case 'pages':
+            bookCaseArray.sort((a, b) => (a.pages > b.pages) ? -1 : 1);
+            break;
+        case 'read':
+            bookCaseArray.sort((a) => (a.read === false) ? -1 : 1);
+            break;
+        default:
+            alert('Error #2 - No sorting option selected');
+    }
+    populateBookCase();
+}
+
 function Book(title, author, pages, read, cover) {
     this.title = title;
     this.author = author;
@@ -159,7 +212,10 @@ function findBookObject() {
     let targetedBookTitle = this.parentNode.parentNode.querySelector('.bookcase-title').textContent;
 
     for (let i = 0; i < bookCaseArray.length; i++) {
+        // console.log(bookCaseArray);
+        // console.log(targetedBookTitle);
         if (bookCaseArray[i].title === targetedBookTitle) {
+            console.log(bookCaseArray[i] instanceof Book)
             bookCaseArray[i].toggleReadStatus();
         }
     }
@@ -277,8 +333,11 @@ function populateBookCase() {
 
         bookCase.appendChild(bookCard);
     });
+    
+    addEventListeners();   
 
-    addEventListeners();    
+    // set local storage for bookCaseArray
+    localStorage.setItem('bookCaseArray', JSON.stringify(bookCaseArray));
 }
 
 function closeModal() {
@@ -309,6 +368,37 @@ function openAddBookModal() {
 
 function closeSearchInput(e) {
     searchInput.value = '';
+}
+
+function sortFromLocalStorage() {
+    if (localStorage.getItem('sortBy')) {
+        sortBy = localStorage.getItem('sortBy');
+        
+        console.log(sortBy);
+
+        // ! fix this
+        // ! fix this
+        // ! fix this
+        // loop through select options and set selected option to the one stored in local storage
+        for (let i = 0; i < sortSelect.options.length; ++i) {
+            if (sortSelect.options[i].value === sortBy) {
+                sortSelect.options[i].selected = true;
+            }
+        }
+    }
+}
+
+if (localStorage.getItem('bookCaseArray')) {
+    bookCaseArray = JSON.parse(localStorage.getItem('bookCaseArray'));
+
+    for (let i = 0; i < bookCaseArray.length; ++i) {
+        bookCaseArray[i] = Object.assign(new Book(), bookCaseArray[i]);
+    }
+
+    sortFromLocalStorage();
+    populateBookCase();
+} else {
+    bookCaseArray = [];
 }
 
 openDialogBtn.addEventListener('click', openAddBookModal);
