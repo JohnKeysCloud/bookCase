@@ -1,5 +1,3 @@
-
-
 const bookCase = document.getElementById('bookcase');
 const addBookModal = document.querySelector('dialog');
 
@@ -39,7 +37,7 @@ function Book(title, author, pages, read, cover) {
 
 Book.prototype.toggleReadStatus = function () {
     this.read === false ? (this.read = true) : (this.read = false);
-};appendEmptyBookCaseContent();
+};
 
 function addEventListeners() {
     const readToggleBtns = document.querySelectorAll('.book-card-btn:first-of-type');
@@ -232,7 +230,19 @@ function applySorting() {
     populateBookCase();
 }
 
-// ! break this up
+function checkSortPossibility() {
+    if (bookCaseArray.length === 0) {
+        alert('Your bookcase is empty though… How? 🤔');
+        return false
+    } else if (bookCaseArray.length === 1) {
+        alert('You can\'t sort one book… you silly goose 🤓');
+        return false
+    } else {
+        return true;
+    } 
+}
+
+// ! break this up and refactor?
 function initializeSelectElements() { 
     // ? look for any elements with the class 'custom-select':
     for (let i = 0; i < selectContainers.length; i++) {
@@ -260,12 +270,8 @@ function initializeSelectElements() {
                 let currentSelectedLiElem = this.parentNode.getElementsByClassName('same-as-selected');
                 let listItemParent = this.parentNode.parentNode.getElementsByTagName('select')[0];
                 let currentSelectedDiv = this.parentNode.previousSibling;
-
-                if (bookCaseArray.length === 0) {
-                    return alert('Your bookcase is empty though… How? 🤔');
-                } else if (bookCaseArray.length === 1) {
-                    return alert('You can\'t sort one book, you silly duck 🦆');
-                }
+                
+                if (!checkSortPossibility()) return;
 
                 for (let i = 0; i < listItemParent.length; i++) {
                     if (listItemParent.options[i].innerHTML === this.innerHTML) {
@@ -278,11 +284,34 @@ function initializeSelectElements() {
                         this.setAttribute('class', 'same-as-selected');
                         break;
                     }
-
                 }
+
                 currentSelectedDiv.click();
                 applySorting();
             });
+
+            optionsListItem.addEventListener('keydown', function (e) {
+                // ? prevents scrolling when using arrow keys & also allows for using enter key to select an option
+                e.preventDefault();
+
+                if (e.key === 'Enter') {
+                    this.click();
+                }
+        
+                if (e.key === 'ArrowDown') {
+                    if (!this.nextSibling) return;
+                    this.nextSibling.focus();
+                }
+
+                if (e.key === 'ArrowUp') {
+                    if (!this.previousSibling) {
+                        this.parentNode.previousSibling.focus();
+                        return;
+                    };
+                    this.previousSibling.focus();
+                }
+            });
+            
             optionsList.appendChild(optionsListItem);
         }
         selectContainers[i].appendChild(optionsList);
@@ -297,17 +326,18 @@ function initializeSelectElements() {
     }
 
     selectedOptionDiv.addEventListener('keydown', function (e) {
-        console.log(e.key);
-        if (e.key === 'Enter' && document.activeElement === selectedOptionDiv) {
+        // ? prevents scrolling when using arrow keys & also allows for using enter key to select an option
+        if (e.key !== 'Tab') e.preventDefault(); 
+
+        // ? if select arrow is active, close the select box and tab to the next element
+        if (e.key === 'Tab' && this.classList.contains('select-arrow-active')) {
             this.click();
-        }
-
-        // ! add keydown event listener to each li => goes to next sibling => enter simulates click
-
-        if (e.key === 'ArrowDown') {
-            console.log(this.nextSibling.firstChild);
             this.nextSibling.firstChild.focus();
         }
+        
+        if (e.key === 'Enter') this.click();
+        
+        if (e.key === 'ArrowDown') this.nextSibling.firstChild.focus();
     });
 }
 
@@ -332,6 +362,7 @@ function closeAllSelect(currentSelectedDivOption) {
     }
 }
 
+// ! fix this
 function changeSelectedSortDivFromLocalStorage() {
     if (localStorage.getItem('sortBy')) {
         sortBy = localStorage.getItem('sortBy');
@@ -350,7 +381,6 @@ function changeSelectedSortDivFromLocalStorage() {
 function loadLocalStorage() {
     if (localStorage.getItem('bookCaseArray')) {
         bookCaseArray = JSON.parse(localStorage.getItem('bookCaseArray'));
-        console.log('bug found')
 
         for (let i = 0; i < bookCaseArray.length; ++i) {
             bookCaseArray[i] = Object.assign(new Book(), bookCaseArray[i]);
@@ -359,6 +389,8 @@ function loadLocalStorage() {
         // ! fix this
         // changeSelectedSortDivFromLocalStorage();
         populateBookCase();
+    } else {
+        appendEmptyBookCaseContent();
     }
 }
 
