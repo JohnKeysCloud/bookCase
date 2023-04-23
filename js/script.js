@@ -1,69 +1,34 @@
-const body = document.body;
-const header = document.createElement('header');
-const main = document.createElement('main');
-const footer = document.createElement('footer');
 
+
+const bookCase = document.getElementById('bookcase');
 const addBookModal = document.querySelector('dialog');
-const openDialogBtn = document.getElementById('open-dialog-btn');
+
+// * buttons
+const menuBtn = document.getElementById('menu-btn');
 const addBookBtn = document.getElementById('add-book-btn');
-const addBookForm = document.getElementById('add-book-form');
-const searchInput = document.getElementById('search-input');
+const openDialogBtn = document.getElementById('open-dialog-btn');
 const searchCloseBtn = document.getElementById('search-close-btn');
 const modalCloseBtn = document.getElementById('modal-close-btn');
-const bookCase = document.getElementById('bookcase');
 
-const bookCaseEmptyDiv = document.createElement('div');
-const bookCaseEmptyDivP = document.createElement('p');
-const bookCaseEmptyDivP2 = document.createElement('p')
-bookCaseEmptyDiv.setAttribute('id', 'bookcase-empty');
-bookCaseEmptyDivP.classList.add('no-select');
-bookCaseEmptyDivP.innerHTML = 'your bookcase is empty<span id="bookcase-empty-periods">...</span> read a book ♡';
-bookCaseEmptyDivP2.classList.add('no-select');
-bookCaseEmptyDivP2.innerHTML = '<span class="add-symbol">⨭</span> Click to Add';
-bookCaseEmptyDiv.append(bookCaseEmptyDivP, bookCaseEmptyDivP2);
-
-const titleInput = document.getElementById('title');
+// * forms & inputs 
+const addBookForm = document.getElementById('add-book-form');
 const authorInput = document.getElementById('author');
+const bookCoverInput = document.getElementById('book-cover');
 const pagesInput = document.getElementById('pages');
 const readInput = document.getElementById('read');
-const bookCoverInput = document.getElementById('book-cover');
+const searchInput = document.getElementById('search-input');
 const sortSelect = document.getElementById('sort-select');
+const titleInput = document.getElementById('title');
+
+// * created elements
+const bookCaseEmptyDiv = document.createElement('div');
+const bookCaseEmptyDivP = document.createElement('p');
+const bookCaseEmptyDivP2 = document.createElement('p');
+const selectedOptionDiv = document.createElement('div');
+
+const selectContainers = document.getElementsByClassName('custom-select');
 
 let bookCaseArray = [];
-
-const menuBtn = document.querySelector('#menu-btn');
-let menuOpen = false;
-
-menuBtn.addEventListener('click', () => {
-    if (!menuOpen) {
-        menuBtn.classList.add('open');
-        menuOpen = true;
-    } else {
-        menuBtn.classList.remove('open');
-        menuOpen = false;
-    }
-}); 
-
-function sortBooks() {
-    switch (sortSelect.value) {
-        case 'title':
-            bookCaseArray.sort((a, b) => (a.title < b.title) ? -1 : 1);
-            break;
-        case 'author':
-            bookCaseArray.sort((a, b) => (a.author < b.author) ? -1 : 1);
-            break;
-        case 'pages':
-            bookCaseArray.sort((a, b) => (a.pages > b.pages) ? -1 : 1);
-            break;
-        case 'read':
-            bookCaseArray.sort((a) => (a.read === false) ? -1 : 1);
-            break;
-        default:
-            alert('Error #2 - No sorting option selected');
-    }
-    populateBookCase();
-}
-
 function Book(title, author, pages, read, cover) {
     this.title = title;
     this.author = author;
@@ -74,34 +39,7 @@ function Book(title, author, pages, read, cover) {
 
 Book.prototype.toggleReadStatus = function () {
     this.read === false ? (this.read = true) : (this.read = false);
-};
-
-function findBookObject() {
-    let targetedBookTitle = this.parentNode.parentNode.querySelector('.bookcase-title').textContent;
-
-    for (let i = 0; i < bookCaseArray.length; i++) {
-        // console.log(bookCaseArray);
-        // console.log(targetedBookTitle);
-        if (bookCaseArray[i].title === targetedBookTitle) {
-            console.log(bookCaseArray[i] instanceof Book)
-            bookCaseArray[i].toggleReadStatus();
-        }
-    }
-    populateBookCase();
-}
-
-function removeBookFromCase() {
-    let targetedBookTitle = this.parentNode.parentNode.querySelector('.bookcase-title').textContent;
-    // ? why does this work?
-    bookCaseArray.splice(bookCaseArray.indexOf(targetedBookTitle), 1);
-
-    if (bookCaseArray.length === 0) {
-        populateBookCase();
-        bookCase.appendChild(bookCaseEmptyDiv);
-    } else {
-        populateBookCase();
-    }
-}
+};appendEmptyBookCaseContent();
 
 function addEventListeners() {
     const readToggleBtns = document.querySelectorAll('.book-card-btn:first-of-type');
@@ -118,16 +56,16 @@ function populateBookCase() {
     bookCaseArray.forEach( book => {
         const bookCard = document.createElement('article');
         const bookImg = document.createElement('img');
-        const bookImgWrapper = document.createElement('div');
         const bookImgDefaultSource = '../assets/images/book-case/no-image-placeholder.svg';
-        const changeReadStatus = document.createElement('button');
-        const descriptionList = document.createElement('dl');
-        const descriptionWrapper = document.createElement('div');
+        const bookImgWrapper = document.createElement('div');
         const bottomBookCardDiv = document.createElement('div');
-        const removeBookBtn = document.createElement('button');
+        const changeReadStatus = document.createElement('button');
         const dateAddedDiv = document.createElement('div');
         const dateTime = document.createElement('time');
-
+        const descriptionList = document.createElement('dl');
+        const descriptionWrapper = document.createElement('div');
+        const removeBookBtn = document.createElement('button');
+        
         const today = new Date().toLocaleDateString();
         let todaySplit = today.split('/');
         [todaySplit[0], todaySplit[1], todaySplit[2]] = [todaySplit[2], todaySplit[0], todaySplit[1]];
@@ -204,20 +142,54 @@ function populateBookCase() {
     
     addEventListeners();   
 
-    // set local storage for bookCaseArray
-    localStorage.setItem('bookCaseArray', JSON.stringify(bookCaseArray));
+    bookCaseArray.length > 0
+        ? localStorage.setItem('bookCaseArray', JSON.stringify(bookCaseArray))
+        : localStorage.removeItem('bookCaseArray');
 }
 
-function closeModal() {
+function findBookObject() {
+    let targetedBookTitle = this.parentNode.parentNode.querySelector('.bookcase-title').textContent;
+
+    for (let i = 0; i < bookCaseArray.length; i++) {
+        if (bookCaseArray[i].title === targetedBookTitle) {
+            console.log(bookCaseArray[i] instanceof Book)
+            bookCaseArray[i].toggleReadStatus();
+        }
+    }
+    populateBookCase();
+}
+
+function appendEmptyBookCaseContent() {
+    if (bookCaseArray.length !== 0) return;
+    bookCaseEmptyDiv.setAttribute('id', 'bookcase-empty');
+    bookCaseEmptyDivP.classList.add('no-select');
+    bookCaseEmptyDivP.innerHTML = 'your bookcase is empty<span id="bookcase-empty-periods">...</span> read a book ♡';
+    bookCaseEmptyDivP2.classList.add('no-select');
+    bookCaseEmptyDivP2.innerHTML = '<span class="add-symbol">⨭</span> Click to Add';
+    bookCaseEmptyDiv.append(bookCaseEmptyDivP, bookCaseEmptyDivP2);
+        
+    bookCase.append(bookCaseEmptyDiv);
+}
+
+function removeBookFromCase() {
+    let targetedBookTitle = this.parentNode.parentNode.querySelector('.bookcase-title').textContent;
+    // ? why does this work?
+    bookCaseArray.splice(bookCaseArray.indexOf(targetedBookTitle), 1);
+
+    populateBookCase();
+    appendEmptyBookCaseContent();
+}
+
+function closeAddBookModal() {
     addBookModal.classList.toggle('is-hidden');
     addBookModal.close();
     addBookForm.reset();
-    addBookModal.removeEventListener('animationend', closeModal);
+    addBookModal.removeEventListener('animationend', closeAddBookModal);
 }
 
 function animateModalClose() {
     addBookModal.classList.toggle('is-hidden');
-    addBookModal.addEventListener('animationend', closeModal);
+    addBookModal.addEventListener('animationend', closeAddBookModal);
 }
 
 function initializeNewBook(e) {
@@ -238,47 +210,6 @@ function closeSearchInput(e) {
     searchInput.value = '';
 }
 
-function sortFromLocalStorage() {
-    if (localStorage.getItem('sortBy')) {
-        sortBy = localStorage.getItem('sortBy');
-        
-        console.log(sortBy);
-
-        // ! fix this
-        // ! fix this
-        // ! fix this
-        // loop through select options and set selected option to the one stored in local storage
-        for (let i = 0; i < sortSelect.options.length; ++i) {
-            if (sortSelect.options[i].value === sortBy) {
-                sortSelect.options[i].selected = true;
-            }
-        }
-    }
-}
-
-if (localStorage.getItem('bookCaseArray')) {
-    bookCaseArray = JSON.parse(localStorage.getItem('bookCaseArray'));
-
-    for (let i = 0; i < bookCaseArray.length; ++i) {
-        bookCaseArray[i] = Object.assign(new Book(), bookCaseArray[i]);
-    }
-
-    sortFromLocalStorage();
-    populateBookCase();
-} else {
-    bookCaseArray = [];
-}
-
-if (bookCaseArray.length === 0) {
-    bookCase.append(bookCaseEmptyDiv);
-}
-
-// ! ---------------------------------------------------
-// * REVIEW 
-
-let selectContainers = document.getElementsByClassName('custom-select');
-let selectedOptionDiv = document.createElement('div');
-
 function applySorting() {
     let sortSelectValue = sortSelect.options[sortSelect.selectedIndex].value;
 
@@ -297,87 +228,88 @@ function applySorting() {
             break;
     } 
 
-    // ? save to local storage and repopulate bookcase
     localStorage.setItem('sortBy', JSON.stringify(sortSelectValue));
-
     populateBookCase();
 }
 
-// ? look for any elements with the class 'custom-select':
-for (let i = 0; i < selectContainers.length; i++) {
-    let selectElement = selectContainers[i].getElementsByTagName('select')[0];
-    // ? for each element, create a new DIV that will contain the option list:
-    let optionsList = document.createElement('ul');
-    
-    // ? for each element, create a new DIV that will act as the selected item:
-    selectedOptionDiv.setAttribute('class', 'select-selected');
-    selectedOptionDiv.setAttribute('tabindex', '0');
+// ! break this up
+function initializeSelectElements() { 
+    // ? look for any elements with the class 'custom-select':
+    for (let i = 0; i < selectContainers.length; i++) {
+        let selectElement = selectContainers[i].getElementsByTagName('select')[0];
+        // ? for each element, create a new DIV that will contain the option list:
+        let optionsList = document.createElement('ul');
 
-    selectedOptionDiv.innerHTML = selectElement.options[selectElement.selectedIndex].innerHTML;
-    selectContainers[i].appendChild(selectedOptionDiv);
-    
-    optionsList.setAttribute('class', 'select-items select-hide');
+        // ? for each element, create a new DIV that will act as the selected item:
+        selectedOptionDiv.setAttribute('class', 'select-selected');
+        selectedOptionDiv.setAttribute('tabindex', '0');
 
-    for (let j = 1; j < selectElement.length; j++) {
-        // ? for each option in the original select element, create a new DIV that will act as an option item:
-        let optionsListItem = document.createElement('li');
-        optionsListItem.setAttribute('tabindex', '0');
-        optionsListItem.innerHTML = selectElement.options[j].innerHTML;
+        selectedOptionDiv.innerHTML = selectElement.options[selectElement.selectedIndex].innerHTML;
+        selectContainers[i].appendChild(selectedOptionDiv);
 
-        optionsListItem.addEventListener('click', function(e) {
-            // ? when an item is clicked, update the original select box, and the selected item:
-            let currentSelectedLiElem = this.parentNode.getElementsByClassName('same-as-selected');
-            let listItemParent = this.parentNode.parentNode.getElementsByTagName('select')[0];
-            let currentSelectedDiv = this.parentNode.previousSibling;
+        optionsList.setAttribute('class', 'select-items select-hide');
 
-            if (bookCaseArray.length === 0) {
-                return alert('Your bookcase is empty though… How? 🤔');
-            } else if (bookCaseArray.length === 1) {
-                return alert('You can\'t sort one book, you silly duck 🦆');
-            }
+        for (let j = 1; j < selectElement.length; j++) {
+            // ? for each option in the original select element, create a new DIV that will act as an option item:
+            let optionsListItem = document.createElement('li');
+            optionsListItem.setAttribute('tabindex', '0');
+            optionsListItem.innerHTML = selectElement.options[j].innerHTML;
 
-            for (let i = 0; i < listItemParent.length; i++) {
-                if (listItemParent.options[i].innerHTML === this.innerHTML) {
-                    listItemParent.selectedIndex = i;
-                    currentSelectedDiv.innerHTML = this.innerHTML;
-                    
-                    for (let k = 0; k < currentSelectedLiElem.length; k++) {
-                        currentSelectedLiElem[k].removeAttribute('class');
-                    }
-                    this.setAttribute('class', 'same-as-selected');
-                    break;
+            optionsListItem.addEventListener('click', function(e) {
+                // ? when an item is clicked, update the original select box, and the selected item:
+                let currentSelectedLiElem = this.parentNode.getElementsByClassName('same-as-selected');
+                let listItemParent = this.parentNode.parentNode.getElementsByTagName('select')[0];
+                let currentSelectedDiv = this.parentNode.previousSibling;
+
+                if (bookCaseArray.length === 0) {
+                    return alert('Your bookcase is empty though… How? 🤔');
+                } else if (bookCaseArray.length === 1) {
+                    return alert('You can\'t sort one book, you silly duck 🦆');
                 }
 
-            }
-            currentSelectedDiv.click();
-            applySorting();
-        });
-        optionsList.appendChild(optionsListItem);
-    }
-    selectContainers[i].appendChild(optionsList);
+                for (let i = 0; i < listItemParent.length; i++) {
+                    if (listItemParent.options[i].innerHTML === this.innerHTML) {
+                        listItemParent.selectedIndex = i;
+                        currentSelectedDiv.innerHTML = this.innerHTML;
 
-    selectedOptionDiv.addEventListener('click', function(e) {
-        // ? when the select box is clicked, close any other select boxes, and open/close the current select box:*
-        e.stopPropagation();
-        closeAllSelect(this);
-        this.nextSibling.classList.toggle('select-hide');
-        this.classList.toggle('select-arrow-active');
+                        for (let k = 0; k < currentSelectedLiElem.length; k++) {
+                            currentSelectedLiElem[k].removeAttribute('class');
+                        }
+                        this.setAttribute('class', 'same-as-selected');
+                        break;
+                    }
+
+                }
+                currentSelectedDiv.click();
+                applySorting();
+            });
+            optionsList.appendChild(optionsListItem);
+        }
+        selectContainers[i].appendChild(optionsList);
+
+        selectedOptionDiv.addEventListener('click', function(e) {
+            // ? when the select box is clicked, close any other select boxes, and open/close the current select box:*
+            e.stopPropagation();
+            closeAllSelect(this);
+            this.nextSibling.classList.toggle('select-hide');
+            this.classList.toggle('select-arrow-active');
+        });
+    }
+
+    selectedOptionDiv.addEventListener('keydown', function (e) {
+        console.log(e.key);
+        if (e.key === 'Enter' && document.activeElement === selectedOptionDiv) {
+            this.click();
+        }
+
+        // ! add keydown event listener to each li => goes to next sibling => enter simulates click
+
+        if (e.key === 'ArrowDown') {
+            console.log(this.nextSibling.firstChild);
+            this.nextSibling.firstChild.focus();
+        }
     });
 }
-
-selectedOptionDiv.addEventListener('keydown', function (e) {
-    console.log(e.key);
-    if (e.key === 'Enter' && document.activeElement === selectedOptionDiv) {
-        this.click();
-    }
-
-    // ! add keydown event listener to each li => goes to next sibling => enter simulates click
-
-    if (e.key === 'ArrowDown') {
-        console.log(this.nextSibling.firstChild);
-        this.nextSibling.firstChild.focus();
-    }
-});
 
 function closeAllSelect(currentSelectedDivOption) {
     // ? a function that will close all select boxes in the document, except the current select box:
@@ -399,11 +331,43 @@ function closeAllSelect(currentSelectedDivOption) {
         }
     }
 }
+
+function changeSelectedSortDivFromLocalStorage() {
+    if (localStorage.getItem('sortBy')) {
+        sortBy = localStorage.getItem('sortBy');
+        
+        console.log(sortBy);
+
+        // loop through select options and set selected option to the one stored in local storage
+        for (let i = 0; i < sortSelect.options.length; ++i) {
+            if (sortSelect.options[i].value === sortBy) {
+                sortSelect.options[i].selected = true;
+            }
+        }
+    }
+}
+
+function loadLocalStorage() {
+    if (localStorage.getItem('bookCaseArray')) {
+        bookCaseArray = JSON.parse(localStorage.getItem('bookCaseArray'));
+        console.log('bug found')
+
+        for (let i = 0; i < bookCaseArray.length; ++i) {
+            bookCaseArray[i] = Object.assign(new Book(), bookCaseArray[i]);
+        }
+
+        // ! fix this
+        // changeSelectedSortDivFromLocalStorage();
+        populateBookCase();
+    }
+}
+
+initializeSelectElements();
+loadLocalStorage();
+
 // ? if the user clicks anywhere outside the select box, then close all select boxes:
 document.addEventListener('click', closeAllSelect);
-
-// ! ---------------------------------------------------
-
+menuBtn.addEventListener('click', () => menuBtn.classList.toggle('open'));
 openDialogBtn.addEventListener('click', openAddBookModal);
 searchCloseBtn.addEventListener('click', closeSearchInput);
 modalCloseBtn.addEventListener('click', animateModalClose);
