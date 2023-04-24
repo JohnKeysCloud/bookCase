@@ -1498,6 +1498,11 @@ footer #footer-links a {
     color: var(--color-secondary);
     text-shadow: none;
   }
+
+  footer #footer-links a {
+    color: var(--color-secondary);
+    text-shadow: unset;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
