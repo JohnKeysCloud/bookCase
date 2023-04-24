@@ -978,6 +978,7 @@ main #bookcase .book-card .book-info {
 }
 
 main #bookcase .book-card .book-info[contenteditable='true'] {
+  display: inline-block;
   background-color: white;
   border-radius: 25px;
   box-shadow: inset 6px 6px 12px #dbd5bd, inset -6px -6px 12px #fffffb;
@@ -1011,9 +1012,11 @@ main #bookcase .description-wrapper .bookcase-author-name {
 }
 
 main #bookcase .description-list {
+  align-items: right;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  justify-content: right;
   position: relative;
   transition: all 380ms ease-in-out;
   width: 100%;
@@ -1032,6 +1035,8 @@ main #bookcase .description-term {
 
 main #bookcase .description {
   text-align: right;
+  max-width: 200px;
+  overflow: hidden;
 }
 
 main #bookcase .book-card .bottom-book-card-div {

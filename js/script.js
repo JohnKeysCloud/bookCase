@@ -440,7 +440,24 @@ function loadLocalStorage() {
     }
 }
 
+function search() {
+    let searchValue = searchInput.value.toLowerCase();
+    let bookCards = document.querySelectorAll('.book-card');
 
+    for (let i = 0; i < bookCaseArray.length; ++i) {
+        let bookTitle = bookCaseArray[i].title.toLowerCase();
+        let bookAuthor = bookCaseArray[i].author.toLowerCase();
+
+        if (bookTitle.includes(searchValue) || bookAuthor.includes(searchValue)) {
+            bookCards[i].style.display = 'block';
+        } else {
+            bookCards[i].style.display = 'none';
+        }
+    }
+}
+
+// ! Fix this
+searchInput.addEventListener('keyup', search);
 
 initializeSelectElements();
 loadLocalStorage();
