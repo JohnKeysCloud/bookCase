@@ -651,7 +651,7 @@ main #controls #search-form:valid {
 	background-color: var(--text-input-bg);
 	border-radius: 25px;
   cursor: pointer;
-  width: 200px;
+  width: 155px;
 }
 
 main #controls #search-form:hover #search-input,
@@ -724,15 +724,31 @@ main #controls #search-form .fa-magnifying-glass {
   box-sizing: border-box;
   color: var(--color-secondary);
   font-size: 1rem;
-  height: 38px;
+  height: 51px;
   padding: 10px;
   position: absolute;
-  right: 5px;
+  right: 0px;
   text-align: center;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) scale(0.7);
   transition: all 1s;
-  width: 38px;
+  width: 51px;
+}
+
+main #controls #search-form #search-submit-btn {
+  border-radius: 50%;
+  box-sizing: border-box;
+  color: var(--color-secondary);
+  font-size: 1rem;
+  height: 51px;
+  padding: 10px;
+  position: absolute;
+  right: 0px;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%) scale(1);
+  transition: all 1s;
+  width: 51px;
 }
 
 main #controls #sort-select-container {
@@ -798,6 +814,12 @@ main #controls .select-items li {
 
 main #controls .select-items li:last-child {
 	border: none;
+}
+
+main #controls .select-items li:focus {
+  border: 2px solid var(--color-primary);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 main #controls .select-arrow-active {
@@ -1408,6 +1430,7 @@ footer #footer-links a {
   }
 
   main #controls #search-form:hover, 
+  main #controls #search-form:focus-within,
   main #controls #search-form:valid {
     width: 300px;
   }
@@ -1501,7 +1524,8 @@ footer #footer-links a {
   }
 
   /* ! adjust so maybe sort button shrinks while valid? */
-  main #controls #search-form:hover, 
+  main #controls #search-form:hover,
+  main #controls #search-form:focus-within, 
   main #controls #search-form:valid {
     width: 180px;
   }
@@ -1537,6 +1561,7 @@ footer #footer-links a {
 
 @media only screen and (min-width: 1200px) {
   main #controls #search-form:hover, 
+  main #controls #search-form:focus-within,
   main #controls #search-form:valid {
     width: 315px;
   }

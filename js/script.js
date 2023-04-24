@@ -6,6 +6,7 @@ const menuBtn = document.getElementById('menu-btn');
 const addBookBtn = document.getElementById('add-book-btn');
 const openDialogBtn = document.getElementById('open-dialog-btn');
 const searchCloseBtn = document.getElementById('search-close-btn');
+const searchSubmitBtn = document.getElementById('search-submit-btn');
 const modalCloseBtn = document.getElementById('modal-close-btn');
 
 // * forms & inputs 
@@ -439,14 +440,21 @@ function loadLocalStorage() {
     }
 }
 
+
+
 initializeSelectElements();
 loadLocalStorage();
 
 // ? if the user clicks anywhere outside the select box, then close all select boxes:
 document.addEventListener('click', closeAllSelect);
-menuBtn.addEventListener('click', () => menuBtn.classList.toggle('open'));
 openDialogBtn.addEventListener('click', openAddBookModal);
 searchCloseBtn.addEventListener('click', closeSearchInput);
 modalCloseBtn.addEventListener('click', animateModalClose);
 addBookBtn.addEventListener('click', initializeNewBook);
 bookCaseEmptyDiv.addEventListener('click', openAddBookModal);
+
+// * one offs
+menuBtn.addEventListener('click', () => menuBtn.classList.toggle('open'));
+searchSubmitBtn.addEventListener('focus', () => {
+    searchInput.style.display = 'block';
+});
