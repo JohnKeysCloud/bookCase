@@ -1033,9 +1033,10 @@ main #bookcase .description-term {
   padding-bottom: 3px;
 }
 
+
+/* ! fix */
 main #bookcase .description {
   text-align: right;
-  max-width: 200px;
   overflow: hidden;
 }
 
