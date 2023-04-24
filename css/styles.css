@@ -950,6 +950,18 @@ main #bookcase .book-card {
 
 main #bookcase .book-card .book-info {
   font-weight: bold;
+  position: relative;
+  transition: all 380ms ease-in-out;
+  z-index: 1;
+}
+
+main #bookcase .book-card .book-info[contenteditable='true'] {
+  background-color: white;
+  border-radius: 25px;
+  box-shadow: inset 6px 6px 12px #dbd5bd, inset -6px -6px 12px #fffffb;
+  font-style: normal;
+  font-weight: normal;
+  padding: 8px 25px;
 }
 
 main #bookcase .description-wrapper {
@@ -977,14 +989,17 @@ main #bookcase .description-wrapper .bookcase-author-name {
 }
 
 main #bookcase .description-list {
-  border-radius: 25px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  justify-content: space-evenly;
-  padding: 10px;
+  position: relative;
+  transition: all 380ms ease-in-out;
   width: 100%;
 } 
+
+main #bookcase .description-list:has(.book-info[contenteditable='true']) {
+  gap: 15px;
+}
 
 main #bookcase .description-term {
   font-family: 'Cyclone', monospace;
@@ -1002,7 +1017,7 @@ main #bookcase .book-card .bottom-book-card-div {
   column-gap: 25px;
   row-gap: 10px;
   grid-template-areas:  'unreadBtn removeBtn'
-                        'dateAdded dateAdded';
+                        'editBtn dateAdded';
 }
 
 main #bookcase .book-card .book-card-btn {
@@ -1022,9 +1037,22 @@ main #bookcase .book-card .book-card-btn:nth-of-type(2) {
   grid-area: removeBtn;
 }
 
+main #bookcase .book-card .book-card-btn:nth-of-type(3) {
+  background-color: unset;
+  border: unset;
+  color: var(--color-secondary);
+  text-decoration: underline;
+  /* font-weight: bold; */
+  grid-area: editBtn;
+  justify-self: start;
+  padding: 0;
+} 
+
 main #bookcase .book-card .date-added-div {
   grid-area: dateAdded;
+  justify-self: end;
   text-align: right;
+  width: max-content;
 }
 
 aside section {

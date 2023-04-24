@@ -42,10 +42,12 @@ Book.prototype.toggleReadStatus = function () {
 function addEventListeners() {
     const readToggleBtns = document.querySelectorAll('.book-card-btn:first-of-type');
     const removeBookBtns = document.querySelectorAll('.book-card-btn:nth-of-type(2)');
+    const editBookBtns = document.querySelectorAll('.book-card-btn:nth-of-type(3)');
     
     for (let i = 0; i < readToggleBtns.length; ++i) {
         readToggleBtns[i].addEventListener('click', findBookObject);
         removeBookBtns[i].addEventListener('click', removeBookFromCase);
+        editBookBtns[i].addEventListener('click', editBookInfo);
     }
 }
 
@@ -63,6 +65,7 @@ function populateBookCase() {
         const descriptionList = document.createElement('dl');
         const descriptionWrapper = document.createElement('div');
         const removeBookBtn = document.createElement('button');
+        const editBookBtn = document.createElement('button');
         
         const today = new Date().toLocaleDateString();
         let todaySplit = today.split('/');
@@ -73,7 +76,7 @@ function populateBookCase() {
         dateTime.textContent = today;
 
         dateAddedDiv.classList.add('date-added-div');
-        dateAddedDiv.innerHTML = '<span class="book-info">Date added:</span> ';
+        dateAddedDiv.innerHTML = '<span class="bold">Date added:</span> ';
         dateAddedDiv.appendChild(dateTime);
         
         bookImgWrapper.classList.add('bookcase-cover-img-wrapper');
@@ -83,6 +86,7 @@ function populateBookCase() {
         descriptionWrapper.classList.add('description-wrapper');
         bottomBookCardDiv.classList.add('bottom-book-card-div');
         removeBookBtn.classList.add('book-card-btn');
+        editBookBtn.classList.add('book-card-btn');
 
         bookImg.src = book.cover || bookImgDefaultSource;
 
@@ -111,17 +115,23 @@ function populateBookCase() {
                     break;
                 case 'read':
                     description.innerHTML = book.read === true
-                        ? '<span class="book-info bookcase-read-status">Status:</span> Read'
-                        : '<span class="book-info bookcase-read-status">Status:</span> Unread';
+                        ? '<span class="bold bookcase-read-status">Status:</span> Read'
+                        : '<span class="bold bookcase-read-status">Status:</span> Unread';
                     break;
                 default:
                     description.textContent = book[info];
             }
 
-            book.read === true
-                ? (changeReadStatus.textContent = 'Mark as Unread')
-                : (changeReadStatus.textContent = 'Mark as Read');
+            if (book.read) {
+                changeReadStatus.style.background = '#465A3C';
+                changeReadStatus.textContent = 'Mark as Unread';
+            } else {
+                changeReadStatus.style.background = '#E56D4B';
+                changeReadStatus.textContent = 'Mark as Read';
+            }
+            
             removeBookBtn.textContent = 'Remove Book';
+            editBookBtn.textContent = 'Edit Book';
             
             descriptionDiv.append(descriptionTerm, description);
             descriptionListFragment.appendChild(descriptionDiv);
@@ -131,7 +141,7 @@ function populateBookCase() {
         bookImgWrapper.appendChild(bookImg);
         descriptionWrapper.append(bookImgWrapper, descriptionList);
         bookCard.appendChild(descriptionWrapper);
-        bottomBookCardDiv.append(changeReadStatus, removeBookBtn, dateAddedDiv);
+        bottomBookCardDiv.append(changeReadStatus, removeBookBtn, editBookBtn, dateAddedDiv);
         bookCard.appendChild(bottomBookCardDiv);
         bookCard.classList.add('book-card');
 
@@ -150,10 +160,10 @@ function findBookObject() {
 
     for (let i = 0; i < bookCaseArray.length; i++) {
         if (bookCaseArray[i].title === targetedBookTitle) {
-            console.log(bookCaseArray[i] instanceof Book)
             bookCaseArray[i].toggleReadStatus();
         }
     }
+
     populateBookCase();
 }
 
@@ -167,6 +177,41 @@ function appendEmptyBookCaseContent() {
     bookCaseEmptyDiv.append(bookCaseEmptyDivP, bookCaseEmptyDivP2);
         
     bookCase.append(bookCaseEmptyDiv);
+}
+
+function editBookInfo() {
+    const bookInfoPseudoInputs = this.parentNode.parentNode.querySelectorAll('.book-info');
+    const targetedBookTitle = this.parentNode.parentNode.querySelector('.bookcase-title').textContent;
+    const targetedBook = bookCaseArray.find(book => book.title === targetedBookTitle);
+    
+    if (this.textContent === 'Save Changes') {        
+        bookInfoPseudoInputs.forEach(info => info.setAttribute('contenteditable', 'false'));
+        this.textContent = 'Edit Book';
+        populateBookCase();
+        return;
+    }
+
+    for (let i = 0; i < bookInfoPseudoInputs.length; i++) {
+        bookInfoPseudoInputs[i].addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                this.click();                
+            }
+        });
+
+        bookInfoPseudoInputs[i].addEventListener('input', () => {
+            if (bookInfoPseudoInputs[i].classList.contains('bookcase-title')) {
+                targetedBook.title = bookInfoPseudoInputs[i].textContent;
+            } else if (bookInfoPseudoInputs[i].classList.contains('bookcase-author-name')) {
+                targetedBook.author = bookInfoPseudoInputs[i].textContent;
+            } else if (bookInfoPseudoInputs[i].classList.contains('bookcase-page-amount')) {
+                targetedBook.pages = bookInfoPseudoInputs[i].textContent;
+            }
+        });
+    }
+
+    this.textContent = 'Save Changes';
+    bookInfoPseudoInputs.forEach(info => info.setAttribute('contenteditable', 'true'));
 }
 
 function removeBookFromCase() {
