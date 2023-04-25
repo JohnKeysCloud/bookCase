@@ -52,6 +52,14 @@ function addEventListeners() {
     }
 }
 
+function formatDate(dateAdded) {
+    let dateAddedSplit = dateAdded.split('/');
+    [dateAddedSplit[0], dateAddedSplit[1], dateAddedSplit[2]] = [dateAddedSplit[2], dateAddedSplit[0], dateAddedSplit[1]];
+    let dateAddedFormatted = dateAddedSplit.join('-');
+
+    return dateAddedFormatted;
+}
+
 function populateBookCase() {
     bookCase.innerHTML = '';
     bookCaseArray.forEach( book => {
@@ -67,14 +75,15 @@ function populateBookCase() {
         const descriptionWrapper = document.createElement('div');
         const removeBookBtn = document.createElement('button');
         const editBookBtn = document.createElement('button');
-        
-        const today = new Date().toLocaleDateString();
-        let todaySplit = today.split('/');
-        [todaySplit[0], todaySplit[1], todaySplit[2]] = [todaySplit[2], todaySplit[0], todaySplit[1]];
-        let todayFormatted = todaySplit.join('-');
 
-        dateTime.setAttribute('date-time', todayFormatted);
-        dateTime.textContent = today;
+        const today = new Date().toLocaleDateString();
+        const dateAdded = book.dateAdded || today;
+        const dateAddedFormatted = formatDate(dateAdded);
+        
+        book.dateAdded = dateAdded;
+
+        dateTime.textContent = dateAdded;
+        dateTime.setAttribute('date-time', dateAddedFormatted);
 
         dateAddedDiv.classList.add('date-added-div');
         dateAddedDiv.innerHTML = '<span class="bold">Date added:</span> ';
@@ -93,7 +102,7 @@ function populateBookCase() {
 
         const descriptionListFragment = document.createDocumentFragment();
         for (info in book) {
-            if (info === 'cover' || info === 'toggleReadStatus') continue;
+            if (info === 'cover' || info === 'toggleReadStatus' || info === 'dateAdded') continue;
         
             const description = document.createElement('dd');
             const descriptionDiv = document.createElement('div');
