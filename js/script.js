@@ -65,7 +65,7 @@ function populateBookCase() {
     bookCaseArray.forEach( book => {
         const bookCard = document.createElement('article');
         const bookImg = document.createElement('img');
-        const bookImgDefaultSource = '../assets/images/book-case/no-image-placeholder.svg';
+        const bookImgDefaultSource = 'assets/images/book-case/no-image-placeholder.svg';
         const bookImgWrapper = document.createElement('div');
         const bottomBookCardDiv = document.createElement('div');
         const changeReadStatus = document.createElement('button');
