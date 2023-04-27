@@ -61,7 +61,13 @@ function formatDate(dateAdded) {
 }
 
 function populateBookCase() {
+    
     bookCase.innerHTML = '';
+
+    if (!sortSelect.value) {
+        bookCaseArray.sort((a, b) => formatDate(a.dateAdded) > formatDate(b.dateAdded) ? 1 : -1);
+    }
+
     bookCaseArray.forEach( book => {
         const bookCard = document.createElement('article');
         const bookImg = document.createElement('img');
@@ -277,11 +283,13 @@ function applySorting() {
             bookCaseArray.sort((a, b) => +a.pages > +b.pages ? -1 : 1);
             break;
         case 'unread':
-            bookCaseArray.sort((a, b) => a.read === false ? -1 : 1);
+            bookCaseArray.sort((a) => a.read === false ? -1 : 1);
             break;
+        default:
+            console.log('hi');
+            bookCaseArray.sort((a, b) => formatDate(a.dateAdded) < formatDate(b.dateAdded) ? -1 : 1);
     } 
 
-    localStorage.setItem('sortBy', JSON.stringify(sortSelectValue));
     populateBookCase();
 }
 
@@ -417,22 +425,6 @@ function closeAllSelect(currentSelectedDivOption) {
     }
 }
 
-// ! fix this
-function changeSelectedSortDivFromLocalStorage() {
-    if (localStorage.getItem('sortBy')) {
-        sortBy = localStorage.getItem('sortBy');
-        
-        console.log(sortBy);
-
-        // loop through select options and set selected option to the one stored in local storage
-        for (let i = 0; i < sortSelect.options.length; ++i) {
-            if (sortSelect.options[i].value === sortBy) {
-                sortSelect.options[i].selected = true;
-            }
-        }
-    }
-}
-
 function loadLocalStorage() {
     if (localStorage.getItem('bookCaseArray')) {
         bookCaseArray = JSON.parse(localStorage.getItem('bookCaseArray'));
@@ -441,8 +433,6 @@ function loadLocalStorage() {
             bookCaseArray[i] = Object.assign(new Book(), bookCaseArray[i]);
         }
 
-        // ! fix this
-        // changeSelectedSortDivFromLocalStorage();
         populateBookCase();
     } else {
         appendEmptyBookCaseContent();
@@ -468,9 +458,6 @@ function search() {
 // ! Fix this
 searchInput.addEventListener('keyup', search);
 
-initializeSelectElements();
-loadLocalStorage();
-
 // ? if the user clicks anywhere outside the select box, then close all select boxes:
 document.addEventListener('click', closeAllSelect);
 openDialogBtn.addEventListener('click', openAddBookModal);
@@ -484,3 +471,6 @@ menuBtn.addEventListener('click', () => menuBtn.classList.toggle('open'));
 searchSubmitBtn.addEventListener('focus', () => {
     searchInput.style.display = 'block';
 });
+
+initializeSelectElements();
+loadLocalStorage();

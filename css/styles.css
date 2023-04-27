@@ -979,10 +979,17 @@ main #bookcase .book-card {
   padding: 15px 25px;
 }
 
+/* ! fix  */
 main #bookcase .book-card .book-info {
   font-weight: bold;
+  /* ? set to scroll later when text of book info is animated so it doesn't get cut off */
+  overflow: hidden;
+  /* ? prevents italic text from being cut off */
+  padding-right: 2px;
   position: relative;
+  text-overflow: ellipsis;
   transition: all 380ms ease-in-out;
+  white-space: nowrap;
   z-index: 1;
 }
 
@@ -993,12 +1000,18 @@ main #bookcase .book-card .book-info[contenteditable='true'] {
   box-shadow: inset 6px 6px 12px #dbd5bd, inset -6px -6px 12px #fffffb;
   font-style: normal;
   font-weight: normal;
-  padding: 8px 25px;
+  padding: 0px 15px; 
+  /* remove later when text of book info is animated so it doesn't get cut off  */
+  text-overflow: clip;
 }
+
+main #bookcase .book-card .book-info[contenteditable='true']:focus {
+  padding: 8px 15px;
+} 
 
 main #bookcase .description-wrapper {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 40% 60%;
   margin-bottom: 10px;
 }
 
@@ -1009,6 +1022,9 @@ main #bookcase .description-wrapper .bookcase-cover-img-wrapper {
 
 main #bookcase .description-wrapper .bookcase-cover-img {
   border-radius: inherit;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
 }
 
 main #bookcase .description-wrapper .bookcase-title {
@@ -1020,18 +1036,25 @@ main #bookcase .description-wrapper .bookcase-author-name {
 }
 
 main #bookcase .description-list {
-  align-items: right;
+  align-items: end;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  justify-content: right;
+  justify-content: center;
   position: relative;
   transition: all 380ms ease-in-out;
-  width: 100%;
 } 
 
-main #bookcase .description-list:has(.book-info[contenteditable='true']) {
-  gap: 15px;
+main #bookcase .description-list .description-div {
+  max-width: calc(100% - 1rem);
+}
+
+main #bookcase .description-list .description-div .description {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  max-width: 100%;
+  overflow: scroll;
+  padding: 5px;
 }
 
 main #bookcase .description-term {
@@ -1039,13 +1062,6 @@ main #bookcase .description-term {
   font-size: 1.688rem;
   line-height: 1;
   padding-bottom: 3px;
-}
-
-
-/* ! fix */
-main #bookcase .description {
-  text-align: right;
-  overflow: hidden;
 }
 
 main #bookcase .book-card .bottom-book-card-div {
