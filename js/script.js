@@ -140,7 +140,7 @@ function populateBookCase() {
                 changeReadStatus.textContent = 'Mark as Read';
             }
             
-            removeBookBtn.textContent = 'Remove Book';
+            removeBookBtn.textContent = 'Remove';
             editBookBtn.textContent = 'Edit Book';
             
             descriptionDiv.append(descriptionTerm, description);

@@ -87,9 +87,19 @@ h3 {
   font-size: clamp(1.875rem, 4vw, 2.125rem);
 }
 
+a,
+button,
+.select-selected,
+.select-items li {
+  transition: opacity 111ms ease-in-out, transform 111ms ease-in-out;
+}
+
 a:hover,
-button:hover {
-  opacity: 0.85;
+button:hover,
+.select-selected:hover,
+.select-items li:hover {
+  opacity: 0.95;
+  transform: scale(1.02) translateY(-1px);
 }
 
 .user-name {
@@ -817,7 +827,6 @@ main #controls .select-items li:last-child {
 }
 
 main #controls .select-items li:focus {
-  border: 2px solid var(--color-primary);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -843,7 +852,7 @@ main #controls .select-hide {
   display: none;
 }
 
-main #controls .select-items div:hover, 
+main #controls .select-items li:hover, 
 main #controls .same-as-selected {
   background-color: rgba(0, 0, 0, 0.3);
 }
@@ -989,9 +998,8 @@ main #bookcase .book-card .book-info[contenteditable='true'] {
 
 main #bookcase .description-wrapper {
   display: grid;
-  /* gap: 10px; */
   grid-template-columns: 1fr 2fr;
-  place-items: center;
+  margin-bottom: 10px;
 }
 
 main #bookcase .description-wrapper .bookcase-cover-img-wrapper {
@@ -1043,7 +1051,7 @@ main #bookcase .description {
 main #bookcase .book-card .bottom-book-card-div {
   display: grid;
   column-gap: 25px;
-  row-gap: 10px;
+  row-gap: 8px;
   grid-template-areas:  'unreadBtn removeBtn'
                         'editBtn dateAdded';
 }
@@ -1070,7 +1078,7 @@ main #bookcase .book-card .book-card-btn:nth-of-type(3) {
   border: unset;
   color: var(--color-secondary);
   text-decoration: underline;
-  /* font-weight: bold; */
+  font-size: 0.75rem;
   grid-area: editBtn;
   justify-self: start;
   padding: 0;
@@ -1080,7 +1088,7 @@ main #bookcase .book-card .date-added-div {
   grid-area: dateAdded;
   justify-self: end;
   text-align: right;
-  width: max-content;
+  font-size: 0.75rem;
 }
 
 aside section {
