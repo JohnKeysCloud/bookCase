@@ -4,7 +4,7 @@ const addBookModal = document.querySelector('dialog');
 // * buttons
 const menuBtn = document.getElementById('menu-btn');
 const addBookBtn = document.getElementById('add-book-btn');
-const openDialogBtn = document.getElementById('open-dialog-btn');
+const openDialogBtn = document.getElementById('modal-open-btn');
 const searchCloseBtn = document.getElementById('search-close-btn');
 const searchSubmitBtn = document.getElementById('search-submit-btn');
 const modalCloseBtn = document.getElementById('modal-close-btn');
@@ -26,6 +26,8 @@ const bookCaseEmptyDivP2 = document.createElement('p');
 const selectedOptionDiv = document.createElement('div');
 
 const selectContainers = document.getElementsByClassName('custom-select');
+const today = new Date().toLocaleDateString();
+
 
 let bookCaseArray = [];
 function Book(title, author, pages, read, cover) {
@@ -33,6 +35,7 @@ function Book(title, author, pages, read, cover) {
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.dateAdded = this.dateAdded || today;
     this.cover = cover;
 }
 
@@ -63,9 +66,7 @@ function formatDate(dateAdded) {
 function populateBookCase() {
     bookCase.innerHTML = '';
 
-    // if (!sortSelect.value) {
-    //     bookCaseArray.sort((a, b) => formatDate(a.dateAdded) > formatDate(b.dateAdded) ? 1 : -1);
-    // }
+    if (!sortSelect.value) bookCaseArray.sort((a, b) => formatDate(a.dateAdded) > formatDate(b.dateAdded) ? -1 : 1);
 
     bookCaseArray.forEach( book => {
         const bookCard = document.createElement('article');
@@ -81,13 +82,12 @@ function populateBookCase() {
         const removeBookBtn = document.createElement('button');
         const editBookBtn = document.createElement('button');
 
-        const today = new Date().toLocaleDateString();
-        const dateAdded = book.dateAdded || today;
+        const dateAdded = book.dateAdded;
         const dateAddedFormatted = formatDate(dateAdded);
         
         book.dateAdded = dateAdded;
 
-        dateTime.textContent = dateAdded;
+        dateTime.textContent = book.dateAdded;
         dateTime.setAttribute('date-time', dateAddedFormatted);
 
         dateAddedDiv.classList.add('date-added-div');
