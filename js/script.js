@@ -233,7 +233,10 @@ function removeBookFromCase() {
     let targetedBookTitle = this.parentNode.parentNode.querySelector('.bookcase-title').textContent;
     let targetedBookObject = bookCaseArray.find(book => book.title === targetedBookTitle);
 
-    bookCaseArray.splice(targetedBookObject, 1);
+    for (let i = 0; i < bookCaseArray.length; i++) {
+        if (bookCaseArray[i].title !== targetedBookObject.title) continue;
+        bookCaseArray.splice(i, 1);
+    }
 
     populateBookCase();
     appendEmptyBookCaseContent();
