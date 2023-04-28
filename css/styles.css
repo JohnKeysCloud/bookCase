@@ -1067,8 +1067,28 @@ main #bookcase .description-wrapper {
 }
 
 main #bookcase .description-wrapper .bookcase-cover-img-wrapper {
-  border: 2px solid #724b3f;
   border-radius: 15px;
+  position: relative;
+  transition: transform 380ms ease-in-out;
+}
+
+main #bookcase .description-wrapper .bookcase-cover-img-wrapper:hover {
+  transform: rotate(-8deg);
+}
+
+main #bookcase .description-wrapper .bookcase-cover-img-wrapper:hover::before {
+  opacity: 1;
+}
+
+main #bookcase .description-wrapper .bookcase-cover-img-wrapper::before {
+  border-radius: inherit;
+  box-shadow: 3px 3px 11px var(--color-secondary);
+  content: '';
+  inset: 0;
+  opacity: 0;
+  position: absolute;
+  transition: opacity 380ms ease-in-out;
+  z-index: 0;
 }
 
 main #bookcase .description-wrapper .bookcase-cover-img {
