@@ -231,8 +231,9 @@ function editBookInfo() {
 
 function removeBookFromCase() {
     let targetedBookTitle = this.parentNode.parentNode.querySelector('.bookcase-title').textContent;
-    // ? why does this work?
-    bookCaseArray.splice(bookCaseArray.indexOf(targetedBookTitle), 1);
+    let targetedBookObject = bookCaseArray.find(book => book.title === targetedBookTitle);
+
+    bookCaseArray.splice(targetedBookObject, 1);
 
     populateBookCase();
     appendEmptyBookCaseContent();
