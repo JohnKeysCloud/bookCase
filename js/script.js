@@ -61,12 +61,11 @@ function formatDate(dateAdded) {
 }
 
 function populateBookCase() {
-    
     bookCase.innerHTML = '';
 
-    if (!sortSelect.value) {
-        bookCaseArray.sort((a, b) => formatDate(a.dateAdded) > formatDate(b.dateAdded) ? 1 : -1);
-    }
+    // if (!sortSelect.value) {
+    //     bookCaseArray.sort((a, b) => formatDate(a.dateAdded) > formatDate(b.dateAdded) ? 1 : -1);
+    // }
 
     bookCaseArray.forEach( book => {
         const bookCard = document.createElement('article');
