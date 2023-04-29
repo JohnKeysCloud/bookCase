@@ -28,7 +28,6 @@ const selectedOptionDiv = document.createElement('div');
 const selectContainers = document.getElementsByClassName('custom-select');
 const today = new Date().toLocaleDateString();
 
-
 let bookCaseArray = [];
 function Book(title, author, pages, read, cover) {
     this.title = title;

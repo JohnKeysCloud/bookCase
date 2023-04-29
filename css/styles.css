@@ -66,7 +66,7 @@
 
 :root {
   --color-primary: cornsilk;
-  --color-secondary: #724b3f;
+  --color-secondary:#724b3f;
 	--text-input-bg: #ebe2d5;
 
   --header-height: 70px;
@@ -131,7 +131,7 @@ button:hover,
   bottom: 0;
   height: 700px;
   width: 700px;
-  fill: #724b3f;
+  fill: var(--color-secondary);
   opacity: 0.1;
   left: 50%;
   top: 50%;
@@ -440,8 +440,8 @@ main #controls #modal-open-btn {
 
 main #controls #add-book-container #add-book-modal {
   background: linear-gradient(145deg, #ffffeb, #e6dfc6);
-  box-shadow: 0 7px 3px -3px #724b3f, inset 0 -3px 15px #724b3f;
-  border: 2px solid #724b3f;
+  box-shadow: 0 7px 3px -3px var(--color-secondary), inset 0 -3px 15px var(--color-secondary);
+  border: 2px solid var(--color-secondary);
   border-radius: 50px;
   color: var(--color-secondary);
   overflow: hidden;
@@ -945,7 +945,7 @@ main #bookcase-empty:hover p:nth-of-type(2) {
 }
 
 main #bookcase-empty::before {
-  background: linear-gradient(to bottom right, cornsilk, #724b3f, black);
+  background: linear-gradient(to bottom right, cornsilk, var(--color-secondary), black);
   opacity: 0;
   border-radius: inherit;
   content: '';
@@ -957,7 +957,7 @@ main #bookcase-empty::before {
 
 main #bookcase-empty::after {
   border-radius: inherit;
-  box-shadow: inset 0 0 10px #724b3f;
+  box-shadow: inset 0 0 10px var(--color-secondary);
   content: '';
   inset: 0;
   opacity: 0;
@@ -992,7 +992,7 @@ main #bookcase-empty #bookcase-empty-periods {
 main #bookcase-empty .add-symbol {
   font-size: 2rem;
   vertical-align: 5px;
-  /* text-shadow: 0 0 3px #724b3f; */
+  /* text-shadow: 0 0 3px var(--color-secondary); */
 }
 
 main #bookcase .book-card {
@@ -1144,7 +1144,7 @@ main #bookcase .book-card .bottom-book-card-div {
 }
 
 main #bookcase .book-card .book-card-btn {
-  background-color: #724b3f;
+  background-color: var(--color-secondary);
   border: 2px solid black;
   border-radius: 25px;
   color: cornsilk;
