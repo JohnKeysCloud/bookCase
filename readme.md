@@ -1,5 +1,5 @@
 # bookCase
-[![bookCaseMockUp]([link to image here](https://user-images.githubusercontent.com/90482169/235292341-7ec384a5-1bc9-4293-a627-6909b4119ec8.gif))](https://johnkeyscloud.github.io/bookCase/)
+[![bookCaseMockUp]([https://user-images.githubusercontent.com/90482169/235292341-7ec384a5-1bc9-4293-a627-6909b4119ec8.gif))](https://johnkeyscloud.github.io/bookCase/)
 
 A library application that stores a user's reading list… built for <a href="https://www.theodinproject.com/lessons/node-path-javascript-library" target="_blank">The Odin Project</a>. The goal of this project was to implement a JavaScript object constructor that would create "Book" instances and inherit keys & methods. The "Book" instances are stored in an array and used to populate the contents of the bookcase with the help of a neat CSS3 grid trick (see code).
 
