@@ -893,6 +893,7 @@ main #bookcase {
   padding-block: 25px;
   padding-inline: 3vw;
   position: relative;
+  z-index: 0;
 }
 
 main #bookcase:hover::before {
