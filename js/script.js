@@ -29,18 +29,20 @@ const selectContainers = document.getElementsByClassName('custom-select');
 const today = new Date().toLocaleDateString();
 
 let bookCaseArray = [];
-function Book(title, author, pages, read, cover) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.dateAdded = this.dateAdded || today;
-    this.cover = cover;
-}
+class Book {
+    constructor(title, author, pages, read, cover) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.dateAdded = this.dateAdded || today;
+        this.cover = cover;
+    }
 
-Book.prototype.toggleReadStatus = function () {
-    this.read === false ? (this.read = true) : (this.read = false);
-};
+    toggleReadStatus() {
+        this.read === false ? this.read = true : this.read = false;
+    }
+}
 
 function addEventListeners() {
     const readToggleBtns = document.querySelectorAll('.book-card-btn:first-of-type');
@@ -273,13 +275,13 @@ function closeSearchInput(e) {
 
 function applySorting() {
     let sortSelectValue = sortSelect.options[sortSelect.selectedIndex].value;
-
+    
     switch (sortSelectValue) {
         case 'title':
-            bookCaseArray.sort((a, b) => a.title < b.title ? -1 : 1);
+            bookCaseArray.sort((a, b) => a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1);
             break;
         case 'author':
-            bookCaseArray.sort((a, b) => a.author < b.author ? -1 : 1);
+            bookCaseArray.sort((a, b) => a.author.toLowerCase() < b.author.toLowerCase() ? -1 : 1);
             break;
         case 'pages':
             bookCaseArray.sort((a, b) => +a.pages > +b.pages ? -1 : 1);
