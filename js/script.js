@@ -258,7 +258,7 @@ function animateModalClose() {
 function initializeNewBook(e) {
     e.preventDefault();
 
-    let newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, readInput.checked, bookCoverInput.value);
+    let newBook = new Book.constructor(titleInput.value, authorInput.value, pagesInput.value, readInput.checked, bookCoverInput.value);
     bookCaseArray.push(newBook);
 
     populateBookCase();
@@ -275,7 +275,7 @@ function closeSearchInput(e) {
 
 function applySorting() {
     let sortSelectValue = sortSelect.options[sortSelect.selectedIndex].value;
-    
+
     switch (sortSelectValue) {
         case 'title':
             bookCaseArray.sort((a, b) => a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1);
