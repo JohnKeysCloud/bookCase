@@ -29,17 +29,23 @@ const selectContainers = document.getElementsByClassName('custom-select');
 const today = new Date().toLocaleDateString();
 
 let bookCaseArray = [];
-class Book {
-    constructor(title, author, pages, read, cover) {
-        this.title = title;
-        this.author = author;
-        this.pages = pages;
-        this.read = read;
-        this.dateAdded = this.dateAdded || today;
-        this.cover = cover;
-    }
 
-    toggleReadStatus() {
+// * ✨ FACTORY FUNCTION ✨
+function book(title, author, pages, read, cover) {
+    let newBook = Object.create(book.proto); // ? sets the pseudo proto of newBook to book.proto
+
+    newBook.title = title;
+    newBook.author = author;
+    newBook.pages = pages;
+    newBook.read = read;
+    newBook.dateAdded = this.dateAdded || today;
+    newBook.cover = cover;
+
+    return newBook
+} 
+
+book.proto = {
+    toggleReadStatus: function() {
         this.read === false ? this.read = true : this.read = false;
     }
 }
@@ -258,7 +264,7 @@ function animateModalClose() {
 function initializeNewBook(e) {
     e.preventDefault();
 
-    let newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, readInput.checked, bookCoverInput.value);
+    let newBook = book(titleInput.value, authorInput.value, pagesInput.value, readInput.checked, bookCoverInput.value);
     bookCaseArray.push(newBook);
 
     populateBookCase();
@@ -434,7 +440,7 @@ function loadLocalStorage() {
         bookCaseArray = JSON.parse(localStorage.getItem('bookCaseArray'));
 
         for (let i = 0; i < bookCaseArray.length; ++i) {
-            bookCaseArray[i] = Object.assign(new Book(), bookCaseArray[i]);
+            bookCaseArray[i] = Object.assign(book(), bookCaseArray[i]);
         }
 
         populateBookCase();
